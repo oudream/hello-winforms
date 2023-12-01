@@ -62,18 +62,18 @@ namespace HelloWinForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (flowLayoutPanel.Controls.Count >= 3)
+            if (flowLayoutPanel.Controls.Count >= 5)
             {
-                flowLayoutPanel.Controls.Remove(flowLayoutPanel.Controls[2]);
+                flowLayoutPanel.Controls.Remove(flowLayoutPanel.Controls[4]);
             }
             flowLayoutPanel.Controls.Add(pRight);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (flowLayoutPanel.Controls.Count >= 3)
+            if (flowLayoutPanel.Controls.Count >= 5)
             {
-                flowLayoutPanel.Controls.Remove(flowLayoutPanel.Controls[2]);
+                flowLayoutPanel.Controls.Remove(flowLayoutPanel.Controls[4]);
             }
             flowLayoutPanel.Controls.Add(pTray);
         }

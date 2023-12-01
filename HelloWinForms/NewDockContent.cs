@@ -48,7 +48,7 @@ namespace HelloWinForms
         private void button7_Click(object sender, EventArgs e)
         {
             // 初始化Person实例
-            var person = new Person
+            var person = new DockPerson
             {
                 FirstName = "John",
                 LastName = "Doe",
@@ -59,7 +59,7 @@ namespace HelloWinForms
             propertyGrid1.SelectedObject = person;
         }
     }
-    public class Person
+    public class DockPerson
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

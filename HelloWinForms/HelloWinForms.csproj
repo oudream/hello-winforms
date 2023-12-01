@@ -33,9 +33,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.3.1.1\lib\net471\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=5.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.5.0.1\lib\net471\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,8 +79,17 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
       <HintPath>..\packages\DockPanelSuite.ThemeVS2015.3.1.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.13.7.1\lib\net47\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionUi\ActionItem.cs" />
+    <Compile Include="ActionUi\ActionUiManger.cs" />
+    <Compile Include="ActionUi\IConfigurable.cs" />
+    <Compile Include="ActionUi\IconManager.cs" />
+    <Compile Include="ActionUi\Sample\DialogConfig.cs" />
+    <Compile Include="ActionUi\Sample\HorizontalPanelConfig.cs" />
     <Compile Include="Action\PRight.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,11 +102,35 @@
     <Compile Include="Action\PTray.Designer.cs">
       <DependentUpon>PTray.cs</DependentUpon>
     </Compile>
+    <Compile Include="BaseForm\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseForm\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloUtilities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloUtilities.Designer.cs">
+      <DependentUpon>HelloUtilities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloMisc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloMisc.Designer.cs">
+      <DependentUpon>HelloMisc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloActionConfigManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloActionConfigManager.Designer.cs">
+      <DependentUpon>HelloActionConfigManager.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloDragDrop.cs">
       <SubType>Form</SubType>
@@ -89,6 +150,7 @@
     <Compile Include="HelloToolStrip.Designer.cs">
       <DependentUpon>HelloToolStrip.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\LogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewDockContent.cs">
@@ -103,23 +165,39 @@
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Sample\Yaml\Deserializer.cs" />
+    <Compile Include="Utilities\Sample\Yaml\Hello.cs" />
+    <Compile Include="Utilities\Sample\Yaml\Model.cs" />
+    <Compile Include="Utilities\YamlHelper.cs" />
     <EmbeddedResource Include="Action\PRight.resx">
       <DependentUpon>PRight.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Action\PTray.resx">
       <DependentUpon>PTray.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BaseForm\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloActionConfigManager.resx">
+      <DependentUpon>HelloActionConfigManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloDragDrop.resx">
       <DependentUpon>HelloDragDrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloMisc.resx">
+      <DependentUpon>HelloMisc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloToolBarPanel.resx">
       <DependentUpon>HelloToolBarPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloToolStrip.resx">
       <DependentUpon>HelloToolStrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloUtilities.resx">
+      <DependentUpon>HelloUtilities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -150,7 +228,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Processing\" />
+    <Folder Include="Utilities\Sample\Log\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Images\image1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
