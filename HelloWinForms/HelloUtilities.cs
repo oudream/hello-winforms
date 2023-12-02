@@ -41,7 +41,7 @@ namespace HelloWinForms
 
         private void button4_Click(object sender, EventArgs e)
         {
-         
+            Utilities.Sample.Yaml.Hello.SaveEnumToInteger();
         }
 
     }

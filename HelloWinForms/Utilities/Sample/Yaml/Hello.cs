@@ -8,6 +8,8 @@ using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization;
 using YamlDotNet.Core;
 using System.IO;
+using YamlDotNet.Core.Events;
+using YamlDotNet.RepresentationModel;
 
 namespace HelloWinForms.Utilities.Sample.Yaml
 {
@@ -50,12 +52,8 @@ object3:
             var serializer = YamlHelper.CreateSerializer().Build();
 
             // 反序列化 YAML 数据
-            var yamlObject = deserializer.Deserialize<YamlThree>(yamlContent);
+            var yamlObject = deserializer.Deserialize<YamlThree>(yamlContent) ?? new YamlThree();
 
-            if (yamlObject == null)
-            {
-                yamlObject = new YamlThree();
-            }
             if (yamlObject.Person == null)
             {
                 yamlObject.Person = new Person();
@@ -88,13 +86,63 @@ object3:
 
         public static void SavePart()
         {
+            string yamlPath = @"E:\tmp\yaml1.yaml";
+            var yaml = LoadYamlFromFile(yamlPath);
+            if (yaml != null)
+            {
+                // 获取 YAML 中的第一个文档
+                var doc = yaml.Documents[0];
+                var root = (YamlMappingNode)doc.RootNode;
+                // 找到 person 节点
+                var personNode = root.Children[new YamlScalarNode("person")] as YamlMappingNode;
+                if (personNode != null)
+                {
+                    // 修改 person 对象的属性
+                    personNode.Children[new YamlScalarNode("name")] = new YamlScalarNode("New Name");
+                    var age = new YamlScalarNode("22");
+                    age.Style = ScalarStyle.Plain;
+                    var heightInInches = new YamlScalarNode("175");
+                    heightInInches.Style = ScalarStyle.Plain;
+                    personNode.Children[new YamlScalarNode("age")] = age; // 修改为新的年龄
+                    personNode.Children[new YamlScalarNode("heightInInches")] = heightInInches; // 修改为新的身高
+                    // 将修改后的 YAML 保存到文件
+                    SaveYamlToFile(yaml, yamlPath);                                                                                    
+                    Console.WriteLine("Person object modified and saved to 'output.yaml'.");
+                }
+                else
+                {
+                    Console.WriteLine("Person node not found in the YAML.");
+                }
+            }
+        }
+
+        private static YamlStream LoadYamlFromFile(string filePath)
+        {
+            using (var input = new StreamReader(File.OpenRead(filePath)))
+            {
+                var yaml = new YamlStream();
+                yaml.Load(input);
+                return yaml;
+            }
+        }
+
+        private static void SaveYamlToFile(YamlStream yaml, string filePath)
+        {
+            using (var writer = new StreamWriter(filePath))
+            {
+                yaml.Save(writer);
+            }
+        }
+
+        public static void FindField()
+        {
             // 读取整个 YAML 文件内容
             string yamlPath = @"E:\tmp\yaml1.yaml";
             string yamlContent = File.ReadAllText(yamlPath);
 
             // 将 YAML 文件内容加载到字典
             var deserializer = YamlHelper.CreateDeserializer().Build();
-            var yamlDict = deserializer.Deserialize<Dictionary<string, object>>(yamlContent);
+            var yamlDict = deserializer.Deserialize<Dictionary<object, object>>(yamlContent);
 
             // 找到对应的键值对并修改值
             string keyToModify = "person"; // 修改对应的键
@@ -106,33 +154,88 @@ object3:
             }
 
             // 将字典保存回文件
-            var serializer = YamlHelper.CreateSerializer().Build();
+            var serializer = YamlHelper.CreateSerializer()
+                .EnsureRoundtrip()
+                .Build();
             string updatedYamlContent = serializer.Serialize(yamlDict);
             File.WriteAllText(yamlPath, updatedYamlContent);
 
             Console.WriteLine($"文件 {yamlPath} 已更新");
         }
 
+        // 保存时使用类型转换，枚举默认保存为字符串的，以下方面把枚举转为整形来保存
+        public static void SaveEnumToInteger()
+        {
+            // 读取 YAML 文件内容
+            string yamlPath = @"E:\tmp\yaml1.yaml";
+            string yamlContent = File.ReadAllText(yamlPath);
 
+            // 创建序列化器和反序列化器
+            var deserializer = YamlHelper.CreateDeserializer().Build();
+
+            var serializer = YamlHelper.CreateSerializer()
+                .WithTypeConverter(new EnumTypeConverter())
+                .Build();
+
+            // 反序列化 YAML 数据
+            var yamlObject = deserializer.Deserialize<YamlThree>(yamlContent) ?? new YamlThree();
+            if (yamlObject.Person == null)
+            {
+                yamlObject.Person = new Person();
+            }
+            if (yamlObject.Section == null)
+            {
+                yamlObject.Section = new Section();
+            }
+            if (yamlObject.Address == null)
+            {
+                yamlObject.Address = new Address();
+            }
+
+            DateTime currentDate = DateTime.Now;
+            yamlObject.Person.Name = $"Now Is {currentDate:yyyy-MM-dd HH:mm:ss.fff}";
+            yamlObject.Person.Age = 31;
+            yamlObject.Section.Property1 = "p1";
+            yamlObject.Section.Property2 = "p2";
+            yamlObject.Address.State = "state1";
+            yamlObject.Address.Street = "street1";
+            yamlObject.Color = Color.Green;
+
+            // 将更新后的对象序列化为 YAML
+            string updatedYamlContent = serializer.Serialize(yamlObject);
+
+            // 保存更新后的 YAML 数据到文件
+            File.WriteAllText(yamlPath, updatedYamlContent);
+
+            Console.WriteLine("YAML file updated successfully.");
+        }
 
     }
 
-    public class EnumToIntegerNamingConvention : INamingConvention
+    public class EnumTypeConverter : IYamlTypeConverter
     {
-        public string Apply(string value)
+        public bool Accepts(Type type)
         {
-            return value;
+            return type.IsEnum;
         }
 
-        public string Apply(System.Reflection.MemberInfo member)
+        public object ReadYaml(IParser parser, Type type)
         {
-            if (member is System.Reflection.FieldInfo fieldInfo && fieldInfo.FieldType.IsEnum)
-            {
-                var enumValue = (int)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                return enumValue.ToString();
-            }
+            var value = ((Scalar)parser.Current)?.Value;
+            return value != null ? Enum.Parse(type, value) : null;
+        }
 
-            return member.Name;
+        public void WriteYaml(IEmitter emitter, object value, Type type)
+        {
+            if (value != null && value is Enum)
+            {
+                var enumValue = (int)value;
+                emitter.Emit(new Scalar(enumValue.ToString()));
+            }
+            else
+            {
+                emitter.Emit(new Scalar(string.Empty));
+            }
         }
     }
 
