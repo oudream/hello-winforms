@@ -58,6 +58,31 @@ namespace HelloWinForms
         {
             return Path.IsPathRooted(path);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = LoadImage(@"E:\tmp\CT_1.tif");
+        }
+
+        private static Image LoadImage(string filePath)
+        {
+            // 使用文件流加载图像
+            try
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    // 创建图像对象
+                    Image image = Image.FromStream(fs);
+                    // 关闭文件流，释放文件句柄
+                    fs.Close();
+                    return image;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 
 }
