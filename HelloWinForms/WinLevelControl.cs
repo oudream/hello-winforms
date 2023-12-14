@@ -77,10 +77,10 @@ public class HistogramWithAdjustableDiagonalLineControl : Control
             Pen linePen = new Pen(Color.Red, 2);
 
             // 绘制左上角到 nodePosition 的线段
-            g.DrawLine(linePen, 0, 0, nodePosition.X, nodePosition.Y);
+            g.DrawLine(linePen, 0, Height, nodePosition.X, nodePosition.Y);
 
             // 绘制 nodePosition 到右下角的线段
-            g.DrawLine(linePen, nodePosition.X, nodePosition.Y, Width, Height);
+            g.DrawLine(linePen, nodePosition.X, nodePosition.Y, Width, 0);
 
 
             //// 绘制对角线
