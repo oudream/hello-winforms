@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CxWorkStation.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,208 +22,111 @@ Action界面及执行的管理器，实现注册方式，注册项的基础信�
 
 namespace HelloWinForms.ActionUi
 {
-    public class ActionUiManger
+    public static class ActionUiManger
     {
-        private List<ActionUiItem> _registeredActions;
-        private Control _actionPanel;
-        private Panel _horizontalPanel;
-        private Control _verticalControl;
+        private static List<ActionUiItemConifig> _actionUiItemConifigs;
+        private static List<ActionUiItem> _actionUiItems;
 
-        public ActionUiManger(Control actionPanel, Panel horizontalPanel, Control verticalControl)
+        // 加载 ActionUiItemConifig
+        public static void LoadItems()
         {
-            _registeredActions = new List<ActionUiItem>();
-            _actionPanel = actionPanel;
-            _horizontalPanel = horizontalPanel;
-            _verticalControl = verticalControl;
+
         }
 
-        private bool ActionExists(string catalog, string actionName)
+        private static bool ActionExists(string actionName)
         {
-            return _registeredActions.Any(a => a.Catalog == catalog && a.Name == actionName);
+            return _actionUiItems.Any(a => a.Name == actionName);
         }
         
-        public void RegisterActionWithoutConfig(string catalog, string name, string title, string description, ConfigApplyHandler applyCallback)
+        public static void RegisterActionWithoutConfig(string name, EventHandler onClick)
         {
-            if (!ActionExists(catalog, name))
+            ActionUiItem item = _actionUiItems.FirstOrDefault(a => a.Name == name);
+            if (item == null)
             {
-                var action = new ActionUiItem
+                ActionUiItemConifig conf = _actionUiItemConifigs.FirstOrDefault(a => a.Name == name);
+                if (conf != null)
                 {
-                    Catalog = catalog,
-                    Name = name,
-                    Title = title,
-                    Description = description,
-                    ConfigType = ConfigurationType.None,
-                    ConfigApply = applyCallback,
-                };
-                // configPanelCallback?.Invoke(action.ConfigPanel);
-                _registeredActions.Add(action);
-            }
-            else
-            {
-                Console.WriteLine($"Action with catalog '{catalog}' and name '{name}' already exists. Skipping registration.");
-            }
-        }
-
-        public void RegisterActionWithConfig(string catalog, string name, string title, string description, ConfigurationType configType, Panel configPanel, ConfigApplyHandler applyCallback)
-        {
-            if (!ActionExists(catalog, name))
-            {
-                var action = new ActionUiItem
+                     ActionUiItem actionItem = new ActionUiItem
+                     {
+                         Catalog = conf.Catalog,
+                         Name = conf.Name,
+                         Title = conf.Title,
+                         Description = conf.Description,
+                         AtToolBar = conf.AtToolBar,
+                         AtMenu = conf.AtMenu,
+                         ConfigType = conf.ConfigType,
+                         OnClick = onClick,
+                         ConfigControl = null,
+                     };
+                    _actionUiItems.Add(actionItem);
+                }
+                else
                 {
-                    Catalog = catalog,
-                    Name = name,
-                    Title = title,
-                    Description = description,
-                    ConfigType = configType,
-                    ConfigPanel= configPanel,
-                    ConfigApply = applyCallback,
-                };
-                // configPanelCallback?.Invoke(action.ConfigPanel);
-                _registeredActions.Add(action);
+                    LogHelper.Warning($"Action with name '{name}' can not found at ActionUi.config.yml. Skipping registration.");
+                }
             }
             else
             {
-                Console.WriteLine($"Action with catalog '{catalog}' and name '{name}' already exists. Skipping registration.");
+                LogHelper.Warning($"Action with name '{name}' already exists. Skipping registration.");
             }
         }
 
-        public void RegisterActionWithFullConfig(string catalog, string name, string title, string description, ConfigurationType configType, Panel configPanel, ConfigCheckHandler checkHandler, ConfigApplyHandler applyCallback)
+        public static void RegisterActionWithConfig(string name, EventHandler onClick, Control configControl)
         {
-            if (!ActionExists(catalog, name))
+            ActionUiItem item = _actionUiItems.FirstOrDefault(a => a.Name == name);
+            if (item == null)
             {
-                var action = new ActionUiItem
+                ActionUiItemConifig conf = _actionUiItemConifigs.FirstOrDefault(a => a.Name == name);
+                if (conf != null)
                 {
-                    Catalog = catalog,
-                    Name = name,
-                    Title = title,
-                    Description = description,
-                    ConfigType = configType,
-                    ConfigPanel = configPanel,
-                    ConfigCheck = checkHandler,
-                    ConfigApply = applyCallback,
-                };
-                // configPanelCallback?.Invoke(action.ConfigPanel);
-                _registeredActions.Add(action);
+                    ActionUiItem actionItem = new ActionUiItem
+                    {
+                        Catalog = conf.Catalog,
+                        Name = conf.Name,
+                        Title = conf.Title,
+                        Description = conf.Description,
+                        AtToolBar = conf.AtToolBar,
+                        AtMenu = conf.AtMenu,
+                        ConfigType = conf.ConfigType,
+                        OnClick = onClick,
+                        ConfigControl = null,
+                    };
+                    _actionUiItems.Add(actionItem);
+                }
+                else
+                {
+                    LogHelper.Warning($"Action with name '{name}' can not found at ActionUi.config.yml. Skipping registration.");
+                }
             }
             else
             {
-                Console.WriteLine($"Action with catalog '{catalog}' and name '{name}' already exists. Skipping registration.");
+                LogHelper.Warning($"Action with name '{name}' already exists. Skipping registration.");
             }
         }
 
-        public void ExecuteAction(string actionName)
-        {
-            var action = _registeredActions.Find(a => a.Name == actionName);
 
-            if (action != null)
-            {
-
-            }
-            else
-            {
-                Console.WriteLine($"Action '{actionName}' not found.");
-            }
-        }
-
-        private void ShowConfigurationPanel(ActionUiItem action)
-        {
-            // Similar to the previous implementation
-            // (omitting for brevity)
-        }
-
-        private void ApplyConfiguration(ActionUiItem action)
-        {
-            // Similar to the previous implementation
-            // (omitting for brevity)
-        }
-        
-
-        private void ActionButton_Click(object sender, EventArgs e)
+        private static void ActionButton_Click(object sender, EventArgs e)
         {
             // 处理按钮点击事件
             Button btn = (Button)sender;
-            ActionUiItem item = (ActionUiItem)btn.Tag;
-
-        }
-
-        private void ShowConfiguration(ActionUiItem item)
-        {
-            // 根据配置类型显示界面
-            switch (item.ConfigType)
+            if ( btn != null ) 
             {
-                case ConfigurationType.HorizontalPanel:
-                    ShowConfigPanel(item, DockStyle.Top);
-                    break;
-                case ConfigurationType.VerticalPanel:
-                    ShowConfigPanel(item, DockStyle.Right);
-                    break;
-                case ConfigurationType.DialogPanel:
-                    ShowConfigDialog(item);
-                    break;
+                ActionUiItem item = (ActionUiItem)btn.Tag;
+                if ( item != null ) 
+                {
+                    switch (item.ConfigType)
+                    {
+                        case ConfigurationType.HorizontalPanel:
+                            break;
+                        case ConfigurationType.VerticalPanel:
+                            break;
+                        case ConfigurationType.DialogPanel:
+                            break;
+                    }
+                }
             }
+
         }
 
-        private void ShowConfigPanel(ActionUiItem item, DockStyle dockStyle)
-        {
-            // 显示配置界面的Panel
-            //Control configControl = item.ConfigInterface.GetConfigurationControl();
-            //configControl.Dock = dockStyle;
-            //panelConfig.Controls.Add(configControl);
-
-            //// 显示应用按钮
-            //Button applyButton = new Button
-            //{
-            //    Text = "Apply Configuration",
-            //    Dock = DockStyle.Top
-            //};
-            //applyButton.Click += (sender, e) => ApplyConfiguration(item, configControl);
-            //panelConfig.Controls.Add(applyButton);
-        }
-
-        private void ShowConfigDialog(ActionUiItem item)
-        {
-            // 显示配置对话框
-            //Control configControl = item.ConfigInterface.GetConfigurationControl();
-            //Form configDialog = new Form
-            //{
-            //    Text = "Configuration Dialog",
-            //    Size = configControl.Size,
-            //    FormBorderStyle = FormBorderStyle.FixedDialog,
-            //    MaximizeBox = false,
-            //    MinimizeBox = false
-            //};
-
-            //configControl.Dock = DockStyle.Fill;
-            //configDialog.Controls.Add(configControl);
-
-            //// 显示应用按钮
-            //Button applyButton = new Button
-            //{
-            //    Text = "Apply Configuration",
-            //    Dock = DockStyle.Bottom
-            //};
-            //applyButton.Click += (sender, e) =>
-            //{
-            //    ApplyConfiguration(item, configControl);
-            //    configDialog.Close();
-            //};
-            //configDialog.Controls.Add(applyButton);
-
-            //configDialog.ShowDialog();
-        }
-
-        private void ApplyConfiguration(ActionUiItem item, Control configControl)
-        {
-            // 应用配置
-            //if (item.ConfigInterface.CheckConfiguration(configControl))
-            //{
-            //    item.ApplyConfig(configControl);
-            //    MessageBox.Show("Configuration applied successfully!");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Configuration check failed. Please review your settings.");
-            //}
-        }
     }
 }

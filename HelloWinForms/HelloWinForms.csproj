@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionUi\ActionItem.cs" />
+    <Compile Include="ActionUi\ActionItemConfig.cs" />
     <Compile Include="ActionUi\ActionUiManger.cs" />
     <Compile Include="ActionUi\IConfigurable.cs" />
     <Compile Include="ActionUi\IconManager.cs" />
@@ -113,6 +114,30 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloXML.Designer.cs">
+      <DependentUpon>HelloXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloListView.Designer.cs">
+      <DependentUpon>HelloListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloRichTextBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloRichTextBox.Designer.cs">
+      <DependentUpon>HelloRichTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTimer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTimer.Designer.cs">
+      <DependentUpon>HelloTimer.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloUtilities.cs">
       <SubType>Form</SubType>
@@ -187,8 +212,17 @@
     <EmbeddedResource Include="HelloDragDrop.resx">
       <DependentUpon>HelloDragDrop.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloListView.resx">
+      <DependentUpon>HelloListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloMisc.resx">
       <DependentUpon>HelloMisc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloRichTextBox.resx">
+      <DependentUpon>HelloRichTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTimer.resx">
+      <DependentUpon>HelloTimer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloToolBarPanel.resx">
       <DependentUpon>HelloToolBarPanel.cs</DependentUpon>
@@ -199,6 +233,9 @@
     <EmbeddedResource Include="HelloUtilities.resx">
       <DependentUpon>HelloUtilities.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloXML.resx">
+      <DependentUpon>HelloXML.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -207,6 +244,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="NewDockContent.resx">
       <DependentUpon>NewDockContent.cs</DependentUpon>
@@ -239,6 +277,7 @@
     <Content Include="Images\image2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\画线.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

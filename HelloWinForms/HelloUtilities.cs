@@ -26,28 +26,38 @@ namespace HelloWinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Utilities.Sample.Yaml.Hello.IgnoreUnmatched();
+            string folder = @"C:\Example";
+            string subfolder = "Subfolder";
+            string filename = "File.txt";
+            // 合并多级路径
+            string combinedPath = Path.Combine(folder, subfolder, filename);
+            label1.Text = combinedPath;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Utilities.Sample.Yaml.Hello.SaveFull();
+            long dtNow = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
+            textBox1.Text = $"{dtNow}";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Utilities.Sample.Yaml.Hello.SavePart();
+            double number = 123.556789;
+            textBox1.Text = $"{number:0}";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Utilities.Sample.Yaml.Hello.SaveEnumToInteger();
+            string path1 = @"C:\Example\File.txt";
+            string path2 = @"RelativePath\File.txt";
+
+            label1.Text = ($"Is path '{path1}' rooted? {IsFullPath(path1)} {path2}' rooted? {IsFullPath(path2)}");
         }
 
+        static bool IsFullPath(string path)
+        {
+            return Path.IsPathRooted(path);
+        }
     }
 
-
-
-
-   
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelloToolBarPanel));
             this.panel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,12 +41,16 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel.SuspendLayout();
             this.flowLayoutPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel
@@ -153,11 +159,23 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 49);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(93, 633);
             this.panel4.TabIndex = 4;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.BackgroundImage = global::HelloWinForms.Properties.Resources.画线;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Location = new System.Drawing.Point(12, 15);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(74, 63);
+            this.button5.TabIndex = 0;
+            this.button5.UseVisualStyleBackColor = false;
             // 
             // dockPanel
             // 
@@ -166,6 +184,18 @@
             this.dockPanel.Name = "dockPanel";
             this.dockPanel.Size = new System.Drawing.Size(1195, 633);
             this.dockPanel.TabIndex = 5;
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "长园-xray工作站系统";
+            this.notifyIcon.Visible = true;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
             // HelloToolBarPanel
             // 
@@ -184,6 +214,7 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -202,5 +233,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panel4;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }

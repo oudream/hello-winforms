@@ -7,38 +7,11 @@ using System.Windows.Forms;
 
 namespace HelloWinForms.ActionUi
 {
-    public enum ConfigurationType
+    public class ActionUiItem : ActionUiItemConifig 
     {
-        None,
-        HorizontalPanel,
-        VerticalPanel,
-        DialogPanel
-    }
-    
-    public delegate string ConfigCheckHandler(Control configControl);
+        public EventHandler OnClick { get; set; }
 
-    public delegate string ConfigApplyHandler(Control configControl);
-    
-    public class ActionUiItem
-    {
-        public string Catalog { get; set; }
+        public Control ConfigControl { get; set; }
 
-        public string Name { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public bool AtToolBar { get; set; }
-
-        public bool AtMenu { get; set; }
-
-        public ConfigurationType ConfigType { get; set; }
-
-        public ConfigCheckHandler ConfigCheck { get; set; }
-        
-        public ConfigApplyHandler ConfigApply { get; set; }
-
-        public Panel ConfigPanel { get; set; }
     }
 }

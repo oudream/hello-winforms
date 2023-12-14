@@ -10,6 +10,7 @@ using YamlDotNet.Core;
 using System.IO;
 using YamlDotNet.Core.Events;
 using YamlDotNet.RepresentationModel;
+using System.Reflection;
 
 namespace HelloWinForms.Utilities.Sample.Yaml
 {
@@ -19,7 +20,7 @@ namespace HelloWinForms.Utilities.Sample.Yaml
         // DeserializerBuilder Option:
         // IgnoreUnmatchedProperties()
         // NamingConvention: CamelCaseNamingConvention
-        public static void IgnoreUnmatched()
+        public static void LoadIgnoreUnmatched()
         {
             var yaml = @"
 section:
@@ -35,11 +36,13 @@ object3:
 
             var deserializer = YamlHelper.CreateDeserializer().Build();
             var yamlObject = deserializer.Deserialize<YamlSection>(yaml);
-
-            Console.WriteLine($"Value of 'Property1': {yamlObject.Section.Property1}");
-            Console.WriteLine($"Value of 'Property2': {yamlObject.Section.Property2}");
+            string msg = PrintObjectInfo(yamlObject);
+            Console.WriteLine($"yamlObject': {msg}");
         }
 
+        // 先加载出对象模型（模型可以是多层嵌套）
+        // 加载时，可以选择自己感觉兴趣部分来加载
+        // 再保存为修改的对象（覆盖形式）
         public static void SaveFull()
         {
             // 读取 YAML 文件内容
@@ -84,6 +87,9 @@ object3:
             Console.WriteLine("YAML file updated successfully.");
         }
 
+        // 先加载出对象模型（模型可以是多层嵌套）
+        // 加载时，可以选择自己感觉兴趣部分来加载
+        // 再保存需要修改的部分对象
         public static void SavePart()
         {
             string yamlPath = @"E:\tmp\yaml1.yaml";
@@ -113,24 +119,6 @@ object3:
                 {
                     Console.WriteLine("Person node not found in the YAML.");
                 }
-            }
-        }
-
-        private static YamlStream LoadYamlFromFile(string filePath)
-        {
-            using (var input = new StreamReader(File.OpenRead(filePath)))
-            {
-                var yaml = new YamlStream();
-                yaml.Load(input);
-                return yaml;
-            }
-        }
-
-        private static void SaveYamlToFile(YamlStream yaml, string filePath)
-        {
-            using (var writer = new StreamWriter(filePath))
-            {
-                yaml.Save(writer);
             }
         }
 
@@ -210,6 +198,60 @@ object3:
             Console.WriteLine("YAML file updated successfully.");
         }
 
+        private static YamlStream LoadYamlFromFile(string filePath)
+        {
+            using (var input = new StreamReader(File.OpenRead(filePath)))
+            {
+                var yaml = new YamlStream();
+                yaml.Load(input);
+                return yaml;
+            }
+        }
+
+        private static void SaveYamlToFile(YamlStream yaml, string filePath)
+        {
+            using (var writer = new StreamWriter(filePath))
+            {
+                yaml.Save(writer);
+            }
+        }
+
+        public static string PrintObjectInfo(object obj)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            PrintObjectInfo(obj, stringBuilder, 0);
+            return stringBuilder.ToString();
+        }
+
+        private static void PrintObjectInfo(object obj, StringBuilder stringBuilder, int indentationLevel)
+        {
+            if (obj == null)
+            {
+                stringBuilder.AppendLine("Object is null.");
+                return;
+            }
+
+            Type type = obj.GetType();
+            string indentation = new string(' ', indentationLevel * 2);
+
+            stringBuilder.AppendLine($"{indentation}Object Type: {type.FullName}");
+
+            foreach (PropertyInfo property in type.GetProperties())
+            {
+                object value = property.GetValue(obj);
+
+                if (value != null)
+                {
+                    stringBuilder.AppendLine($"{indentation}{property.Name}: {value}");
+
+                    // 如果属性是一个嵌套对象，则递归调用 PrintObjectInfo 处理嵌套对象
+                    if (!property.PropertyType.IsPrimitive && property.PropertyType != typeof(string))
+                    {
+                        PrintObjectInfo(value, stringBuilder, indentationLevel + 1);
+                    }
+                }
+            }
+        }
     }
 
     public class EnumTypeConverter : IYamlTypeConverter
