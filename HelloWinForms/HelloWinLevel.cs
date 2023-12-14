@@ -23,20 +23,16 @@ namespace HelloWinForms
             {
                 Dock = DockStyle.Fill
             };
-            Controls.Add(histogramControl);
-
-            histogramControl.NodePositionChanged += HistogramControl_NodePositionChanged;
-
-            Button generateHistogramButton = new Button
-            {
-                Text = "Generate Histogram",
-                Dock = DockStyle.Top
-            };
-            generateHistogramButton.Click += GenerateHistogramButton_Click;
-            Controls.Add(generateHistogramButton);
+            histogramControl.NodePositionsChanged += HistogramControl_NodePositionChanged;
+            panel1.Controls.Add(histogramControl);
         }
 
-        private void GenerateHistogramButton_Click(object sender, EventArgs e)
+        private void HistogramControl_NodePositionChanged(string name, int minX, int minY, int middleX, int middleY, int maxX, int maxY)
+        {
+            Console.WriteLine($"Node Position Changed: Name={name}, minX={minX}, minY={minY}, middleX={middleX}, middleY={middleY}, maxX={maxX}, maxY={maxY}");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             // 此处演示一个简单的直方图数据生成，实际应用中需要根据图像数据生成
             Random random = new Random();
@@ -48,12 +44,5 @@ namespace HelloWinForms
 
             histogramControl.Histogram = histogramData;
         }
-
-        private void HistogramControl_NodePositionChanged(int x, int y)
-        {
-            Console.WriteLine($"Node Position Changed: X={x}, Y={y}");
-        }
-
-
     }
 }

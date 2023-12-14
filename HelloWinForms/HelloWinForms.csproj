@@ -242,6 +242,9 @@
     <EmbeddedResource Include="HelloUtilities.resx">
       <DependentUpon>HelloUtilities.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloWinLevel.resx">
+      <DependentUpon>HelloWinLevel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloXML.resx">
       <DependentUpon>HelloXML.cs</DependentUpon>
     </EmbeddedResource>
