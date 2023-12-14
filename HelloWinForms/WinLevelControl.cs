@@ -41,6 +41,42 @@ public class HistogramWithAdjustableDiagonalLineControl : Control
         }
     }
 
+    public Point MinNodePosition
+    {
+        get { return _minNodePosition; }
+        set
+        {
+            _minNodePosition = value;
+            UpdateWindowParams();
+            OnNodePositionsChanged("min", _minNodePosition.X, _minNodePosition.Y, _middleNodePosition.X, _middleNodePosition.Y, _maxNodePosition.X, _maxNodePosition.Y);
+            Invalidate();
+        }
+    }
+
+    public Point MiddleNodePosition
+    {
+        get { return _middleNodePosition; }
+        set
+        {
+            _middleNodePosition = value;
+            UpdateWindowParams();
+            OnNodePositionsChanged("middle", _minNodePosition.X, _minNodePosition.Y, _middleNodePosition.X, _middleNodePosition.Y, _maxNodePosition.X, _maxNodePosition.Y);
+            Invalidate();
+        }
+    }
+
+    public Point MaxNodePosition
+    {
+        get { return _maxNodePosition; }
+        set
+        {
+            _maxNodePosition = value;
+            UpdateWindowParams();
+            OnNodePositionsChanged("max", _minNodePosition.X, _minNodePosition.Y, _middleNodePosition.X, _middleNodePosition.Y, _maxNodePosition.X, _maxNodePosition.Y);
+            Invalidate();
+        }
+    }
+
     public int[] Histogram
     {
         get { return histogram; }
