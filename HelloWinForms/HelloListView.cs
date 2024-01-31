@@ -154,5 +154,11 @@ namespace HelloWinForms
         {
             MessageBox.Show($"当前选中的是：");
         }
+
+        private void listView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            // 默认绘制，如果需要
+            e.DrawDefault = true;
+        }
     }
 }

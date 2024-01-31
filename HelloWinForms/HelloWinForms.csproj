@@ -33,6 +33,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExCSS">
+      <HintPath>Libs\Debug\ExCSS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.Scripting.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="NPinyin, Version=0.2.6321.26573, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPinyin.0.2.6321.26573\lib\net20\NPinyin.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.3.1.1\lib\net471\Serilog.dll</HintPath>
     </Reference>
@@ -42,9 +61,15 @@
     <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
+    <Reference Include="Svg">
+      <HintPath>Libs\Debug\Svg.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -60,10 +85,19 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.7.0.0\lib\net462\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.7.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +113,7 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
       <HintPath>..\packages\DockPanelSuite.ThemeVS2015.3.1.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.13.7.1\lib\net47\YamlDotNet.dll</HintPath>
     </Reference>
@@ -109,11 +144,112 @@
     <Compile Include="BaseForm\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Channel\ChannelClient.cs" />
+    <Compile Include="Channel\TcpChannelClient.cs" />
+    <Compile Include="DataGridViewComponent\CalendarEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataGridViewComponent\DataGridViewCalendarCell.cs" />
+    <Compile Include="DataGridViewComponent\DataGridViewCalendarColumn.cs" />
+    <Compile Include="DataGridViewComponent\DataGridViewNumericCell.cs" />
+    <Compile Include="DataGridViewComponent\DataGridViewNumericColumn.cs" />
+    <Compile Include="DataGridViewComponent\NumericUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloChannel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloChannel.Designer.cs">
+      <DependentUpon>HelloChannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloDataGridView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDataGridView.Designer.cs">
+      <DependentUpon>HelloDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloDateTimePicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDateTimePicker.Designer.cs">
+      <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloOOP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloOOP.Designer.cs">
+      <DependentUpon>HelloOOP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPinyin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPinyin.Designer.cs">
+      <DependentUpon>HelloPinyin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPropertyGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPropertyGrid.Designer.cs">
+      <DependentUpon>HelloPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloCoordinate.cs" />
+    <Compile Include="HelloCoordinate.Designer.cs">
+      <DependentUpon>HelloCoordinate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPanel.Designer.cs">
+      <DependentUpon>HelloPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloRoslyn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloRoslyn.Designer.cs">
+      <DependentUpon>HelloRoslyn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloRoslynUtility.cs" />
+    <Compile Include="HelloSnowflake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloSnowflake.Designer.cs">
+      <DependentUpon>HelloSnowflake.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloSNR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloSNR.Designer.cs">
+      <DependentUpon>HelloSNR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloSplitter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloSplitter.Designer.cs">
+      <DependentUpon>HelloSplitter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloSVG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloSVG.Designer.cs">
+      <DependentUpon>HelloSVG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTreeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTreeView.Designer.cs">
+      <DependentUpon>HelloTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloVariable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloVariable.Designer.cs">
+      <DependentUpon>HelloVariable.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloWinLevel.cs">
       <SubType>Form</SubType>
@@ -181,6 +317,9 @@
     <Compile Include="HelloToolStrip.Designer.cs">
       <DependentUpon>HelloToolStrip.cs</DependentUpon>
     </Compile>
+    <Compile Include="HistogramLineControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utilities\LogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,10 +338,8 @@
     <Compile Include="Utilities\Sample\Yaml\Deserializer.cs" />
     <Compile Include="Utilities\Sample\Yaml\Hello.cs" />
     <Compile Include="Utilities\Sample\Yaml\Model.cs" />
+    <Compile Include="Utilities\Snowflake.cs" />
     <Compile Include="Utilities\YamlHelper.cs" />
-    <Compile Include="WinLevelControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <EmbeddedResource Include="Action\PRight.resx">
       <DependentUpon>PRight.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,8 +352,29 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloChannel.resx">
+      <DependentUpon>HelloChannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloDataGridView.resx">
+      <DependentUpon>HelloDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloDateTimePicker.resx">
+      <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloOOP.resx">
+      <DependentUpon>HelloOOP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloPinyin.resx">
+      <DependentUpon>HelloPinyin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloPropertyGrid.resx">
+      <DependentUpon>HelloPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloActionConfigManager.resx">
       <DependentUpon>HelloActionConfigManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloCoordinate.resx">
+      <DependentUpon>HelloCoordinate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloDragDrop.resx">
       <DependentUpon>HelloDragDrop.cs</DependentUpon>
@@ -227,8 +385,26 @@
     <EmbeddedResource Include="HelloMisc.resx">
       <DependentUpon>HelloMisc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloPanel.resx">
+      <DependentUpon>HelloPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloRichTextBox.resx">
       <DependentUpon>HelloRichTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloRoslyn.resx">
+      <DependentUpon>HelloRoslyn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloSnowflake.resx">
+      <DependentUpon>HelloSnowflake.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloSNR.resx">
+      <DependentUpon>HelloSNR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloSplitter.resx">
+      <DependentUpon>HelloSplitter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloSVG.resx">
+      <DependentUpon>HelloSVG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTimer.resx">
       <DependentUpon>HelloTimer.cs</DependentUpon>
@@ -239,8 +415,14 @@
     <EmbeddedResource Include="HelloToolStrip.resx">
       <DependentUpon>HelloToolStrip.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloTreeView.resx">
+      <DependentUpon>HelloTreeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloUtilities.resx">
       <DependentUpon>HelloUtilities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloVariable.resx">
+      <DependentUpon>HelloVariable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloWinLevel.resx">
       <DependentUpon>HelloWinLevel.cs</DependentUpon>
@@ -274,6 +456,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Script\ScriptFileA.csx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -290,6 +475,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\画线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

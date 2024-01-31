@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<svg width="962" height="687" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+ <defs>
+  <linearGradient id="mx-gradient-e6e6e6-1-808080-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
+   <stop offset="0%" stop-color="#e6e6e6"/>
+   <stop offset="100%" stop-color="#808080"/>
+  </linearGradient>
+ </defs>
+ <switch>
+  <g id="svg_1" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+  <a id="svg_2" transform="translate(0,-5)" xlink:href="https://desk.draw.io/support/solutions/articles/16000042487">
+   <text font-size="10px" id="svg_3" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+  </a>
+ </switch>
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#ffffff" height="60" id="svg_5" stroke="#000000" width="120" x="341" y="281"/>
+  <path d="m31,71l100,0l20,20l0,60l-100,0l-20,-20l0,-60z" fill="#f8cecc" id="svg_6" stroke="#b85450" stroke-miterlimit="10"/>
+  <path d="m31,71l100,0l20,20l-100,0l-20,-20z" fill="#000000" fill-opacity="0.05" id="svg_7"/>
+  <path d="m31,71l20,20l0,60l-20,-20l0,-60z" fill="#000000" fill-opacity="0.1" id="svg_8"/>
+  <path d="m51,151l0,-60l-20,-20m20,20l100,0" fill="none" id="svg_9" stroke="#b85450" stroke-miterlimit="10"/>
+  <rect fill="none" height="20" id="svg_10" width="40" x="211" y="71"/>
+  <ellipse cx="296" cy="36" fill="#ffffff" id="svg_14" rx="15" ry="15" stroke="#000000"/>
+  <path d="m381,411q60,0 60,40q0,40 -60,40l0,-80z" fill="#ffffff" id="svg_15" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m421,191l60,40l-60,40l0,-80z" fill="#ffffff" id="svg_16" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m161,381c-24,0 -30,20 -10.8,24c-19.2,8.8 2.4,28 18,20c10.8,16 46.8,16 58.8,0c24,0 24,-16 9,-24c15,-16 -9,-32 -30,-24c-15,-12 -39,-12 -45,4z" fill="#ffffff" id="svg_17" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m131,221l50,0l30,30l0,70l-80,0l0,-100z" fill="#ffffff" id="svg_18" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m181,221l0,30l30,0l-30,-30z" fill="#000000" fill-opacity="0.05" id="svg_19"/>
+  <path d="m181,221l0,30l30,0" fill="none" id="svg_20" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m191,617c0,-21.33 60,-21.33 60,0l0,48c0,21.33 -60,21.33 -60,0l0,-48z" fill="#ffffff" id="svg_21" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m191,617c0,16 60,16 60,0" fill="none" id="svg_22" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m514.63,173.22l14.27,10.86l-1.55,11.62l-16.35,6.33l5.19,21.99l18.41,-2.27l7.01,9.61l-6.74,15.67l19.2,11.63l11.16,-13.91l12.45,1.51l6.49,15.93l22.3,-5.06l-2.08,-18.19l9.62,-7.58l15.29,7.83l12.97,-19.22l-15.05,-11.37l1.57,-11.37l16.86,-6.33l-4.93,-21.73l-19.46,2.03l-6.74,-8.61l7,-16.67l-19.45,-11.13l-12.2,14.16l-11.93,-1.78l-7.53,-16.17l-21.53,5.56l2.08,17.69l-8.05,6.83l-16.6,-6.83l-11.68,18.97zm40.02,24.66c0,-12.78 10.64,-23.15 23.76,-23.15c13.13,0 23.77,10.37 23.77,23.15c0,12.79 -10.64,23.15 -23.77,23.15c-13.12,0 -23.76,-10.36 -23.76,-23.15z" fill="#ffffff" id="svg_23" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m539.97,202.03l14.28,10.86l-1.55,11.62l-16.35,6.33l5.19,21.99l18.41,-2.27l7.01,9.61l-6.75,15.67l19.21,11.63l11.16,-13.91l12.44,1.51l6.5,15.93l22.3,-5.06l-2.08,-18.19l9.61,-7.58l15.3,7.83l12.97,-19.22l-15.05,-11.37l1.57,-11.37l16.86,-6.33l-4.93,-21.73l-19.47,2.03l-6.74,-8.61l7.01,-16.67l-19.45,-11.13l-12.2,14.17l-11.93,-1.79l-7.54,-16.17l-21.52,5.56l2.07,17.69l-8.04,6.83l-16.6,-6.83l-11.69,18.97zm40.03,24.66c0,-12.78 10.64,-23.15 23.76,-23.15c13.12,0 23.76,10.37 23.76,23.15c0,12.79 -10.64,23.15 -23.76,23.15c-13.12,0 -23.76,-10.36 -23.76,-23.15z" fill="#ffffff" id="svg_24" stroke="#000000" stroke-miterlimit="10"/>
+  <rect fill="none" height="80" id="svg_25" width="100" x="361" y="91"/>
+  <path d="m391,101l40,30l-40,0l0,-30zm-30,30l30,0m0,0l0,30m40,-30l30,0" fill="#000000" id="svg_26" stroke="#000000" stroke-miterlimit="10"/>
+  <ellipse cx="411" cy="131" fill="none" id="svg_27" rx="40" ry="40" stroke="#000000"/>
+  <path d="m671,411l17.6,0m64.8,0l17.6,0" fill="none" id="svg_28" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <rect fill="#ea6b66" height="30" id="svg_29" stroke="#ea6b66" width="3.6" x="688.6" y="396"/>
+  <path d="m699.4,381l0,60" fill="none" id="svg_30" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <rect fill="#ea6b66" height="30" id="svg_31" stroke="#ea6b66" width="3.6" x="706.6" y="396"/>
+  <path d="m717.4,381l0,60" fill="none" id="svg_32" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <path d="m699.4,411l7.2,0" fill="none" id="svg_33" stroke="#ea6b66" stroke-dasharray="3 3" stroke-miterlimit="10"/>
+  <rect fill="#ea6b66" height="30" id="svg_34" stroke="#ea6b66" width="3.6" x="724.6" y="396"/>
+  <path d="m735.4,381l0,60" fill="none" id="svg_35" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <path d="m717.4,411l7.2,0" fill="none" id="svg_36" stroke="#ea6b66" stroke-dasharray="3 3" stroke-miterlimit="10"/>
+  <rect fill="#ea6b66" height="30" id="svg_37" stroke="#ea6b66" width="3.6" x="742.6" y="396"/>
+  <path d="m753.4,381l0,60" fill="none" id="svg_38" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <path d="m735.4,411l7.2,0" fill="none" id="svg_39" stroke="#ea6b66" stroke-dasharray="3 3" stroke-miterlimit="10"/>
+  <rect fill="none" height="60" id="svg_40" width="60" x="561" y="511"/>
+  <path d="m591,511l30,30l-30,30l-30,-30l30,-30z" fill="#ffffff" id="svg_41" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m591,521l0,40m-5,-10l5,10l5,-10" fill="none" id="svg_42" stroke="#000000" stroke-miterlimit="10"/>
+  <rect fill="none" height="60" id="svg_43" width="60" x="731" y="51"/>
+  <ellipse cx="761" cy="81" fill="#ffffff" id="svg_44" rx="30" ry="30" stroke="#ea6b66"/>
+  <ellipse cx="735" cy="81" fill="none" id="svg_45" rx="4" ry="4" stroke="#ea6b66"/>
+  <ellipse cx="787" cy="81" fill="none" id="svg_46" rx="4" ry="4" stroke="#ea6b66"/>
+  <path d="m781,89l-6,6l-28,-28l-6,6" fill="none" id="svg_47" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m743,66l-4,9l9,-4l-5,-5z" fill="#000000" id="svg_48"/>
+  <rect fill="none" height="100" id="svg_49" width="100" x="61" y="461"/>
+  <ellipse cx="111" cy="511" fill="#ffffff" id="svg_50" rx="50" ry="50" stroke="#ea6b66"/>
+  <rect fill="none" height="18" id="svg_51" stroke="#ea6b66" width="36" x="93" y="534"/>
+  <path d="m68,486l9.5,0m67,0l9.5,0m-43,75l0,-9m12.2,-67l15.5,-9.1l18,31.3l-15.6,9.1l-17.9,-31.3zm-57.8,22.3l17.9,-31.2l15.5,9l-17.9,31.2l-15.5,-9z" fill="none" id="svg_52" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <rect fill="none" height="82" id="svg_53" width="80" x="251" y="151"/>
+  <path d="m261,151l0,50l10,30l10,-30l10,30l10,-30l10,30l10,-30l0,-50m-67,2l0,6m-3,-3l6,0m68,0l6,0" fill="none" id="svg_54" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <ellipse cx="291" cy="231" fill="#ffffff" id="svg_55" rx="2" ry="2" stroke="#ea6b66"/>
+  <ellipse cx="311" cy="231" fill="#ffffff" id="svg_56" rx="2" ry="2" stroke="#ea6b66"/>
+  <ellipse cx="271" cy="231" fill="#ffffff" id="svg_57" rx="2" ry="2" stroke="#ea6b66"/>
+  <ellipse cx="301" cy="201" fill="#ffffff" id="svg_58" rx="2" ry="2" stroke="#ea6b66"/>
+  <ellipse cx="281" cy="201" fill="#ffffff" id="svg_59" rx="2" ry="2" stroke="#ea6b66"/>
+  <rect fill="none" height="96.1" id="svg_60" width="74.7" x="531" y="353"/>
+  <path d="m551.2,360l8.3,-7l30.8,0l6.3,6.9l-8.4,7.1l-30.6,0l-6.4,-7zm48.1,2.6l6.4,6.8l-2.9,21.8l-8.5,7.2l-6.5,-6.9l3,-22l8.5,-6.9zm-5.7,41.2l6.6,6.9l-3,21.9l-8.5,7l-6.4,-6.9l2.9,-21.9l8.4,-7zm-14.4,31.4l6.4,7l-8.2,6.9l-31,0l-6.4,-6.8l8.4,-7.1l30.8,0zm-30.5,-24.5l-2.9,21.9l-8.4,7l-6.4,-6.8l3,-22l8.4,-7l6.3,6.9zm42.4,-9.8l-8.3,7l-31,0l-6.3,-7l8.6,-7l30.9,0l6.1,7zm-36.7,-31.5l-3,22l-8.4,7l-6.4,-6.8l3,-22.2l8.4,-6.8l6.4,6.8zm25.7,0.6l7.7,0l-1.6,11.2l-5.6,9.8l-8.8,0l1.5,-9.4l6.8,-11.6zm-30.7,52.7l7.2,-12.2l9,0l-1,7.7l-8.2,14.7l-8.3,0l1.3,-10.2z" fill="#ffffff" id="svg_61" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <ellipse cx="706" cy="538" fill="#ffffff" id="svg_62" rx="35" ry="35" stroke="#ea6b66"/>
+  <path d="m706,503l0,10m-10,67l0,-9c0,-5.52 4.48,-10 10,-10c5.52,0 10,4.48 10,10l0,9" fill="none" id="svg_63" stroke="#ea6b66" stroke-miterlimit="10"/>
+  <path d="m696,513l20,0m-35,30l10,0m10,0l10,0m10,0l10,0m-50,-10l10,0m10,0l10,0m10,0l10,0m-37.5,30l5,-5l15,0l5,5" fill="none" id="svg_64" stroke="#ea6b66" stroke-miterlimit="10" stroke-width="2"/>
+  <rect fill="#c0f5a9" height="90" id="svg_65" stroke="#000000" stroke-width="2" width="150" x="521" y="1"/>
+  <path d="m561,26c0,-2.76 15.67,-5 35,-5c19.33,0 35,2.24 35,5l0,45c0,2.76 -15.67,5 -35,5c-19.33,0 -35,-2.24 -35,-5l0,-45z" fill="#e6e6e6" id="svg_66" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m561,26c0,2.76 15.67,5 35,5c19.33,0 35,-2.24 35,-5" fill="none" id="svg_67" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m561,26c-0.47,1.62 4.55,3.16 13.48,4.16c8.93,0.99 20.68,1.3 31.52,0.84l0,45c-10.84,0.46 -22.59,0.15 -31.52,-0.84c-8.93,-1 -13.95,-2.54 -13.48,-4.16l0,-45z" fill="#a0a0a0" id="svg_68"/>
+  <path d="m561,26c0.05,1.92 7.83,3.68 20,4.5l0,45c-12.17,-0.82 -19.95,-2.58 -20,-4.5l0,-45z" fill="#808080" id="svg_69"/>
+  <path d="m561,26c0,2.76 15.67,5 35,5c19.33,0 35,-2.24 35,-5l0,45c0,2.76 -15.67,5 -35,5c-19.33,0 -35,-2.24 -35,-5l0,-45z" fill="none" id="svg_70" stroke="#000000" stroke-miterlimit="10" transform="matrix(1 0 0 1 0 0)"/>
+  <rect fill="#c0f5a9" height="90" id="svg_71" stroke="#000000" stroke-width="2" transform="matrix(1 0 0 1 0 0)" width="150" x="741" y="191"/>
+  <rect fill="#e6e6e6" height="16" id="svg_72" stroke="#000000" width="16" x="865" y="228"/>
+  <rect fill="#e6e6e6" height="16" id="svg_73" stroke="#000000" width="16" x="841" y="228"/>
+  <rect fill="#e6e6e6" height="16" id="svg_74" stroke="#000000" width="16" x="817" y="228"/>
+  <path d="m765,236l39,0" fill="none" id="svg_75" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m796.5,230l0,12l13,-6l-13,-6z" fill="#000000" id="svg_76"/>
+  <ellipse cx="759" cy="236" fill="#000000" id="svg_77" rx="8" ry="8"/>
+  <path d="m77,355l-10,0l0,-12" fill="none" id="svg_78" stroke="#808080" stroke-miterlimit="10" stroke-width="2"/>
+  <ellipse cx="67" cy="337" fill="#808080" id="svg_79" rx="6" ry="6"/>
+  <rect fill="#00cc00" height="12" id="svg_80" stroke="#000000" stroke-width="2" width="12" x="77" y="349"/>
+  <path d="m79,349l-2,2l0,-2l2,0zm4,0l-6,6l0,4l10,-10l-4,0zm6,2l-10,10l4,0l6,-6l0,-4zm0,10l0,-2l-2,2l2,0z" fill="#ffff00" id="svg_81"/>
+  <rect fill="none" height="12" id="svg_82" stroke="#000000" stroke-width="2" width="12" x="77" y="349"/>
+  <rect fill="#c0f5a9" height="90" id="svg_83" stroke="#000000" stroke-width="2" width="150" x="201" y="481"/>
+  <rect fill="#e6e6e6" height="60" id="svg_84" stroke="#000000" stroke-width="2" width="40" x="216" y="496"/>
+  <rect fill="#e6e6e6" height="60" id="svg_85" stroke="#000000" stroke-width="2" width="40" x="296" y="496"/>
+  <path d="m249,551l54,-50m-54,0l54,50" fill="none" id="svg_86" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m221,506l30,0m-30,10l30,0m-30,10l30,0m-30,10l30,0m-30,10l30,0m50,-40l30,0m-30,10l30,0m-30,10l30,0m-30,10l30,0m-30,10l30,0" fill="none" id="svg_87" stroke="#808080" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m451,575l30,0l0,9c0,6.63 -6.72,12 -15,12c-8.28,0 -15,-5.37 -15,-12l0,-9zm6,0l0,-7c0,-3.87 4.03,-7 9,-7c4.97,0 9,3.13 9,7l0,7l-4,0l0,-7c0,-1.66 -2.24,-3 -5,-3c-2.76,0 -5,1.34 -5,3l0,7l-4,0z" fill="#a0a0a0" id="svg_88" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m464,581c0,-1.1 0.9,-2 2,-2c1.1,0 2,0.9 2,2l0,7c0,1.1 -0.9,2 -2,2c-1.1,0 -2,-0.9 -2,-2l0,-7z" fill="#000000" id="svg_89"/>
+  <rect fill="#c0f5a9" height="90" id="svg_90" stroke="#000000" stroke-width="2" transform="matrix(1 0 0 1 0 0)" width="150" x="811" y="461"/>
+  <path d="m857,499l0,15l15,-8l-15,-7z" fill="#808080" id="svg_91"/>
+  <path d="m822,506l45,0" fill="none" id="svg_92" stroke="#808080" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m891,506l50,0" fill="none" id="svg_93" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <ellipse cx="891" cy="506" fill="#9ddbef" id="svg_94" rx="20" ry="20" stroke="#000000"/>
+  <path d="m883,497c1.32,-2.77 4.28,-4.65 7.66,-4.86c3.37,-0.21 6.6,1.28 8.34,3.86c1.78,3.23 0.49,7.12 -3,9c-3.2,1.85 -5.12,5.31 -5,9" fill="none" id="svg_95" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m943,498l8,8l-8,8l-8,-8l8,-8zm-24,3l10,5l-10,5l0,-10z" fill="#000000" id="svg_96"/>
+  <rect fill="#000000" height="2" id="svg_97" width="2" x="890" y="517"/>
+  <path d="m16,381l45,25l0,40l-45,25l0,-90z" fill="#9ddbef" id="svg_98" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m81,31c-3.35,-2.22 -5.37,-5.98 -5.37,-10c0,-4.02 2.02,-7.78 5.37,-10l84,0c3.35,2.22 5.37,5.98 5.37,10c0,4.02 -2.02,7.78 -5.37,10l-84,0z" fill="url(#mx-gradient-e6e6e6-1-808080-1-s-0)" id="svg_99" stroke="#000000" stroke-miterlimit="10"/>
+  <path d="m165,11c3.35,2.22 5.37,5.98 5.37,10c0,4.02 -2.02,7.78 -5.37,10c-3.35,-2.22 -5.37,-5.98 -5.37,-10c0,-4.02 2.02,-7.78 5.37,-10" fill="#e6e6e6" id="svg_100" stroke="#000000" stroke-miterlimit="10"/>
+  <rect fill="#fffbc0" height="10" id="svg_101" stroke="#000000" width="10" x="93" y="16"/>
+  <rect fill="#fffbc0" height="10" id="svg_102" stroke="#000000" width="10" x="113" y="16"/>
+  <rect fill="#fffbc0" height="10" id="svg_103" stroke="#000000" width="10" x="133" y="16"/>
+  <rect fill="#c0f5a9" height="90" id="svg_104" stroke="#000000" stroke-width="2" width="150" x="541" y="596"/>
+  <path d="m591,641l45,0" fill="none" id="svg_105" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m628,635l0,12l13,-6l-13,-6z" fill="#000000" id="svg_106"/>
+  <rect fill="#e6e6e6" height="16" id="svg_107" stroke="#000000" width="16" x="665" y="633"/>
+  <ellipse cx="559" cy="623" fill="#e6e6e6" id="svg_108" rx="8" ry="8" stroke="#000000"/>
+  <path d="m574,633l8,8l-8,8l-8,-8l8,-8zm-15,18l8,16l-16,0l8,-16z" fill="#e6e6e6" id="svg_109" stroke="#000000" stroke-miterlimit="10"/>
+  <rect fill="#fffbc0" height="18" id="svg_110" stroke="#000000" stroke-width="2" width="26" x="48" y="171"/>
+  <rect fill="#fffbc0" height="18" id="svg_111" stroke="#000000" stroke-width="2" width="26" x="1" y="189"/>
+  <rect fill="#fffbc0" height="18" id="svg_112" stroke="#000000" stroke-width="2" width="26" x="95" y="189"/>
+  <rect fill="#fffbc0" height="18" id="svg_113" stroke="#000000" stroke-width="2" width="26" x="1" y="225"/>
+  <rect fill="#fffbc0" height="18" id="svg_114" stroke="#000000" stroke-width="2" width="26" x="95" y="225"/>
+  <rect fill="#fffbc0" height="18" id="svg_115" stroke="#000000" stroke-width="2" width="26" x="48" y="243"/>
+  <rect fill="#c0f5a9" height="18" id="svg_116" stroke="#000000" stroke-width="2" width="26" x="48" y="207"/>
+  <path d="m61,207l0,-18" fill="none" id="svg_117" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m48,211.02l-21,-8.04" fill="none" id="svg_118" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m74,211.02l21,-8.04" fill="none" id="svg_119" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m48,220.98l-21,8.04" fill="none" id="svg_120" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m74,220.98l21,8.04" fill="none" id="svg_121" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="m61,225l0,18" fill="none" id="svg_122" stroke="#000000" stroke-miterlimit="10" stroke-width="2"/>
+ </g>
+</svg>

@@ -23,5 +23,15 @@ namespace HelloWinForms
             this.richTextBox1.AppendText("aaa bbb ccc 1 aaa bbb ccc 2 aaa bbb ccc 3 aaa bbb ccc 4 aaa bbb ccc 5 aaa bbb ccc " + Environment.NewLine);
             this.richTextBox1.AppendText("aaa bbb ccc 1 aaa bbb ccc 2 aaa bbb ccc 3 aaa bbb ccc 4 aaa bbb ccc 5 aaa bbb ccc " + Environment.NewLine);
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_ImeChange(object sender, EventArgs e)
+        {
+
+        }
     }
 }

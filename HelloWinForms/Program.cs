@@ -17,9 +17,10 @@ namespace HelloWinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HelloWinLevel());
-            //Application.Run(new HelloMisc());
-            //Application.Run(new HelloListView());
+            //Application.Run(new HelloDataGridView());
+            //Application.Run(new HelloRoslyn());
+            //Application.Run(new HelloSnowflake());
+            Application.Run(new HelloSVG());
         }
     }
 }
