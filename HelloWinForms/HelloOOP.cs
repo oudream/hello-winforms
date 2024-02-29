@@ -35,6 +35,35 @@ namespace HelloWinForms
                 Console.WriteLine("对象是 DerivedClass 类型");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var v = new VariableInfo<int>(0, 0, false);
+            MessageBox.Show(v.Value.ToString());
+        }
+    }
+    public class VariableInfo<TValue>
+    {
+        // 变量值，最好是值类型
+        public TValue Value { get; set; }
+        // 变量更新时间
+        public long LastUpdated { get; set; }
+        // 变量是否需要初始值
+        public bool HasInitialValue { get; set; }
+        public VariableInfo(TValue value)
+        {
+            Value = value;
+            HasInitialValue = true;
+        }
+        public VariableInfo(TValue value, long lastUpdated) : this(value)
+        {
+            LastUpdated = lastUpdated;
+        }
+        public VariableInfo(TValue value, long lastUpdated, bool hasInitialValue) : this(value)
+        {
+            LastUpdated = lastUpdated;
+            HasInitialValue = hasInitialValue;
+        }
     }
 
     // 基类

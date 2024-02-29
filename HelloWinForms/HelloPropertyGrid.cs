@@ -63,6 +63,15 @@ namespace HelloWinForms
         }
     }
 
+    // [DisplayName(...)]
+    // [Description(...)]
+    // [Category(...)]
+    // [TypeConverter(...)]
+    // [ReadOnly(...)]
+    // [Browsable(...)]
+    // [DefaultValue(...)]
+    // [Editor(...)]
+
     // 定义一个简单的对象，其属性将显示在 PropertyGrid 中
     public class PropertyObject
     {

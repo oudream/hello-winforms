@@ -20,7 +20,12 @@ namespace HelloWinForms
             //Application.Run(new HelloDataGridView());
             //Application.Run(new HelloRoslyn());
             //Application.Run(new HelloSnowflake());
-            Application.Run(new HelloSVG());
+            //Application.Run(new HelloWaitHandle());
+            //Application.Run(new HelloLog());
+            //Application.Run(new HelloOOP());
+            //Application.Run(new HelloAsync());
+            //Application.Run(new HelloCustomBar());
+            Application.Run(new HelloServiceController());
         }
     }
 }

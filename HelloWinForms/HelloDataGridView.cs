@@ -19,7 +19,9 @@ namespace HelloWinForms
             InitializeComponent();
 
             // 初始化上下文菜单
-            InitializeContextMenu(); 
+            InitializeContextMenu();
+
+            dataGridView1.CellPainting += dataGridView1_CellPainting;
         }
 
         // DataGridViewCalendarColumn
@@ -45,8 +47,10 @@ namespace HelloWinForms
             //paymentAmountColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 
             // 列
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "GroupColumn", HeaderText = "分组", Width = 100 });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ProjectId", DataPropertyName = "ProjectId", HeaderText = "项目 ID", Width = 100});
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ProjectName", DataPropertyName = "ProjectName", HeaderText = "项目名称", Width = 200 });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ProjectGroup", DataPropertyName = "ProjectGroup", HeaderText = "项目组", Width = 200 });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", DataPropertyName = "Description", HeaderText = "描述", Width = 200 });
             dataGridView1.Columns.Add(paymentAmountColumn);
             dataGridView1.Columns.Add(new DataGridViewCalendarColumn { Name = "CreationTime", DataPropertyName = "CreationTime", HeaderText = "创建时间", Width = 150, SortMode = DataGridViewColumnSortMode.Programmatic });
@@ -69,6 +73,7 @@ namespace HelloWinForms
                 {
                     ProjectId = $"ID{i}",
                     ProjectName = $"Project {i}",
+                    ProjectGroup = $"Group {i/10}",
                     Description = $"Description for Project {i}",
                     PaymentAmount = i * 10000.12,
                     CreationTime = DateTime.Now.AddDays(i),
@@ -83,7 +88,7 @@ namespace HelloWinForms
 
             foreach (var config in projectConfigs)
             {
-                message.AppendLine($"ID: {config.ProjectId}, Name: {config.ProjectName}, Description: {config.Description}");
+                message.AppendLine($"ID: {config.ProjectId}, Name: {config.ProjectName}, Group: {config.ProjectGroup}, Description: {config.Description}");
             }
 
             return message.ToString();
@@ -207,6 +212,9 @@ namespace HelloWinForms
                     case "ProjectName":
                         data = sortOrder == SortOrder.Ascending ? data.OrderBy(p => p.ProjectName).ToList() : data.OrderByDescending(p => p.ProjectName).ToList();
                         break;
+                    case "ProjectGroup":
+                        data = sortOrder == SortOrder.Ascending ? data.OrderBy(p => p.ProjectGroup).ToList() : data.OrderByDescending(p => p.ProjectGroup).ToList();
+                        break;
                     case "CreationTime":
                         data = sortOrder == SortOrder.Ascending ? data.OrderBy(p => p.CreationTime).ToList() : data.OrderByDescending(p => p.CreationTime).ToList();
                         break;
@@ -261,12 +269,51 @@ namespace HelloWinForms
             pi.SetValue(dgv, true, null);
         }
 
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            // 这里仅对"GroupColumn"列进行处理
+            if (e.ColumnIndex == dataGridView1.Columns["GroupColumn"].Index && e.RowIndex >= 0)
+            {
+                e.PaintBackground(e.ClipBounds, true);
+                e.Handled = true;
+
+                var projectGroup = dataGridView1.Rows[e.RowIndex].Cells["ProjectGroup"].Value.ToString();
+
+                // 检查当前行是否为同组的第一行
+                if (e.RowIndex == 0 || projectGroup != dataGridView1.Rows[e.RowIndex - 1].Cells["ProjectGroup"].Value.ToString())
+                {
+                    // 计算这个组跨越多少行
+                    int rowCount = 1;
+                    while (e.RowIndex + rowCount < dataGridView1.RowCount &&
+                           projectGroup == dataGridView1.Rows[e.RowIndex + rowCount].Cells["ProjectGroup"].Value.ToString())
+                    {
+                        rowCount++;
+                    }
+
+                    // 合并单元格的边界
+                    Rectangle groupCellBounds = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                    int totalHeight = 0;
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        totalHeight += dataGridView1.GetRowDisplayRectangle(e.RowIndex + i, true).Height;
+                    }
+
+                    groupCellBounds.Height = totalHeight;
+
+                    // 绘制文本
+                    TextRenderer.DrawText(e.Graphics, projectGroup, e.CellStyle.Font,
+                        groupCellBounds, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+                }
+            }
+        }
+
     }
 
     public class ProjectConfig
     {
         public string ProjectId { get; set; }
         public string ProjectName { get; set; }
+        public string ProjectGroup { get; set; }
         public string Description { get; set; }
         // 添加创建时间属性
         public DateTime CreationTime { get; set; }
