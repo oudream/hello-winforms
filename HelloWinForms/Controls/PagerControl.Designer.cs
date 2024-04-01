@@ -92,18 +92,18 @@
             // btnEnd
             // 
             this.btnEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEnd.Location = new System.Drawing.Point(843, 3);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(64, 64);
             this.btnEnd.TabIndex = 12;
-            this.btnEnd.Text = ">";
+            this.btnEnd.Text = ">|";
             this.btnEnd.UseVisualStyleBackColor = true;
             // 
             // btnNext
             // 
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnNext.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNext.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNext.Location = new System.Drawing.Point(773, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(64, 64);
@@ -114,7 +114,7 @@
             // p9
             // 
             this.p9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p9.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p9.Location = new System.Drawing.Point(703, 3);
             this.p9.Name = "p9";
             this.p9.Size = new System.Drawing.Size(64, 64);
@@ -125,7 +125,7 @@
             // p8
             // 
             this.p8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p8.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p8.Location = new System.Drawing.Point(633, 3);
             this.p8.Name = "p8";
             this.p8.Size = new System.Drawing.Size(64, 64);
@@ -136,7 +136,7 @@
             // p7
             // 
             this.p7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p7.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p7.Location = new System.Drawing.Point(563, 3);
             this.p7.Name = "p7";
             this.p7.Size = new System.Drawing.Size(64, 64);
@@ -147,7 +147,7 @@
             // p6
             // 
             this.p6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p6.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p6.Location = new System.Drawing.Point(493, 3);
             this.p6.Name = "p6";
             this.p6.Size = new System.Drawing.Size(64, 64);
@@ -158,7 +158,7 @@
             // p5
             // 
             this.p5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p5.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p5.Location = new System.Drawing.Point(423, 3);
             this.p5.Name = "p5";
             this.p5.Size = new System.Drawing.Size(64, 64);
@@ -169,7 +169,7 @@
             // p4
             // 
             this.p4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p4.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p4.Location = new System.Drawing.Point(353, 3);
             this.p4.Name = "p4";
             this.p4.Size = new System.Drawing.Size(64, 64);
@@ -180,7 +180,7 @@
             // p3
             // 
             this.p3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p3.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p3.Location = new System.Drawing.Point(283, 3);
             this.p3.Name = "p3";
             this.p3.Size = new System.Drawing.Size(64, 64);
@@ -191,7 +191,7 @@
             // p2
             // 
             this.p2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p2.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p2.Location = new System.Drawing.Point(213, 3);
             this.p2.Name = "p2";
             this.p2.Size = new System.Drawing.Size(64, 64);
@@ -202,7 +202,7 @@
             // p1
             // 
             this.p1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p1.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.p1.Location = new System.Drawing.Point(143, 3);
             this.p1.Name = "p1";
             this.p1.Size = new System.Drawing.Size(64, 64);
@@ -213,7 +213,7 @@
             // btnPrevious
             // 
             this.btnPrevious.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPrevious.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPrevious.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPrevious.Location = new System.Drawing.Point(73, 3);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(64, 64);
@@ -224,18 +224,18 @@
             // btnFirst
             // 
             this.btnFirst.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFirst.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnFirst.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnFirst.Location = new System.Drawing.Point(3, 3);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(64, 64);
             this.btnFirst.TabIndex = 0;
-            this.btnFirst.Text = "<";
+            this.btnFirst.Text = "|<";
             this.btnFirst.UseVisualStyleBackColor = true;
             // 
             // btnToPage
             // 
             this.btnToPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnToPage.Font = new System.Drawing.Font("微软雅黑", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnToPage.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnToPage.Location = new System.Drawing.Point(1042, 3);
             this.btnToPage.Name = "btnToPage";
             this.btnToPage.Size = new System.Drawing.Size(130, 64);

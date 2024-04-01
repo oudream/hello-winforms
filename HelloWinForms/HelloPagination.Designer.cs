@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelloPagination));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pagerControl1 = new HelloWinForms.Controls.PagerControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -43,28 +46,44 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1156, 645);
+            this.dataGridView1.Size = new System.Drawing.Size(1326, 715);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.pagerControl1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1156, 100);
+            this.panel1.Size = new System.Drawing.Size(1326, 100);
             this.panel1.TabIndex = 1;
+            // 
+            // pagerControl1
+            // 
+            this.pagerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pagerControl1.DataSource = ((System.Collections.Generic.List<object>)(resources.GetObject("pagerControl1.DataSource")));
+            this.pagerControl1.Location = new System.Drawing.Point(3, 14);
+            this.pagerControl1.Name = "pagerControl1";
+            this.pagerControl1.PageCount = 0;
+            this.pagerControl1.PageIndex = 1;
+            this.pagerControl1.PageSize = 10;
+            this.pagerControl1.Size = new System.Drawing.Size(1320, 70);
+            this.pagerControl1.StartIndex = 0;
+            this.pagerControl1.TabIndex = 0;
             // 
             // HelloPagination
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 775);
+            this.ClientSize = new System.Drawing.Size(1350, 845);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "HelloPagination";
             this.Text = "HelloPagination";
+            this.Load += new System.EventHandler(this.HelloPagination_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -73,5 +92,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
+        private Controls.PagerControl pagerControl1;
     }
 }

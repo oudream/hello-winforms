@@ -44,7 +44,9 @@ namespace HelloWinForms
 
             //Application.Run(new HelloVirtualKeyboardNumber());
 
-            Application.Run(new HelloSolderBall());
+            //Application.Run(new HelloSolderBall());
+
+            Application.Run(new HelloPagination());
 
         }
     }

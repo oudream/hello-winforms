@@ -19,9 +19,11 @@ namespace HelloWinForms.Controls
         {
             InitializeComponent();
 
+            txtPage.Controls[0].Visible = false;
+
             for (int i = 0; i < 9; i++)
             {
-                System.Windows.Forms.Button c = (System.Windows.Forms.Button)this.tableLayoutPanel1.Controls.Find("p" + (i + 1), false)[0];
+                Button c = (Button)this.tableLayoutPanel1.Controls.Find("p" + (i + 1), false)[0];
                 c.Click += page_BtnClick;
             }
 

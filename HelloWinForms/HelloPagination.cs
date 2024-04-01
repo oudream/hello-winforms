@@ -13,10 +13,103 @@ namespace HelloWinForms
 {
     public partial class HelloPagination : Form
     {
+        private ImageRecordsView imageRecordsView;
+
         public HelloPagination()
         {
             InitializeComponent();
+
+            //List<object> lstPage2 = new List<object>();
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    lstPage2.Add(i);
+            //}
+
+            imageRecordsView = new ImageRecordsView(this.dataGridView1);
         }
+
+
+        private void HelloPagination_Load(object sender, EventArgs e)
+        {
+            imageRecordsView.InitializeDataGridView();
+
+            var imageRecords = GenerateMockImageRecords(100 * 900);
+            var dataSource = new List<object>();
+            for (int i = 0; i < imageRecords.Count; i++)
+            {
+                dataSource.Add(imageRecords[i]);
+            }
+
+            pagerControl1.ShowSourceChanged += PagerControl1_ShowSourceChanged;
+            pagerControl1.PageSize = 100;
+            pagerControl1.DataSource = dataSource;
+        }
+
+        private void PagerControl1_ShowSourceChanged(object currentSource)
+        {
+            if (currentSource is List<object> lst)
+            {
+                var imageRecords = new List<ImageRecord>();
+                foreach (var item in lst)
+                {
+                    imageRecords.Add(item as ImageRecord);
+                }
+                imageRecordsView.PopulateDataGridView(imageRecords);
+            }
+        }
+
+        public List<ImageRecord> GenerateMockImageRecords(int numberOfRecords)
+        {
+            var records = new List<ImageRecord>();
+            var random = new Random();
+            var products = new[] { "Camera", "Sensor", "Module" };
+            var detectorModes = new[] { "ModeA", "ModeB", "ModeC" };
+
+            // Variables to track the current batch number and position.
+            int batchNumber = 1;
+            int positionCounter = 1; // Start with position 1
+
+            for (int i = 0; i < numberOfRecords; i++)
+            {
+                // Increment batch number after every 4 records
+                if (i % 4 == 0 && i != 0)
+                {
+                    batchNumber++;
+                }
+
+                // Set position from 1 to 4 and reset for each new batch
+                int position = positionCounter;
+                positionCounter++;
+                if (positionCounter > 4) // Reset position for the next batch
+                {
+                    positionCounter = 1;
+                }
+
+                var record = new ImageRecord
+                {
+                    Id = i + 1,
+                    Product = products[random.Next(products.Length)],
+                    SN = $"SN{random.Next(100000, 999999)}",
+                    BatchNumber = batchNumber,
+                    ModuleNumber = random.Next(1, 10),
+                    Position = position, // Use the positionCounter for the Position
+                    Voltage = random.NextDouble() * 5.0,
+                    Current = random.NextDouble() * 2.0,
+                    DetectorMode = detectorModes[random.Next(detectorModes.Length)],
+                    FrontTime = DateTime.Now.AddDays(-random.Next(0, 30)),
+                    FrontResultStatus = (DetectionResultStatus)random.Next(0, 3),
+                    FrontResultContent = $"Front{random.Next(1000, 9999)}",
+                    SideTime = DateTime.Now.AddDays(-random.Next(0, 30)),
+                    SideResultStatus = (DetectionResultStatus)random.Next(0, 3),
+                    SideResultContent = $"Side{random.Next(1000, 9999)}"
+                };
+
+                records.Add(record);
+            }
+
+            return records;
+        }
+
     }
 
     public class ImageRecord
@@ -204,7 +297,7 @@ namespace HelloWinForms
             try
             {
                 dataGridView.SuspendLayout(); // 暂停布局逻辑
-                dataGridView.Visible = false; // 隐藏DataGridView以减少闪烁
+                //dataGridView.Visible = false; // 隐藏DataGridView以减少闪烁
 
                 // 禁用用户添加行
                 dataGridView.AllowUserToAddRows = false;
@@ -228,7 +321,7 @@ namespace HelloWinForms
             }
             finally
             {
-                dataGridView.Visible = true; // 数据填充完成后重新显示DataGridView
+                //dataGridView.Visible = true; // 数据填充完成后重新显示DataGridView
                 dataGridView.ResumeLayout(true); // 恢复布局逻辑并强制一个重新布局
             }
         }
