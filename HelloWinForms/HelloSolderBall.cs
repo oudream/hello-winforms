@@ -44,7 +44,6 @@ namespace HelloWinForms
             {
                 form.ShowDialog();
             }
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)

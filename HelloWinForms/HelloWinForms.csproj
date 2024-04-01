@@ -195,6 +195,12 @@
     <Compile Include="CircularIndicator.Designer.cs">
       <DependentUpon>CircularIndicator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DateScrollerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DateScrollerControl.Designer.cs">
+      <DependentUpon>DateScrollerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -604,6 +610,9 @@
     <EmbeddedResource Include="CircularIndicator.resx">
       <DependentUpon>CircularIndicator.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DateScrollerControl.resx">
+      <DependentUpon>DateScrollerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\PagerControl.resx">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -823,8 +832,19 @@
     <Content Include="Images\image2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\首页选中.png" />
+    <None Include="Resources\图库选中.png" />
     <None Include="Resources\图库.png" />
+    <None Include="Resources\探测器选中.png" />
+    <None Include="Resources\探测器.png" />
+    <None Include="Resources\光源选中.png" />
+    <None Include="Resources\光源.png" />
+    <None Include="Resources\工控选中.png" />
+    <None Include="Resources\工控.png" />
+    <None Include="Resources\告警选中.png" />
+    <None Include="Resources\告警.png" />
+    <None Include="Resources\调试选中.png" />
+    <None Include="Resources\调试.png" />
+    <None Include="Resources\首页选中.png" />
     <None Include="Resources\首页.png" />
     <None Include="Resources\画线.png" />
   </ItemGroup>

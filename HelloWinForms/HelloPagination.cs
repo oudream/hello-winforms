@@ -43,6 +43,13 @@ namespace HelloWinForms
             pagerControl1.ShowSourceChanged += PagerControl1_ShowSourceChanged;
             pagerControl1.PageSize = 100;
             pagerControl1.DataSource = dataSource;
+
+            dateScrollerControl1.DateSelected += DateScrollerControl1_DateSelected;
+        }
+
+        private void DateScrollerControl1_DateSelected(object sender, DateTime e)
+        {
+            Console.WriteLine(e.ToString());
         }
 
         private void PagerControl1_ShowSourceChanged(object currentSource)
