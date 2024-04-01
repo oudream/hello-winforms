@@ -15,6 +15,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,7 +50,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DeveloperSharp">
+      <HintPath>..\Dll64\DeveloperSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ExCSS">
       <HintPath>Libs\Debug\ExCSS.dll</HintPath>
     </Reference>
@@ -167,6 +188,22 @@
     </Compile>
     <Compile Include="Channel\ChannelClient.cs" />
     <Compile Include="Channel\TcpChannelClient.cs" />
+    <Compile Include="Channel\TcpClientChannel.cs" />
+    <Compile Include="CircularIndicator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CircularIndicator.Designer.cs">
+      <DependentUpon>CircularIndicator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PagerControl.Designer.cs">
+      <DependentUpon>PagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RJControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="DataGridViewComponent\CalendarEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -189,6 +226,18 @@
     <Compile Include="HelloAsync.Designer.cs">
       <DependentUpon>HelloAsync.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloAutoCloseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloAutoCloseForm.Designer.cs">
+      <DependentUpon>HelloAutoCloseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloBuffer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloBuffer.Designer.cs">
+      <DependentUpon>HelloBuffer.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloChannel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +249,12 @@
     </Compile>
     <Compile Include="HelloCombineFiles.Designer.cs">
       <DependentUpon>HelloCombineFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloComboBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloComboBox.Designer.cs">
+      <DependentUpon>HelloComboBox.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloCustomBar.cs">
       <SubType>Form</SubType>
@@ -219,11 +274,29 @@
     <Compile Include="HelloDataGridViewGroup.Designer.cs">
       <DependentUpon>HelloDataGridViewGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloDataGridViewKV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDataGridViewKV.Designer.cs">
+      <DependentUpon>HelloDataGridViewKV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloDataGridViewStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDataGridViewStatus.Designer.cs">
+      <DependentUpon>HelloDataGridViewStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloDateTimePicker.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloDateTimePicker.Designer.cs">
       <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloJson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloJson.Designer.cs">
+      <DependentUpon>HelloJson.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloLog.cs">
       <SubType>Form</SubType>
@@ -231,17 +304,47 @@
     <Compile Include="HelloLog.Designer.cs">
       <DependentUpon>HelloLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloLogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloLogViewer.Designer.cs">
+      <DependentUpon>HelloLogViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloOOP.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloOOP.Designer.cs">
       <DependentUpon>HelloOOP.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloOverlayImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloOverlayImage.Designer.cs">
+      <DependentUpon>HelloOverlayImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPagination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPagination.Designer.cs">
+      <DependentUpon>HelloPagination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPictrueBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPictrueBox.Designer.cs">
+      <DependentUpon>HelloPictrueBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloPinyin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloPinyin.Designer.cs">
       <DependentUpon>HelloPinyin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloProgressDialog.Designer.cs">
+      <DependentUpon>HelloProgressDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloPropertyGrid.cs">
       <SubType>Form</SubType>
@@ -290,6 +393,12 @@
     <Compile Include="HelloSNR.Designer.cs">
       <DependentUpon>HelloSNR.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloSolderBall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloSolderBall.Designer.cs">
+      <DependentUpon>HelloSolderBall.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloSplitter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +411,36 @@
     <Compile Include="HelloSVG.Designer.cs">
       <DependentUpon>HelloSVG.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloTabControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTabControl.Designer.cs">
+      <DependentUpon>HelloTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTableLayoutPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTableLayoutPanel.Designer.cs">
+      <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTcpClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTcpClient.Designer.cs">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTcpServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTcpServer.Designer.cs">
+      <DependentUpon>HelloTcpServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTcpServerPLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTcpServerPLC.Designer.cs">
+      <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloTreeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +452,18 @@
     </Compile>
     <Compile Include="HelloVariable.Designer.cs">
       <DependentUpon>HelloVariable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloVirtualKeyboardNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloVirtualKeyboardNumber.Designer.cs">
+      <DependentUpon>HelloVirtualKeyboardNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloWaitAny.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloWaitAny.Designer.cs">
+      <DependentUpon>HelloWaitAny.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloWaitHandle.cs">
       <SubType>Form</SubType>
@@ -407,6 +558,13 @@
     <Compile Include="MouseDrawRectangleForm3.Designer.cs">
       <DependentUpon>MouseDrawRectangleForm3.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protocols\PLCTcpDriverHelper.cs" />
     <Compile Include="Utilities\LogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -422,10 +580,17 @@
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\LogViewer.cs" />
+    <Compile Include="Utilities\MultiThreadedTcpClient.cs" />
+    <Compile Include="Utilities\NetHelper.cs" />
     <Compile Include="Utilities\Sample\Yaml\Deserializer.cs" />
     <Compile Include="Utilities\Sample\Yaml\Hello.cs" />
     <Compile Include="Utilities\Sample\Yaml\Model.cs" />
     <Compile Include="Utilities\Snowflake.cs" />
+    <Compile Include="Utilities\StringHelper.cs" />
+    <Compile Include="Utilities\TcpClientModule.cs" />
+    <Compile Include="Utilities\TcpClientSelect.cs" />
+    <Compile Include="Utilities\TimeHelper.cs" />
     <Compile Include="Utilities\YamlHelper.cs" />
     <EmbeddedResource Include="Action\PRight.resx">
       <DependentUpon>PRight.cs</DependentUpon>
@@ -436,17 +601,32 @@
     <EmbeddedResource Include="BaseForm\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CircularIndicator.resx">
+      <DependentUpon>CircularIndicator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PagerControl.resx">
+      <DependentUpon>PagerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloAsync.resx">
       <DependentUpon>HelloAsync.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloAutoCloseForm.resx">
+      <DependentUpon>HelloAutoCloseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloBuffer.resx">
+      <DependentUpon>HelloBuffer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloChannel.resx">
       <DependentUpon>HelloChannel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloCombineFiles.resx">
       <DependentUpon>HelloCombineFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloComboBox.resx">
+      <DependentUpon>HelloComboBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloCustomBar.resx">
       <DependentUpon>HelloCustomBar.cs</DependentUpon>
@@ -457,17 +637,41 @@
     <EmbeddedResource Include="HelloDataGridViewGroup.resx">
       <DependentUpon>HelloDataGridViewGroup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloDataGridViewKV.resx">
+      <DependentUpon>HelloDataGridViewKV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloDataGridViewStatus.resx">
+      <DependentUpon>HelloDataGridViewStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloDateTimePicker.resx">
       <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloJson.resx">
+      <DependentUpon>HelloJson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloLog.resx">
       <DependentUpon>HelloLog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloLogViewer.resx">
+      <DependentUpon>HelloLogViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloOOP.resx">
       <DependentUpon>HelloOOP.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloOverlayImage.resx">
+      <DependentUpon>HelloOverlayImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloPagination.resx">
+      <DependentUpon>HelloPagination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloPictrueBox.resx">
+      <DependentUpon>HelloPictrueBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloPinyin.resx">
       <DependentUpon>HelloPinyin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloProgressDialog.resx">
+      <DependentUpon>HelloProgressDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloPropertyGrid.resx">
       <DependentUpon>HelloPropertyGrid.cs</DependentUpon>
@@ -508,11 +712,29 @@
     <EmbeddedResource Include="HelloSNR.resx">
       <DependentUpon>HelloSNR.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloSolderBall.resx">
+      <DependentUpon>HelloSolderBall.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloSplitter.resx">
       <DependentUpon>HelloSplitter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloSVG.resx">
       <DependentUpon>HelloSVG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTabControl.resx">
+      <DependentUpon>HelloTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTableLayoutPanel.resx">
+      <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTcpClient.resx">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTcpServer.resx">
+      <DependentUpon>HelloTcpServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTcpServerPLC.resx">
+      <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTimer.resx">
       <DependentUpon>HelloTimer.cs</DependentUpon>
@@ -531,6 +753,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloVariable.resx">
       <DependentUpon>HelloVariable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloVirtualKeyboardNumber.resx">
+      <DependentUpon>HelloVirtualKeyboardNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloWaitAny.resx">
+      <DependentUpon>HelloWaitAny.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloWaitHandle.resx">
       <DependentUpon>HelloWaitHandle.cs</DependentUpon>
@@ -566,6 +794,7 @@
     <EmbeddedResource Include="UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -594,11 +823,26 @@
     <Content Include="Images\image2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\首页选中.png" />
+    <None Include="Resources\图库.png" />
+    <None Include="Resources\首页.png" />
     <None Include="Resources\画线.png" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

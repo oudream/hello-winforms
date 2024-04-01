@@ -63,9 +63,39 @@ namespace HelloWinForms.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 图库 {
+            get {
+                object obj = ResourceManager.GetObject("图库", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 画线 {
             get {
                 object obj = ResourceManager.GetObject("画线", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 首页 {
+            get {
+                object obj = ResourceManager.GetObject("首页", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 首页选中 {
+            get {
+                object obj = ResourceManager.GetObject("首页选中", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

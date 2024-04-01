@@ -9,11 +9,11 @@ using System.Timers;
 using System.Windows.Forms;
 using YamlDotNet.Core.Tokens;
 
-namespace CxSystemConfiguration.Utilities
+namespace HelloWinForms.Utilities
 {
     public static class LogHelper
     {
-        public delegate void LogEventHandler(LogLevel level, string logMessage);
+        public delegate void LogEventHandler(long time, LogLevel level, string logMessage, string logTag);
         public static event LogEventHandler LogEvent;
 
         private static LogLevel currentLogLevel = LogLevel.Verbose;
@@ -23,7 +23,7 @@ namespace CxSystemConfiguration.Utilities
 
         private static bool isRunning;
 
-        public static void InitLog()
+        public static void Run()
         {
             Serilog.Log.Logger = new LoggerConfiguration()
               .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
@@ -66,41 +66,44 @@ namespace CxSystemConfiguration.Utilities
                 logList.Add(logEntry);
             }
             // 注意：在这里 logStack 已经为空
-            logList.Sort((a, b) => a.LogId.CompareTo(b.LogId));
+            logList.Sort((a, b) => a.Id.CompareTo(b.Id));
             foreach (var logEntry in logList)
             {
-                var logLevel = logEntry.LogLevel;
+                var logLevel = logEntry.Level;
+                var logTimestamp = logEntry.Timestamp;
                 var message = logEntry.Message;
                 //var logMessage = message.Replace("\r\n", "  ");
+                var logTag = logEntry.Tag;
                 var logMessage = message.Replace("\r\n", "  ");
-                string logLevelString = "信息";
+                logMessage = $"[{logTag}] {logMessage}";
+                //string logLevelString = "信息";
                 if (logLevel >= currentLogLevel)
                 {
                     // 使用 Serilog 输出日志
                     switch (logLevel)
                     {
                         case LogLevel.Verbose:
-                            logLevelString = "空白";
+                            //logLevelString = "空白";
                             Serilog.Log.Logger.Verbose(logMessage);
                             break;
                         case LogLevel.Debug:
-                            logLevelString = "调试";
+                            //logLevelString = "调试";
                             Serilog.Log.Logger.Debug(logMessage);
                             break;
                         case LogLevel.Information:
-                            logLevelString = "信息";
+                            //logLevelString = "信息";
                             Serilog.Log.Logger.Information(logMessage);
                             break;
                         case LogLevel.Warning:
-                            logLevelString = "警告";
+                            //logLevelString = "警告";
                             Serilog.Log.Logger.Warning(logMessage);
                             break;
                         case LogLevel.Error:
-                            logLevelString = "错误";
+                            //logLevelString = "错误";
                             Serilog.Log.Logger.Error(logMessage);
                             break;
                         case LogLevel.Fatal:
-                            logLevelString = "致命错误";
+                            //logLevelString = "致命错误";
                             Serilog.Log.Logger.Fatal(logMessage);
                             break;
                         default:
@@ -110,8 +113,8 @@ namespace CxSystemConfiguration.Utilities
                     //
                     if (LogEvent != null)
                     {
-                        logMessage = $"[{DateTime.Now:dd/HH:mm:ss.fff}] {logLevelString}: {message}\r\n";
-                        LogEvent?.Invoke(logLevel, logMessage);
+                        //logMessage = $"[{DateTime.Now:dd/HH:mm:ss.fff}] {logLevelString}:{logTag}> {message}\r\n";
+                        LogEvent?.Invoke(logTimestamp, logLevel, logMessage, logTag);
                     }
                 }
             }
@@ -127,17 +130,25 @@ namespace CxSystemConfiguration.Utilities
             {"致命错误", LogLevel.Fatal},
         };
 
-        private static LogLevel GetLogLevelFromMessage(string logMessage)
+        public static string GetLogLevelTranslation(LogLevel level)
         {
-            // 解析日志消息，获取日志级别
-            foreach (var translation in LogLevelTranslations)
+            switch (level)
             {
-                if (logMessage.Contains(translation.Key))
-                {
-                    return translation.Value;
-                }
+                case LogLevel.Verbose:
+                    return "空白";
+                case LogLevel.Debug:
+                    return "调试";
+                case LogLevel.Information:
+                    return "信息";
+                case LogLevel.Warning:
+                    return "警告";
+                case LogLevel.Error:
+                    return "错误";
+                case LogLevel.Fatal:
+                    return "致命错误";
+                default:
+                    return "";
             }
-            return LogLevel.Information; // 默认为 Information
         }
 
         public static void SetLogLevel(LogLevel logLevel)
@@ -145,35 +156,35 @@ namespace CxSystemConfiguration.Utilities
             currentLogLevel = logLevel;
         }
 
-        public static void Information(string message)
+        public static void Information(string message, string tag = "")
         {
-            Log(LogLevel.Information, message);
+            Log(LogLevel.Information, message, tag);
         }
 
-        public static void Warning(string message)
+        public static void Warning(string message, string tag = "")
         {
-            Log(LogLevel.Warning, message);
+            Log(LogLevel.Warning, message, tag);
         }
 
-        public static void Error(string message)
+        public static void Error(string message, string tag = "")
         {
-            Log(LogLevel.Error, message);
+            Log(LogLevel.Error, message, tag);
         }
 
-        public static void Fatal(string message)
+        public static void Fatal(string message, string tag = "")
         {
-            Log(LogLevel.Fatal, message);
+            Log(LogLevel.Fatal, message, tag);
         }
 
-        public static void Debug(string message)
+        public static void Debug(string message, string tag = "")
         {
-            Log(LogLevel.Debug, message);
+            Log(LogLevel.Debug, message, tag);
         }
 
-        private static void Log(LogLevel logLevel, string message)
+        private static void Log(LogLevel logLevel, string message, string tag = "")
         {
             Interlocked.Increment(ref _logId);
-            var logEntry = new LogEntry { LogId = _logId, LogLevel = logLevel, Message = string.Copy(message) };
+            var logEntry = new LogEntry { Id = _logId, Level = logLevel, Timestamp = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds(), Message = string.Copy(message), Tag = string.Copy(tag) };
             // 推入新的日志消息
             _logStack.Push(logEntry);
         }
@@ -191,9 +202,25 @@ namespace CxSystemConfiguration.Utilities
 
     public class LogEntry
     {
-        public int LogId { get; set; }
-        public LogLevel LogLevel { get; set; }
+        public int Id { get; set; }
+        public LogLevel Level { get; set; }
+        public long Timestamp { get; set; }
         public string Message { get; set; }
+        public string Tag { get; set; }
+    }
+
+    public class LogItem
+    {
+        public string Text { get; set; }
+        public Color Color { get; set; }
+        public LogLevel Level { get; set; }
+        public long Timestamp { get; set; }
+        public List<string> Tags { get; set; }
+
+        public override string ToString()
+        {
+            return Text;
+        }
     }
 
 }
