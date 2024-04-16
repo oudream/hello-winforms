@@ -1,6 +1,6 @@
 ﻿namespace HelloWinForms
 {
-    partial class HelloVirtualKeyboardNumber
+    partial class VirtualKeyboardNumber
     {
         /// <summary>
         /// Required designer variable.
@@ -85,7 +85,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(455, 540);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(432, 534);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // button14
@@ -93,9 +93,9 @@
             this.button14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button14.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button14.Location = new System.Drawing.Point(229, 431);
+            this.button14.Location = new System.Drawing.Point(219, 427);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(105, 102);
+            this.button14.Size = new System.Drawing.Size(100, 100);
             this.button14.TabIndex = 11;
             this.button14.Text = ".";
             this.button14.UseVisualStyleBackColor = true;
@@ -106,9 +106,9 @@
             this.button13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button13.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button13.Location = new System.Drawing.Point(7, 431);
+            this.button13.Location = new System.Drawing.Point(7, 427);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(216, 102);
+            this.button13.Size = new System.Drawing.Size(206, 100);
             this.button13.TabIndex = 1;
             this.button13.Text = "0";
             this.button13.UseVisualStyleBackColor = true;
@@ -118,9 +118,9 @@
             this.button11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button11.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button11.Location = new System.Drawing.Point(229, 325);
+            this.button11.Location = new System.Drawing.Point(219, 322);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(105, 100);
+            this.button11.Size = new System.Drawing.Size(100, 99);
             this.button11.TabIndex = 10;
             this.button11.Text = "9";
             this.button11.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             this.button10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button10.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button10.Location = new System.Drawing.Point(118, 325);
+            this.button10.Location = new System.Drawing.Point(113, 322);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(105, 100);
+            this.button10.Size = new System.Drawing.Size(100, 99);
             this.button10.TabIndex = 9;
             this.button10.Text = "8";
             this.button10.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@
             this.button9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button9.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button9.Location = new System.Drawing.Point(7, 325);
+            this.button9.Location = new System.Drawing.Point(7, 322);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(105, 100);
+            this.button9.Size = new System.Drawing.Size(100, 99);
             this.button9.TabIndex = 8;
             this.button9.Text = "7";
             this.button9.UseVisualStyleBackColor = true;
@@ -154,9 +154,9 @@
             this.button8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button8.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(340, 219);
+            this.button8.Location = new System.Drawing.Point(325, 217);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(108, 100);
+            this.button8.Size = new System.Drawing.Size(100, 99);
             this.button8.TabIndex = 13;
             this.button8.Text = "R";
             this.button8.UseVisualStyleBackColor = true;
@@ -166,9 +166,9 @@
             this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button7.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button7.Location = new System.Drawing.Point(229, 219);
+            this.button7.Location = new System.Drawing.Point(219, 217);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(105, 100);
+            this.button7.Size = new System.Drawing.Size(100, 99);
             this.button7.TabIndex = 7;
             this.button7.Text = "6";
             this.button7.UseVisualStyleBackColor = true;
@@ -178,9 +178,9 @@
             this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button6.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button6.Location = new System.Drawing.Point(118, 219);
+            this.button6.Location = new System.Drawing.Point(113, 217);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(105, 100);
+            this.button6.Size = new System.Drawing.Size(100, 99);
             this.button6.TabIndex = 6;
             this.button6.Text = "5";
             this.button6.UseVisualStyleBackColor = true;
@@ -190,9 +190,9 @@
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button5.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(7, 219);
+            this.button5.Location = new System.Drawing.Point(7, 217);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(105, 100);
+            this.button5.Size = new System.Drawing.Size(100, 99);
             this.button5.TabIndex = 5;
             this.button5.Text = "4";
             this.button5.UseVisualStyleBackColor = true;
@@ -202,9 +202,9 @@
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(340, 113);
+            this.button4.Location = new System.Drawing.Point(325, 112);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(108, 100);
+            this.button4.Size = new System.Drawing.Size(100, 99);
             this.button4.TabIndex = 12;
             this.button4.Text = "←";
             this.button4.UseVisualStyleBackColor = true;
@@ -217,17 +217,17 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(7, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(441, 100);
+            this.panel1.Size = new System.Drawing.Size(418, 99);
             this.panel1.TabIndex = 2;
             // 
             // valueTextBox
             // 
             this.valueTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.valueTextBox.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valueTextBox.Location = new System.Drawing.Point(0, 15);
+            this.valueTextBox.Location = new System.Drawing.Point(0, 14);
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.ReadOnly = true;
-            this.valueTextBox.Size = new System.Drawing.Size(441, 62);
+            this.valueTextBox.Size = new System.Drawing.Size(418, 62);
             this.valueTextBox.TabIndex = 99;
             this.valueTextBox.Text = "999.999";
             this.valueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -237,9 +237,9 @@
             this.errorLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.errorLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(0, 77);
+            this.errorLabel.Location = new System.Drawing.Point(0, 76);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(441, 23);
+            this.errorLabel.Size = new System.Drawing.Size(418, 23);
             this.errorLabel.TabIndex = 1;
             // 
             // button1
@@ -247,9 +247,9 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(7, 113);
+            this.button1.Location = new System.Drawing.Point(7, 112);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 100);
+            this.button1.Size = new System.Drawing.Size(100, 99);
             this.button1.TabIndex = 2;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
@@ -259,9 +259,9 @@
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(118, 113);
+            this.button2.Location = new System.Drawing.Point(113, 112);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 100);
+            this.button2.Size = new System.Drawing.Size(100, 99);
             this.button2.TabIndex = 3;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
@@ -271,9 +271,9 @@
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(229, 113);
+            this.button3.Location = new System.Drawing.Point(219, 112);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 100);
+            this.button3.Size = new System.Drawing.Size(100, 99);
             this.button3.TabIndex = 4;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = true;
@@ -283,10 +283,10 @@
             this.button12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button12.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button12.Location = new System.Drawing.Point(340, 325);
+            this.button12.Location = new System.Drawing.Point(325, 322);
             this.button12.Name = "button12";
             this.tableLayoutPanel.SetRowSpan(this.button12, 2);
-            this.button12.Size = new System.Drawing.Size(108, 208);
+            this.button12.Size = new System.Drawing.Size(100, 205);
             this.button12.TabIndex = 0;
             this.button12.Text = "OK";
             this.button12.UseVisualStyleBackColor = true;
@@ -296,7 +296,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.ClientSize = new System.Drawing.Size(467, 553);
+            this.ClientSize = new System.Drawing.Size(444, 547);
             this.Controls.Add(this.tableLayoutPanel);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

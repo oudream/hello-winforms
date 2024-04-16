@@ -24,15 +24,25 @@ namespace HelloWinForms
         private static readonly string[] SerialNumbers = new string[]
         {
             "SN123456789012345678",
-            "SN234567890123456789",
             "SN345678901234567890",
-            "SN456789012345678901",
             "SN567890123456789012",
-            "SN678901234567890123",
             "SN789012345678901234",
-            "SN890123456789012345",
-            "SN901234567890123456",
-            "SN012345678901234567"
+            "SN789012345678901234",
+            "SN567890123456789012",
+            "SN345678901234567890",
+            "SN123456789012345678",
+        };
+
+        private static readonly ushort[] Poses = new ushort[]
+        {
+            11,
+            12,
+            13,
+            14,
+            24,
+            23,
+            22,
+            21,
         };
 
         private TcpListener listener;
@@ -254,11 +264,10 @@ namespace HelloWinForms
             {
                 plcMessage.Cmd = 11; // 11=1号光源请求取图；
                 //
-                ushort position = (ushort)(sendIndex % 4 + 1);
-                position += sendIndex > 3 ? (ushort)20 : (ushort)10;
+                ushort position = Poses[sendIndex];
+                string sn = SerialNumbers[sendIndex];
                 plcMessage.Pos = position;
                 //
-                string sn = SerialNumbers[snIndex];
                 switch (position)
                 {
                     case 11:
@@ -281,10 +290,6 @@ namespace HelloWinForms
                         break;
                 }
                 sendIndex++;
-                if (sendIndex % 2 != 0)
-                {
-                    snIndex = (snIndex + 1) % SerialNumbers.Length; // 循环使用SN码
-                }
             }
             else // 模拟请求最终结果
             {

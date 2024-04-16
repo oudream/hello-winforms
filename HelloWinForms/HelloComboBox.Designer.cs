@@ -28,21 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BoxComboBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ipTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cueTextBox1 = new HelloWinForms.Components.CueTextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.deleteDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.datePickerWithWeekNumbers1 = new DatePickerWithWeekNumbers();
+            this.dateTimePickerBigOne1 = new HelloWinForms.Controls.DateTimePickerBigOne();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // BoxComboBox
@@ -59,20 +76,8 @@
             "ProductC"});
             this.BoxComboBox.Location = new System.Drawing.Point(36, 46);
             this.BoxComboBox.Name = "BoxComboBox";
-            this.BoxComboBox.Size = new System.Drawing.Size(425, 56);
+            this.BoxComboBox.Size = new System.Drawing.Size(1283, 56);
             this.BoxComboBox.TabIndex = 2;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "ProductA",
-            "ProductB",
-            "ProductC"});
-            this.comboBox1.Location = new System.Drawing.Point(419, 72);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 26);
-            this.comboBox1.TabIndex = 3;
             // 
             // numericUpDown1
             // 
@@ -103,28 +108,32 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(443, 171);
+            this.numericUpDown2.Location = new System.Drawing.Point(258, 125);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 28);
             this.numericUpDown2.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(634, 184);
+            this.button1.Image = global::HelloWinForms.Properties.Resources.保存35;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(434, 276);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 69);
+            this.button1.Size = new System.Drawing.Size(129, 62);
             this.button1.TabIndex = 6;
             this.button1.Text = "button1";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button1, "选择按钮，显示操作");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // ipTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 156);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(203, 52);
-            this.textBox1.TabIndex = 7;
+            this.ipTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ipTextBox.Location = new System.Drawing.Point(36, 125);
+            this.ipTextBox.Name = "ipTextBox";
+            this.ipTextBox.Size = new System.Drawing.Size(203, 28);
+            this.ipTextBox.TabIndex = 7;
             // 
             // button2
             // 
@@ -155,10 +164,11 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "...";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(420, 615);
+            this.textBox2.Location = new System.Drawing.Point(36, 784);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(289, 28);
             this.textBox2.TabIndex = 9;
@@ -171,37 +181,202 @@
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Location = new System.Drawing.Point(103, 420);
+            this.panel1.Location = new System.Drawing.Point(36, 273);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 62);
             this.panel1.TabIndex = 10;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(133, 263);
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker1.Location = new System.Drawing.Point(36, 180);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(380, 62);
+            this.dateTimePicker1.Size = new System.Drawing.Size(652, 42);
             this.dateTimePicker1.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(33, 437);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(397, 68);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Paint += new System.Windows.Forms.PaintEventHandler(this.label1_Paint);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(221, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(51, 42);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "...";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cueTextBox1);
+            this.panel2.Controls.Add(this.button5);
+            this.panel2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel2.Location = new System.Drawing.Point(36, 553);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(290, 47);
+            this.panel2.TabIndex = 15;
+            // 
+            // cueTextBox1
+            // 
+            this.cueTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cueTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cueTextBox1.Cue = "请输入IP地址";
+            this.cueTextBox1.Location = new System.Drawing.Point(3, 0);
+            this.cueTextBox1.Name = "cueTextBox1";
+            this.cueTextBox1.Size = new System.Drawing.Size(218, 42);
+            this.cueTextBox1.TabIndex = 13;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(93)))), ((int)(((byte)(93)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button6.Location = new System.Drawing.Point(156, 366);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(44, 47);
+            this.button6.TabIndex = 52;
+            this.button6.Text = "...";
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown3.Location = new System.Drawing.Point(36, 366);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(120, 47);
+            this.numericUpDown3.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.numericUpDown3, "XXX选择按钮，显示操作");
+            this.numericUpDown3.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(36, 682);
+            this.trackBar1.Maximum = 65535;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(399, 69);
+            this.trackBar1.TabIndex = 54;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // deleteDateTimePicker
+            // 
+            this.deleteDateTimePicker.CalendarFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.deleteDateTimePicker.CalendarForeColor = System.Drawing.Color.Tomato;
+            this.deleteDateTimePicker.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.deleteDateTimePicker.Location = new System.Drawing.Point(787, 180);
+            this.deleteDateTimePicker.Name = "deleteDateTimePicker";
+            this.deleteDateTimePicker.Size = new System.Drawing.Size(301, 47);
+            this.deleteDateTimePicker.TabIndex = 56;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(93)))), ((int)(((byte)(93)))));
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Location = new System.Drawing.Point(1094, 172);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(190, 70);
+            this.deleteButton.TabIndex = 55;
+            this.deleteButton.Text = "删除此日前";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(340, 381);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 26);
+            this.comboBox1.TabIndex = 57;
+            // 
+            // datePickerWithWeekNumbers1
+            // 
+            this.datePickerWithWeekNumbers1.CalendarFont = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.datePickerWithWeekNumbers1.CalendarForeColor = System.Drawing.Color.Coral;
+            this.datePickerWithWeekNumbers1.DisplayWeekNumbers = false;
+            this.datePickerWithWeekNumbers1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.datePickerWithWeekNumbers1.Location = new System.Drawing.Point(730, 276);
+            this.datePickerWithWeekNumbers1.Name = "datePickerWithWeekNumbers1";
+            this.datePickerWithWeekNumbers1.Size = new System.Drawing.Size(319, 47);
+            this.datePickerWithWeekNumbers1.TabIndex = 58;
+            // 
+            // dateTimePickerBigOne1
+            // 
+            this.dateTimePickerBigOne1.CalendarFont = new System.Drawing.Font("宋体", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePickerBigOne1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePickerBigOne1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePickerBigOne1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerBigOne1.Location = new System.Drawing.Point(825, 553);
+            this.dateTimePickerBigOne1.Name = "dateTimePickerBigOne1";
+            this.dateTimePickerBigOne1.Size = new System.Drawing.Size(366, 42);
+            this.dateTimePickerBigOne1.TabIndex = 59;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(656, 561);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(163, 30);
+            this.label2.TabIndex = 60;
+            this.label2.Text = "可以放大的";
             // 
             // HelloComboBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 831);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.ClientSize = new System.Drawing.Size(1356, 862);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dateTimePickerBigOne1);
+            this.Controls.Add(this.datePickerWithWeekNumbers1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.deleteDateTimePicker);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ipTextBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.BoxComboBox);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "HelloComboBox";
             this.Text = "HelloComboBox";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,16 +384,29 @@
 
         #endregion
         private System.Windows.Forms.ComboBox BoxComboBox;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ipTextBox;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label1;
+        private Components.CueTextBox cueTextBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DateTimePicker deleteDateTimePicker;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private DatePickerWithWeekNumbers datePickerWithWeekNumbers1;
+        private Controls.DateTimePickerBigOne dateTimePickerBigOne1;
+        private System.Windows.Forms.Label label2;
     }
 }

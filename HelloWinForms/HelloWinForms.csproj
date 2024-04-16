@@ -15,6 +15,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -57,6 +57,13 @@
     <Reference Include="DeveloperSharp">
       <HintPath>..\Dll64\DeveloperSharp.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="ExCSS">
       <HintPath>Libs\Debug\ExCSS.dll</HintPath>
     </Reference>
@@ -104,8 +111,10 @@
     <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -113,6 +122,8 @@
     <Reference Include="System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.7.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -195,11 +206,22 @@
     <Compile Include="CircularIndicator.Designer.cs">
       <DependentUpon>CircularIndicator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\CueTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\IpV4Component.cs" />
+    <Compile Include="Components\TextBoxHelper.cs" />
+    <Compile Include="Controls\DatePickerWithWeekNumbers.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DateScrollerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DateScrollerControl.Designer.cs">
       <DependentUpon>DateScrollerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DateTimePickerBigOne.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\PagerControl.cs">
       <SubType>UserControl</SubType>
@@ -297,6 +319,12 @@
     </Compile>
     <Compile Include="HelloDateTimePicker.Designer.cs">
       <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDictionary.Designer.cs">
+      <DependentUpon>HelloDictionary.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloJson.cs">
       <SubType>Form</SubType>
@@ -447,6 +475,12 @@
     <Compile Include="HelloTcpServerPLC.Designer.cs">
       <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloTemp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTemp.Designer.cs">
+      <DependentUpon>HelloTemp.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloTreeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -459,11 +493,17 @@
     <Compile Include="HelloVariable.Designer.cs">
       <DependentUpon>HelloVariable.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelloVirtualKeyboardNumber.cs">
+    <Compile Include="HelloZip.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelloVirtualKeyboardNumber.Designer.cs">
-      <DependentUpon>HelloVirtualKeyboardNumber.cs</DependentUpon>
+    <Compile Include="HelloZip.Designer.cs">
+      <DependentUpon>HelloZip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualKeyboardNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VirtualKeyboardNumber.Designer.cs">
+      <DependentUpon>VirtualKeyboardNumber.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloWaitAny.cs">
       <SubType>Form</SubType>
@@ -655,6 +695,9 @@
     <EmbeddedResource Include="HelloDateTimePicker.resx">
       <DependentUpon>HelloDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloDictionary.resx">
+      <DependentUpon>HelloDictionary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloJson.resx">
       <DependentUpon>HelloJson.cs</DependentUpon>
     </EmbeddedResource>
@@ -745,6 +788,9 @@
     <EmbeddedResource Include="HelloTcpServerPLC.resx">
       <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloTemp.resx">
+      <DependentUpon>HelloTemp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloTimer.resx">
       <DependentUpon>HelloTimer.cs</DependentUpon>
     </EmbeddedResource>
@@ -763,8 +809,11 @@
     <EmbeddedResource Include="HelloVariable.resx">
       <DependentUpon>HelloVariable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelloVirtualKeyboardNumber.resx">
-      <DependentUpon>HelloVirtualKeyboardNumber.cs</DependentUpon>
+    <EmbeddedResource Include="HelloZip.resx">
+      <DependentUpon>HelloZip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VirtualKeyboardNumber.resx">
+      <DependentUpon>VirtualKeyboardNumber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloWaitAny.resx">
       <DependentUpon>HelloWaitAny.cs</DependentUpon>
@@ -787,6 +836,7 @@
     <EmbeddedResource Include="MouseDrawRectangleForm3.resx">
       <DependentUpon>MouseDrawRectangleForm3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -832,10 +882,17 @@
     <Content Include="Images\image2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\保存35.png" />
+    <None Include="Resources\最小化.png" />
+    <None Include="Resources\退出.png" />
+    <None Include="Resources\调试.png" />
+    <None Include="Resources\Logo.png" />
     <None Include="Resources\图库选中.png" />
     <None Include="Resources\图库.png" />
     <None Include="Resources\探测器选中.png" />
     <None Include="Resources\探测器.png" />
+    <None Include="Resources\首页选中.png" />
+    <None Include="Resources\首页.png" />
     <None Include="Resources\光源选中.png" />
     <None Include="Resources\光源.png" />
     <None Include="Resources\工控选中.png" />
@@ -843,9 +900,6 @@
     <None Include="Resources\告警选中.png" />
     <None Include="Resources\告警.png" />
     <None Include="Resources\调试选中.png" />
-    <None Include="Resources\调试.png" />
-    <None Include="Resources\首页选中.png" />
-    <None Include="Resources\首页.png" />
     <None Include="Resources\画线.png" />
   </ItemGroup>
   <ItemGroup>

@@ -42,7 +42,10 @@ namespace HelloWinForms
             // HelloAutoCloseForm 点击外部关闭示例，自动关闭
             using (HelloAutoCloseForm form = new HelloAutoCloseForm())
             {
-                form.ShowDialog();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+
+                }
             }
         }
 

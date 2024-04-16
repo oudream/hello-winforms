@@ -31,13 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelloSolderBall));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox18 = new System.Windows.Forms.PictureBox();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.imageRecordsPictureBox = new System.Windows.Forms.PictureBox();
+            this.gongKongPictureBox = new System.Windows.Forms.PictureBox();
+            this.detectorPictureBox = new System.Windows.Forms.PictureBox();
+            this.lightSourcePictureBox = new System.Windows.Forms.PictureBox();
+            this.homePictureBox = new System.Windows.Forms.PictureBox();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -90,13 +92,15 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageRecordsPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gongKongPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detectorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lightSourcePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.homePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.panel4.SuspendLayout();
@@ -133,96 +137,120 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.panel1.Controls.Add(this.pictureBox18);
+            this.panel1.Controls.Add(this.pictureBox17);
             this.panel1.Controls.Add(this.pictureBox16);
-            this.panel1.Controls.Add(this.pictureBox15);
-            this.panel1.Controls.Add(this.pictureBox14);
-            this.panel1.Controls.Add(this.pictureBox13);
-            this.panel1.Controls.Add(this.pictureBox12);
-            this.panel1.Controls.Add(this.pictureBox11);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.imageRecordsPictureBox);
+            this.panel1.Controls.Add(this.gongKongPictureBox);
+            this.panel1.Controls.Add(this.detectorPictureBox);
+            this.panel1.Controls.Add(this.lightSourcePictureBox);
+            this.panel1.Controls.Add(this.homePictureBox);
+            this.panel1.Controls.Add(this.logoPictureBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(120, 998);
             this.panel1.TabIndex = 0;
             // 
+            // pictureBox18
+            // 
+            this.pictureBox18.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox18.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox18.Image")));
+            this.pictureBox18.Location = new System.Drawing.Point(0, 838);
+            this.pictureBox18.Name = "pictureBox18";
+            this.pictureBox18.Size = new System.Drawing.Size(120, 80);
+            this.pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox18.TabIndex = 10;
+            this.pictureBox18.TabStop = false;
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox17.Image = global::HelloWinForms.Properties.Resources.调试;
+            this.pictureBox17.Location = new System.Drawing.Point(0, 720);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox17.TabIndex = 9;
+            this.pictureBox17.TabStop = false;
+            // 
             // pictureBox16
             // 
             this.pictureBox16.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox16.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox16.Image")));
-            this.pictureBox16.Location = new System.Drawing.Point(0, 878);
+            this.pictureBox16.Location = new System.Drawing.Point(0, 918);
             this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox16.Size = new System.Drawing.Size(120, 80);
             this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox16.TabIndex = 8;
             this.pictureBox16.TabStop = false;
             // 
-            // pictureBox15
+            // imageRecordsPictureBox
             // 
-            this.pictureBox15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox15.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox15.Image")));
-            this.pictureBox15.Location = new System.Drawing.Point(0, 600);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox15.TabIndex = 7;
-            this.pictureBox15.TabStop = false;
+            this.imageRecordsPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.imageRecordsPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("imageRecordsPictureBox.Image")));
+            this.imageRecordsPictureBox.Location = new System.Drawing.Point(0, 600);
+            this.imageRecordsPictureBox.Name = "imageRecordsPictureBox";
+            this.imageRecordsPictureBox.Size = new System.Drawing.Size(120, 120);
+            this.imageRecordsPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imageRecordsPictureBox.TabIndex = 7;
+            this.imageRecordsPictureBox.TabStop = false;
             // 
-            // pictureBox14
+            // gongKongPictureBox
             // 
-            this.pictureBox14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
-            this.pictureBox14.Location = new System.Drawing.Point(0, 480);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox14.TabIndex = 6;
-            this.pictureBox14.TabStop = false;
+            this.gongKongPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gongKongPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("gongKongPictureBox.Image")));
+            this.gongKongPictureBox.Location = new System.Drawing.Point(0, 480);
+            this.gongKongPictureBox.Name = "gongKongPictureBox";
+            this.gongKongPictureBox.Size = new System.Drawing.Size(120, 120);
+            this.gongKongPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.gongKongPictureBox.TabIndex = 6;
+            this.gongKongPictureBox.TabStop = false;
             // 
-            // pictureBox13
+            // detectorPictureBox
             // 
-            this.pictureBox13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
-            this.pictureBox13.Location = new System.Drawing.Point(0, 360);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox13.TabIndex = 5;
-            this.pictureBox13.TabStop = false;
+            this.detectorPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.detectorPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("detectorPictureBox.Image")));
+            this.detectorPictureBox.Location = new System.Drawing.Point(0, 360);
+            this.detectorPictureBox.Name = "detectorPictureBox";
+            this.detectorPictureBox.Size = new System.Drawing.Size(120, 120);
+            this.detectorPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.detectorPictureBox.TabIndex = 5;
+            this.detectorPictureBox.TabStop = false;
             // 
-            // pictureBox12
+            // lightSourcePictureBox
             // 
-            this.pictureBox12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox12.Image = global::HelloWinForms.Properties.Resources.首页选中;
-            this.pictureBox12.Location = new System.Drawing.Point(0, 240);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox12.TabIndex = 4;
-            this.pictureBox12.TabStop = false;
+            this.lightSourcePictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lightSourcePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("lightSourcePictureBox.Image")));
+            this.lightSourcePictureBox.Location = new System.Drawing.Point(0, 240);
+            this.lightSourcePictureBox.Name = "lightSourcePictureBox";
+            this.lightSourcePictureBox.Size = new System.Drawing.Size(120, 120);
+            this.lightSourcePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.lightSourcePictureBox.TabIndex = 4;
+            this.lightSourcePictureBox.TabStop = false;
             // 
-            // pictureBox11
+            // homePictureBox
             // 
-            this.pictureBox11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
-            this.pictureBox11.Location = new System.Drawing.Point(0, 120);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox11.TabIndex = 3;
-            this.pictureBox11.TabStop = false;
+            this.homePictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.homePictureBox.Image = global::HelloWinForms.Properties.Resources.首页选中;
+            this.homePictureBox.Location = new System.Drawing.Point(0, 120);
+            this.homePictureBox.Name = "homePictureBox";
+            this.homePictureBox.Size = new System.Drawing.Size(120, 120);
+            this.homePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.homePictureBox.TabIndex = 3;
+            this.homePictureBox.TabStop = false;
             // 
-            // pictureBox1
+            // logoPictureBox
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Image = global::HelloWinForms.Properties.Resources.首页;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.logoPictureBox.Image = global::HelloWinForms.Properties.Resources.Logo;
+            this.logoPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new System.Drawing.Size(120, 120);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoPictureBox.TabIndex = 2;
+            this.logoPictureBox.TabStop = false;
+            this.logoPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // panel2
             // 
@@ -769,16 +797,19 @@
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HelloSolderBall";
             this.Text = "HelloSolderBall";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageRecordsPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gongKongPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detectorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lightSourcePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.homePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -818,7 +849,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel3;
@@ -868,12 +899,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.PictureBox homePictureBox;
+        private System.Windows.Forms.PictureBox lightSourcePictureBox;
         private System.Windows.Forms.PictureBox pictureBox16;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.PictureBox imageRecordsPictureBox;
+        private System.Windows.Forms.PictureBox gongKongPictureBox;
+        private System.Windows.Forms.PictureBox detectorPictureBox;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox17;
+        private System.Windows.Forms.PictureBox pictureBox18;
     }
 }

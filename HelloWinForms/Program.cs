@@ -19,6 +19,9 @@ namespace HelloWinForms
             Application.EnableVisualStyles();
 
             Application.SetCompatibleTextRenderingDefault(false);
+
+            LogHelper.Run();
+
             //Application.Run(new HelloDataGridView());
             //Application.Run(new HelloRoslyn());
             //Application.Run(new HelloSnowflake());
@@ -36,7 +39,6 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            LogHelper.Run();
 
             //Application.Run(new HelloTcpServerPLC());
 
@@ -46,7 +48,11 @@ namespace HelloWinForms
 
             //Application.Run(new HelloSolderBall());
 
-            Application.Run(new HelloPagination());
+            //Application.Run(new HelloPagination());
+
+            //Application.Run(new HelloZip());
+
+            Application.Run(new HelloDictionary());
 
         }
     }
