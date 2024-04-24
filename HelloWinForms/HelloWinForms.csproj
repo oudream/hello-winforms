@@ -332,6 +332,13 @@
     <Compile Include="HelloDictionary.Designer.cs">
       <DependentUpon>HelloDictionary.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloIniFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloIniFile.Designer.cs">
+      <DependentUpon>HelloIniFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloIniFileManager.cs" />
     <Compile Include="HelloJson.cs">
       <SubType>Form</SubType>
     </Compile>
