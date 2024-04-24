@@ -294,8 +294,12 @@ namespace HelloWinForms
             else // 模拟请求最终结果
             {
                 plcMessage.Cmd = 100; // 100 = 请求最终结果；
-                sendIndex = 0;
-                batchNumber++;
+                sendIndex++;
+                if (sendIndex == 10)
+                {
+                    sendIndex = 0;
+                    batchNumber++;
+                }
             }
             string message = plcMessage.ToMessage();
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);

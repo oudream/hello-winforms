@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HelloWinForms.Action;
+using HelloWinForms.Actions;
 using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
 

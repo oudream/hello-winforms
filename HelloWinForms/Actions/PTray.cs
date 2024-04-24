@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HelloWinForms.Action
+namespace HelloWinForms.Actions
 {
-    public partial class PRight : UserControl
+    public partial class PTray : UserControl
     {
-        public PRight()
+        public PTray()
         {
             InitializeComponent();
         }

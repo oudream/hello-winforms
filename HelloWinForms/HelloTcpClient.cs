@@ -162,6 +162,13 @@ namespace HelloWinForms
         public string Sn3 { get; set; }
         public string Sn4 { get; set; }
         public DateTime Dt { get; set; }
+
+        public override string ToString()
+        {
+            return $"Module Number: {ModuleNumber}, Result: {Result}, Position: {Pos}, Batch Number: {BatchNumber}, " +
+                   $"Number1: {Number1}, Number2: {Number2}, Number3: {Number3}, Number4: {Number4}, " +
+                   $"SN1: {Sn1}, SN2: {Sn2}, SN3: {Sn3}, SN4: {Sn4}, Date: {Dt.ToString("yyyy-MM-dd HH:mm:ss")}";
+        }
     }
 
 }

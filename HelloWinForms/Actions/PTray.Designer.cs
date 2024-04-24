@@ -1,4 +1,4 @@
-﻿namespace HelloWinForms.Action
+﻿namespace HelloWinForms.Actions
 {
     partial class PTray
     {

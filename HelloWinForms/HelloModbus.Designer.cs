@@ -1,6 +1,6 @@
 ﻿namespace HelloWinForms
 {
-    partial class HelloDictionary
+    partial class HelloModbus
     {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +45,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1027, 593);
+            this.richTextBox1.Size = new System.Drawing.Size(1258, 760);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
@@ -59,7 +59,6 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "没有Key时";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -70,8 +69,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1027, 100);
-            this.panel2.TabIndex = 14;
+            this.panel2.Size = new System.Drawing.Size(1258, 100);
+            this.panel2.TabIndex = 17;
             // 
             // button4
             // 
@@ -83,6 +82,7 @@
             this.button4.TabIndex = 2;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -92,9 +92,8 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(148, 94);
             this.button3.TabIndex = 2;
-            this.button3.Text = "ushort? Number1";
+            this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -110,10 +109,10 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 493);
+            this.panel1.Location = new System.Drawing.Point(0, 660);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1027, 100);
-            this.panel1.TabIndex = 13;
+            this.panel1.Size = new System.Drawing.Size(1258, 100);
+            this.panel1.TabIndex = 16;
             // 
             // panel3
             // 
@@ -121,19 +120,19 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1027, 593);
-            this.panel3.TabIndex = 15;
+            this.panel3.Size = new System.Drawing.Size(1258, 760);
+            this.panel3.TabIndex = 18;
             // 
-            // HelloDictionary
+            // HelloModbus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 593);
+            this.ClientSize = new System.Drawing.Size(1258, 760);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Name = "HelloDictionary";
-            this.Text = "HelloDictionary";
+            this.Name = "HelloModbus";
+            this.Text = "HelloModbus";
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);

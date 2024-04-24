@@ -1,6 +1,6 @@
 ﻿namespace HelloWinForms
 {
-    partial class HelloTcpServerPLC
+    partial class HelloThreadTimer
     {
         /// <summary>
         /// Required designer variable.
@@ -55,16 +55,16 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1287, 491);
+            this.richTextBox1.Size = new System.Drawing.Size(1204, 441);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 663);
+            this.panel1.Location = new System.Drawing.Point(0, 613);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1287, 100);
+            this.panel1.Size = new System.Drawing.Size(1204, 100);
             this.panel1.TabIndex = 16;
             // 
             // timer1
@@ -77,7 +77,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 172);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1287, 491);
+            this.panel3.Size = new System.Drawing.Size(1204, 441);
             this.panel3.TabIndex = 18;
             // 
             // panel2
@@ -94,7 +94,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1287, 172);
+            this.panel2.Size = new System.Drawing.Size(1204, 172);
             this.panel2.TabIndex = 17;
             // 
             // checkBox1
@@ -106,7 +106,6 @@
             this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "3秒启停一次";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // portNumericUpDown
             // 
@@ -133,7 +132,7 @@
             this.sendTextBox.Location = new System.Drawing.Point(790, 97);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(485, 69);
+            this.sendTextBox.Size = new System.Drawing.Size(402, 69);
             this.sendTextBox.TabIndex = 5;
             this.sendTextBox.Text = "127.0.0.1";
             // 
@@ -155,7 +154,6 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "发上位机位置到";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // sendButton
             // 
@@ -167,7 +165,6 @@
             this.sendButton.TabIndex = 2;
             this.sendButton.Text = "发送";
             this.sendButton.UseVisualStyleBackColor = true;
-            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
             // 
             // button3
             // 
@@ -179,7 +176,6 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "停止";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // connectButton
             // 
@@ -191,7 +187,6 @@
             this.connectButton.TabIndex = 2;
             this.connectButton.Text = "启动";
             this.connectButton.UseVisualStyleBackColor = true;
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // button1
             // 
@@ -201,7 +196,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 166);
             this.button1.TabIndex = 2;
-            this.button1.Text = "十六进制";
+            this.button1.Text = "压测ThreadTimer";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -214,17 +209,17 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1287, 763);
-            this.panel5.TabIndex = 9;
+            this.panel5.Size = new System.Drawing.Size(1204, 713);
+            this.panel5.TabIndex = 10;
             // 
-            // HelloTcpServerPLC
+            // HelloThreadTimer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1287, 763);
+            this.ClientSize = new System.Drawing.Size(1204, 713);
             this.Controls.Add(this.panel5);
-            this.Name = "HelloTcpServerPLC";
-            this.Text = "HelloTcpServerPLC";
+            this.Name = "HelloThreadTimer";
+            this.Text = "HelloThreadTimer";
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -245,11 +240,11 @@
         private System.Windows.Forms.NumericUpDown portNumericUpDown;
         private System.Windows.Forms.TextBox sendTextBox;
         private System.Windows.Forms.TextBox ipTextBox;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button2;
     }
 }
