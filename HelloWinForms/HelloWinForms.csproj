@@ -332,6 +332,18 @@
     <Compile Include="HelloDictionary.Designer.cs">
       <DependentUpon>HelloDictionary.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloEncoding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloEncoding.Designer.cs">
+      <DependentUpon>HelloEncoding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloHttpClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloHttpClient.Designer.cs">
+      <DependentUpon>HelloHttpClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloIniFile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -727,6 +739,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloDictionary.resx">
       <DependentUpon>HelloDictionary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloEncoding.resx">
+      <DependentUpon>HelloEncoding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloHttpClient.resx">
+      <DependentUpon>HelloHttpClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloIniFile.resx">
+      <DependentUpon>HelloIniFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloJson.resx">
       <DependentUpon>HelloJson.cs</DependentUpon>

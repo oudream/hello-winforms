@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -36,6 +37,51 @@ namespace HelloWinForms
             dateTimePicker1.Paint += new PaintEventHandler(dateTimePicker1_Paint);
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
+            comboBox2.DropDown += ComboBox2_DropDown;
+            //ComboBox2_DropDown(null, null);
+        }
+
+        private void ComboBox2_DropDown(object sender, EventArgs e)
+        {
+            string directoryPath = @"E:\temp\Products"; // 请更改为您的实际目录路径
+            UpdateComboBoxWithDirectorySubfolders(comboBox2, directoryPath);
+        }
+
+        // 更新 ComboBox 列表项以匹配目录的子文件夹
+        private void UpdateComboBoxWithDirectorySubfolders(ComboBox comboBox, string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                // 获取目录中的子文件夹名称
+                var subfolders = Directory.GetDirectories(directoryPath)
+                                          .Select(Path.GetFileName)
+                                          .ToArray();
+
+                // 比较现有的 ComboBox 项目与目录内容，不一致时更新
+                var existingItems = comboBox.Items.Cast<string>().ToArray();
+                if (!existingItems.SequenceEqual(subfolders))
+                {
+                    comboBox.Items.Clear();
+                    comboBox.Items.AddRange(subfolders);
+                    // 显示列表中的第一个项目，如果列表不为空
+                    if (comboBox.Items.Count > 0)
+                    {
+                        comboBox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        comboBox.SelectedIndex = -1;
+                    }
+                }
+            }
+            else
+            {
+                if (comboBox.Items.Count > 0)
+                {
+                    comboBox.Items.Clear();
+                }
+            }
         }
 
         private void dateTimePicker1_Paint(object sender, PaintEventArgs e)
@@ -213,7 +259,9 @@ namespace HelloWinForms
         {
         }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

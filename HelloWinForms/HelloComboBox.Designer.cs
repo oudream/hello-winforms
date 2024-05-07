@@ -51,9 +51,10 @@
             this.deleteDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.deleteButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.datePickerWithWeekNumbers1 = new DatePickerWithWeekNumbers();
-            this.dateTimePickerBigOne1 = new HelloWinForms.Controls.DateTimePickerBigOne();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerBigOne1 = new HelloWinForms.Controls.DateTimePickerBigOne();
+            this.datePickerWithWeekNumbers1 = new DatePickerWithWeekNumbers();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -311,16 +312,26 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 26);
             this.comboBox1.TabIndex = 57;
             // 
-            // datePickerWithWeekNumbers1
+            // label2
             // 
-            this.datePickerWithWeekNumbers1.CalendarFont = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.datePickerWithWeekNumbers1.CalendarForeColor = System.Drawing.Color.Coral;
-            this.datePickerWithWeekNumbers1.DisplayWeekNumbers = false;
-            this.datePickerWithWeekNumbers1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.datePickerWithWeekNumbers1.Location = new System.Drawing.Point(730, 276);
-            this.datePickerWithWeekNumbers1.Name = "datePickerWithWeekNumbers1";
-            this.datePickerWithWeekNumbers1.Size = new System.Drawing.Size(319, 47);
-            this.datePickerWithWeekNumbers1.TabIndex = 58;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(656, 561);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(163, 30);
+            this.label2.TabIndex = 60;
+            this.label2.Text = "可以放大的";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(714, 424);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(361, 47);
+            this.comboBox2.TabIndex = 61;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // dateTimePickerBigOne1
             // 
@@ -333,15 +344,16 @@
             this.dateTimePickerBigOne1.Size = new System.Drawing.Size(366, 42);
             this.dateTimePickerBigOne1.TabIndex = 59;
             // 
-            // label2
+            // datePickerWithWeekNumbers1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(656, 561);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 30);
-            this.label2.TabIndex = 60;
-            this.label2.Text = "可以放大的";
+            this.datePickerWithWeekNumbers1.CalendarFont = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.datePickerWithWeekNumbers1.CalendarForeColor = System.Drawing.Color.Coral;
+            this.datePickerWithWeekNumbers1.DisplayWeekNumbers = false;
+            this.datePickerWithWeekNumbers1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.datePickerWithWeekNumbers1.Location = new System.Drawing.Point(730, 276);
+            this.datePickerWithWeekNumbers1.Name = "datePickerWithWeekNumbers1";
+            this.datePickerWithWeekNumbers1.Size = new System.Drawing.Size(319, 47);
+            this.datePickerWithWeekNumbers1.TabIndex = 58;
             // 
             // HelloComboBox
             // 
@@ -349,6 +361,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(1356, 862);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePickerBigOne1);
             this.Controls.Add(this.datePickerWithWeekNumbers1);
@@ -408,5 +421,6 @@
         private DatePickerWithWeekNumbers datePickerWithWeekNumbers1;
         private Controls.DateTimePickerBigOne dateTimePickerBigOne1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

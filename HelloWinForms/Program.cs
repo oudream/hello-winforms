@@ -39,9 +39,11 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            Application.Run(new HelloTcpServerPLC());
+            //Application.Run(new HelloTcpServerPLC());
 
-            //Application.Run(new HelloComboBox());
+            Application.Run(new HelloHttpClient());
+
+            Application.Run(new HelloComboBox());
 
             //Application.Run(new HelloVirtualKeyboardNumber());
 
@@ -55,7 +57,7 @@ namespace HelloWinForms
 
             //Application.Run(new HelloModbus());
 
-            Application.Run(new HelloThreadTimer());
+            Application.Run(new HelloIniFile());
 
         }
     }
