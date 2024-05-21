@@ -500,6 +500,12 @@
     <Compile Include="HelloTcpServer.Designer.cs">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
     </Compile>
+    <Compile Include="PLC\AACPLCServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\AACPLCServer.Designer.cs">
+      <DependentUpon>AACPLCServer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PLC\SolderBallPLCServer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -543,7 +549,7 @@
     <Compile Include="ImagePng8.Designer.cs">
       <DependentUpon>ImagePng8.cs</DependentUpon>
     </Compile>
-    <Compile Include="Protocols\PLCMessage.cs" />
+    <Compile Include="Protocols\PLCStructs.cs" />
     <Compile Include="Protocols\ModbusReadGroup.cs" />
     <Compile Include="Protocols\ModbusPoint.cs" />
     <Compile Include="Protocols\ModbusTcpClient.cs" />
@@ -845,6 +851,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTcpServer.resx">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\AACPLCServer.resx">
+      <DependentUpon>AACPLCServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PLC\SolderBallPLCServer.resx">
       <DependentUpon>SolderBallPLCServer.cs</DependentUpon>

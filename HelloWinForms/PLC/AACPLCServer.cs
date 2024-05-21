@@ -17,48 +17,43 @@ using CxWorkStation.Utilities;
 using OpenCvSharp.Flann;
 using HelloWinForms.Utilities;
 using HelloWinForms.Protocols;
+using DevExpress.Xpo.DB;
+using System.Reflection.Emit;
+using DevExpress.Internal.WinApi.Windows.UI.Notifications;
 
 namespace HelloWinForms.PLC
 {
-    public partial class SolderBallPLCServer : Form
+    // 仿真过程
+    // 每隔 1.5 秒发送一次产品检测（ #pos:11=扫码请求；21=Xray采图请求，会相隔 100ms）
+    // 7个产品检测后并到出料口，请求结果（ #pos:100=请求最终结果；会相隔 100ms）
+    public partial class AACPLCServer : Form
     {
-        private static readonly string[] SerialNumbers = new string[]
-        {
-            "SN123456789012345678",
-            "SN345678901234567890",
-            "SN567890123456789012",
-            "SN789012345678901234",
-            "SN789012345678901234",
-            "SN567890123456789012",
-            "SN345678901234567890",
-            "SN123456789012345678",
-        };
-
-        private static readonly ushort[] Poses = new ushort[]
-        {
-            11,
-            12,
-            13,
-            14,
-            24,
-            23,
-            22,
-            21,
-        };
+        private const ushort CMD_PC = 1; 
+        private const ushort POS_QRCodeAcquisition = 31;
+        private const ushort POS_ImageAcquisition = 41;
+        private const ushort POS_Result = 100;
 
         private TcpListener _listener;
         private volatile bool _isRunning;
         private readonly List<Thread> _clientThreads = new List<Thread>();
         private ConcurrentDictionary<string, TcpClient> _connectedClients = new ConcurrentDictionary<string, TcpClient>();
         private Random _random = new Random();
+        private volatile uint _batchNumber = 1;
 
-        public SolderBallPLCServer()
+        private volatile bool _position1HasProduct = false;
+        private volatile bool _position2HasProduct = false;
+        private volatile bool _position3HasProduct = false;
+        
+        public AACPLCServer()
         {
             InitializeComponent();
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
+            _position1HasProduct = checkBox1.Checked;
+            _position2HasProduct = checkBox2.Checked;
+            _position3HasProduct = checkBox3.Checked;
             Start();
         }
 
@@ -145,41 +140,6 @@ namespace HelloWinForms.PLC
             }
         }
 
-        private int _sampleBatchCounter;
-        private uint _currentBatchNumber;
-        private uint CurrentBatchNumber 
-        { 
-            get
-            {
-                return _currentBatchNumber;
-            }
-            set
-            {
-                //LogHelper.Warning($"_currentBatchNumber:{_currentBatchNumber}] value:{value}");
-                //OutputMessage($"_currentBatchNumber:{_currentBatchNumber}] value:{value}");
-
-                if (_currentBatchNumber != value)
-                {
-                    if (_sampleBatchCounter != 8)
-                    {
-                        LogHelper.Warning($"Sample batch[{_currentBatchNumber}] counter is {_sampleBatchCounter}");
-                        OutputMessage($"Sample batch[{_currentBatchNumber}] counter is {_sampleBatchCounter}");
-                    }
-                    _sampleBatchCounter = 0;
-                    _currentBatchNumber = value;
-                    if (value % 10 == 0)
-                    {
-                        LogHelper.Warning($"Running Outinfo CurrentBatch[{_currentBatchNumber}] counter is {_sampleBatchCounter}");
-                        OutputMessage($"Running Outinfo CurrentBatch[{_currentBatchNumber}] counter is {_sampleBatchCounter}");
-                    }
-                }
-                else
-                {
-                    _sampleBatchCounter++;
-                }
-            }
-        }
-
         private void HandleClient(TcpClient client)
         {
             var clientEndpoint = client.Client.RemoteEndPoint.ToString();
@@ -194,9 +154,7 @@ namespace HelloWinForms.PLC
                 List<byte> _plcMessageBuffer = new List<byte>();
 
                 long lastSendTime = 0;
-                int sendIndex = 0;
-                int snIndex = 0;
-                uint batchNumber = 1;
+                List<PlcMessage> plcMessages = new List<PlcMessage>();
 
                 while (_isRunning)
                 {
@@ -209,9 +167,59 @@ namespace HelloWinForms.PLC
                             var plcFeedback = ProcessUpdatePlcData(_plcMessageBuffer, buffer.Take(bytesRead).ToArray());
                             if (plcFeedback != null)
                             {
-                                CurrentBatchNumber = plcFeedback.BatchNumber;
-                                //OutputMessage($"{DateTime.Now:dd/HH:mm:ss.fff} received: {plcFeedback}");
-                                LogHelper.Debug($"{DateTime.Now:dd/HH:mm:ss.fff} received: {plcFeedback}");
+                                // 接收 QRCode，结果
+                                if (plcMessages.Count > 0)
+                                {
+                                    if (plcFeedback.Pos == POS_QRCodeAcquisition)
+                                    {
+                                        var qrCodes = plcFeedback.Sn1 + ";" + plcFeedback.Sn2 + ";" + plcFeedback.Sn3;
+                                        uint fromBatchNumber = plcFeedback.BatchNumber;
+                                        uint sendBatchNumber = 0;
+                                        foreach (var plcMessage in plcMessages)
+                                        {
+                                            if (plcMessage.BatchNumber == plcFeedback.BatchNumber)
+                                            {
+                                                plcMessage.ReceivedQRCodeTime = TimeHelper.GetNow();
+                                                plcMessage.ReceivedQRCodes = qrCodes;
+                                                sendBatchNumber = plcMessage.BatchNumber;
+                                                break;
+                                            }
+                                        }
+                                        LogHelper.Debug($"received 读码:{qrCodes} fromBatchNumber:{fromBatchNumber} sendBatchNumber:{sendBatchNumber}");
+                                    }
+                                    else if (plcFeedback.Pos == POS_ImageAcquisition)
+                                    {
+                                        uint fromBatchNumber = plcFeedback.BatchNumber;
+                                        uint sendBatchNumber = 0;
+                                        foreach (var plcMessage in plcMessages)
+                                        {
+                                            if (plcMessage.BatchNumber == plcFeedback.BatchNumber)
+                                            {
+                                                plcMessage.ReceivedImageTime = TimeHelper.GetNow();
+                                                sendBatchNumber = plcMessage.BatchNumber;
+                                                break;
+                                            }
+                                        }
+                                        LogHelper.Debug($"received 采图 fromBatchNumber:{fromBatchNumber} sendBatchNumber:{sendBatchNumber}");
+                                    }
+                                    else if (plcFeedback.Pos == POS_Result)
+                                    {
+                                        var result = plcFeedback.Number1 + ";" + plcFeedback.Number2 + ";" + plcFeedback.Number3;
+                                        uint fromBatchNumber = plcFeedback.BatchNumber;
+                                        uint sendBatchNumber = 0;
+                                        foreach (var plcMessage in plcMessages)
+                                        {
+                                            if (plcMessage.BatchNumber == plcFeedback.BatchNumber)
+                                            {
+                                                plcMessage.ReceivedResultTime = TimeHelper.GetNow();
+                                                plcMessage.ReceivedResult = result;
+                                                sendBatchNumber = plcMessage.BatchNumber;
+                                                break;
+                                            }
+                                        }
+                                        LogHelper.Debug($"received 结果:{result} fromBatchNumber:{fromBatchNumber} sendBatchNumber:{sendBatchNumber}");
+                                    }
+                                }
                             }
                         }
                         else if (bytesRead == 0)
@@ -229,14 +237,100 @@ namespace HelloWinForms.PLC
                         // 除了超时异常，其他都认为是异常，则尝试重新连接
                         throw;
                     }
+                    
+                    var dtNow = DateTime.Now;
+                    var nowMs = TimeHelper.GetMs(dtNow);
 
-                    // 检查是否需要发送新的消息
-                    var dtNow = TimeHelper.GetNow();
-                    if (dtNow - lastSendTime >= 1000) // 每秒发送一次状态更新
+                    bool hSend = false;
+
+                    // 请求读码
+                    // 每 1.5 秒发送一个产品检测
+                    // 7 个为一个大批
+                    if (!hSend && plcMessages.Count < 7)
                     {
-                        lastSendTime = dtNow;
-                        SendPlcMessage(stream, ref sendIndex, ref snIndex, ref batchNumber);
+                        // 检查是否需要发送新的消息
+                        if (nowMs - lastSendTime >= 1500) 
+                        {
+                            lastSendTime = nowMs;
+                            PlcMessage plcMessage = new PlcMessage
+                            {
+                                BatchNumber = _batchNumber++,
+                                Cmd = CMD_PC,
+                                Dt = dtNow,
+                                Sn1 = _position1HasProduct ? "1" : "0",
+                                Sn2 = _position2HasProduct ? "1" : "0",
+                                Sn3 = _position3HasProduct ? "1" : "0",
+                            };
+                            plcMessage.Pos = POS_QRCodeAcquisition;
+                            plcMessage.SendImageAcquisitionTime = 0;
+                            plcMessage.ReceivedQRCodeTime = 0;
+                            plcMessage.ReceivedImageTime = 0;
+                            plcMessage.SendResultTime = 0;
+                            plcMessage.ReceivedResultTime = 0;
+
+                            SendPlcMessage(stream, plcMessage);
+                            hSend = true;
+
+                            plcMessages.Add(plcMessage);
+                        }
                     }
+
+                    // 请求采图
+                    if (!hSend && plcMessages.Count > 0)
+                    {
+                        foreach (var plcMessage in plcMessages)
+                        {
+                            if (plcMessage.SendImageAcquisitionTime <= 0)
+                            {
+                                plcMessage.Pos = POS_ImageAcquisition;
+                                SendPlcMessage(stream, plcMessage);
+                                plcMessage.SendImageAcquisitionTime = nowMs;
+                                hSend = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    // 请求结果
+                    // 如果没有收齐结果，就一直请求结果
+                    if (!hSend && plcMessages.Count >= 7)
+                    {
+                        foreach (var plcMessage in plcMessages)
+                        {
+                            if (nowMs - plcMessage.SendImageAcquisitionTime > 3000 && plcMessage.ReceivedResultTime <= 0)
+                            {
+                                if (nowMs - plcMessage.SendResultTime < 1000)
+                                {
+                                    plcMessage.Pos = POS_Result;
+                                    plcMessage.SendResultTime = nowMs;
+                                    SendPlcMessage(stream, plcMessage);
+                                    hSend = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    // 清除 7 个为一个大批
+                    if (!hSend && plcMessages.Count >= 7)
+                    {
+                        bool allResultValid = true;
+                        foreach (var plcMessage in plcMessages)
+                        {
+                            if (plcMessage.ReceivedResultTime <= 0)
+                            {
+                                allResultValid = false;
+                                break;
+                            }
+                        }
+                        if (allResultValid)
+                        {
+                            LogHelper.Debug($"清除大批次 共 {plcMessages.Count} 个检测");
+                            plcMessages.Clear();
+                            lastSendTime = nowMs;
+                        }
+                    }
+
                 }
             }
             catch (Exception e)
@@ -251,59 +345,21 @@ namespace HelloWinForms.PLC
             }
         }
 
-        private void SendPlcMessage(NetworkStream stream, ref int sendIndex, ref int snIndex, ref uint batchNumber)
+        private bool SendPlcMessage(NetworkStream stream, PlcMessage plcMessage)
         {
-            PlcMessage plcMessage = new PlcMessage
+            try
             {
-                ModuleNumber = 1,
-                BatchNumber = batchNumber,
-                Dt = DateTime.Now,
-            };
-            if (sendIndex < 8) // 模拟发送拍照请求
-            {
-                plcMessage.Cmd = 11; // 11=1号光源请求取图；
-                //
-                ushort position = Poses[sendIndex];
-                string sn = SerialNumbers[sendIndex];
-                plcMessage.Pos = position;
-                //
-                switch (position)
-                {
-                    case 11:
-                    case 21:
-                        plcMessage.Sn1 = sn;
-                        break;
-                    case 12:
-                    case 22:
-                        plcMessage.Sn2 = sn;
-                        break;
-                    case 13:
-                    case 23:
-                        plcMessage.Sn3 = sn;
-                        break;
-                    case 14:
-                    case 24:
-                        plcMessage.Sn4 = sn;
-                        break;
-                    default:
-                        break;
-                }
-                sendIndex++;
+                string message = plcMessage.ToMessage();
+                byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+                stream.Write(messageBytes, 0, messageBytes.Length);
+                LogHelper.Debug($"{DateTime.Now:dd/HH:mm:ss.fff} Sent: Cmd:{plcMessage.Cmd} BatchNumber:{plcMessage.BatchNumber} Pos:{plcMessage.Pos} Sn1:{plcMessage.Sn1} Sn2:{plcMessage.Sn2} Sn3:{plcMessage.Sn3} Sn4:{plcMessage.Sn4}");
+                return true;
             }
-            else // 模拟请求最终结果
+            catch (Exception ex)
             {
-                plcMessage.Cmd = 100; // 100 = 请求最终结果；
-                sendIndex++;
-                if (sendIndex == 10)
-                {
-                    sendIndex = 0;
-                    batchNumber++;
-                }
+                LogHelper.Debug($"{DateTime.Now:dd/HH:mm:ss.fff} Sent: Cmd:{plcMessage.Cmd} BatchNumber:{plcMessage.BatchNumber} Pos:{plcMessage.Pos} Sn1:{plcMessage.Sn1} Sn2:{plcMessage.Sn2} Sn3:{plcMessage.Sn3} Sn4:{plcMessage.Sn4}");
             }
-            string message = plcMessage.ToMessage();
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            stream.Write(messageBytes, 0, messageBytes.Length);
-            LogHelper.Debug($"{DateTime.Now:dd/HH:mm:ss.fff} Sent: Cmd:{plcMessage.Cmd} BatchNumber:{plcMessage.BatchNumber} Pos:{plcMessage.Pos} Sn1:{plcMessage.Sn1} Sn2:{plcMessage.Sn2} Sn3:{plcMessage.Sn3} Sn4:{plcMessage.Sn4}");
+            return false;
         }
 
         private void HandleClient1(TcpClient client)
@@ -377,59 +433,10 @@ namespace HelloWinForms.PLC
             Start();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            timer1.Enabled = checkBox1.Checked;
-        }
-
         private void sendButton_Click(object sender, EventArgs e)
         {
-            for (int i = 10; i < 16; i++)
-            {
-                var (pos, orientation) = ConvertToImageDetection((ushort)i);
-                Console.WriteLine($"Send: {pos} {orientation}");
-            }
-            for (int i = 20; i <= 26; i++)
-            {
-                var (pos, orientation) = ConvertToImageDetection((ushort)i);
-                Console.WriteLine($"Send: {pos} {orientation}");
-            }
         }
 
-        // 位置数据转换
-        // 11=1号产品正面取图反馈；12=2号产品正面取图反馈；13=3号产品正面取图反馈；14=4号产品正面取图反馈；
-        // 21=1号产品反面取图反馈；22=2号产品反面取图反馈；23=3号产品反面取图反馈；24=4号产品反面取图反馈；
-        // 位置数据转换为图像检测任务：11=1号产品正面，12=2号产品正面，13=3号产品正面，14=4号产品正面，
-        //                             21=1号产品反面，22=2号产品反面，23=3号产品反面，24=4号产品反面
-        public static (int pos, Orientation orientation) ConvertToImageDetection(ushort position)
-        {
-            if (position < 11 || position > 24) Console.WriteLine($"Invalid Positon: {position}");
-            if (position > 14 && position < 21) Console.WriteLine($"Invalid Positon: {position}");
-
-            int productNumber = position % 10;
-
-            Orientation orientation = (position / 10 == 1) ? Orientation.Front : Orientation.Side;
-
-            return (productNumber, orientation);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var plcMessage = new PlcMessage
-            {
-                ModuleNumber = 1,
-                BatchNumber = 1,
-                Cmd = 11,
-                Pos = 11,
-                Dt = DateTime.Now,
-            };
-
-        }
 
         private static PlcFeedback ProcessUpdatePlcData(List<byte> _plcMessageBuffer, byte[] bytes)
         {
@@ -580,8 +587,13 @@ namespace HelloWinForms.PLC
             }
             return plcFeedback;
         }
-    }
 
-   
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            _position1HasProduct = checkBox1.Checked;
+            _position2HasProduct = checkBox2.Checked;
+            _position3HasProduct = checkBox3.Checked;
+        }
+    }
 
 }

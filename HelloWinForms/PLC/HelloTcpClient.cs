@@ -147,38 +147,4 @@ namespace HelloWinForms.PLC
         }
     }
 
-    public class PlcFeedback
-    {
-        // 模组号
-        // 1=1号模组反馈，2=2号模组反馈，
-        public uint ModuleNumber { get; set; }
-        // 反馈的结果
-        // 1=ok;2=busy;3=fault;
-        public ushort Result { get; set; }
-        // 位置
-        // 11=1号产品正面取图反馈；12=2号产品正面取图反馈；13=3号产品正面取图反馈；14=4号产品正面取图反馈；
-        // 21=1号产品反面取图反馈；22=2号产品反面取图反馈；23=3号产品反面取图反馈；24=4号产品反面取图反馈；
-        public ushort Pos { get; set; }
-        // 产品检测批次号反馈
-        public uint BatchNumber { get; set; }
-        // 1=1号穴位产品OK;2=1号穴位产品NG;
-        public ushort? Number1 { get; set; }
-        public ushort? Number2 { get; set; }
-        public ushort? Number3 { get; set; }
-        public ushort? Number4 { get; set; }
-        // 1号穴位SN码反馈;
-        public string Sn1 { get; set; }
-        public string Sn2 { get; set; }
-        public string Sn3 { get; set; }
-        public string Sn4 { get; set; }
-        public DateTime Dt { get; set; }
-
-        public override string ToString()
-        {
-            return $"Module Number: {ModuleNumber}, Result: {Result}, Position: {Pos}, Batch Number: {BatchNumber}, " +
-                   $"Number1: {Number1}, Number2: {Number2}, Number3: {Number3}, Number4: {Number4}, " +
-                   $"SN1: {Sn1}, SN2: {Sn2}, SN3: {Sn3}, SN4: {Sn4}, Date: {Dt.ToString("yyyy-MM-dd HH:mm:ss")}";
-        }
-    }
-
 }
