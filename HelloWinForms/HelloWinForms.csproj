@@ -488,10 +488,10 @@
     <Compile Include="HelloTableLayoutPanel.Designer.cs">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelloTcpClient.cs">
+    <Compile Include="PLC\HelloTcpClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelloTcpClient.Designer.cs">
+    <Compile Include="PLC\HelloTcpClient.Designer.cs">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloTcpServer.cs">
@@ -500,11 +500,11 @@
     <Compile Include="HelloTcpServer.Designer.cs">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelloTcpServerPLC.cs">
+    <Compile Include="PLC\SolderBallPLCServer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelloTcpServerPLC.Designer.cs">
-      <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
+    <Compile Include="PLC\SolderBallPLCServer.Designer.cs">
+      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloTemp.cs">
       <SubType>Form</SubType>
@@ -537,6 +537,13 @@
     <Compile Include="HelloZip.Designer.cs">
       <DependentUpon>HelloZip.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImagePng8.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImagePng8.Designer.cs">
+      <DependentUpon>ImagePng8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protocols\PLCMessage.cs" />
     <Compile Include="Protocols\ModbusReadGroup.cs" />
     <Compile Include="Protocols\ModbusPoint.cs" />
     <Compile Include="Protocols\ModbusTcpClient.cs" />
@@ -833,14 +840,14 @@
     <EmbeddedResource Include="HelloTableLayoutPanel.resx">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelloTcpClient.resx">
+    <EmbeddedResource Include="PLC\HelloTcpClient.resx">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTcpServer.resx">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelloTcpServerPLC.resx">
-      <DependentUpon>HelloTcpServerPLC.cs</DependentUpon>
+    <EmbeddedResource Include="PLC\SolderBallPLCServer.resx">
+      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTemp.resx">
       <DependentUpon>HelloTemp.cs</DependentUpon>
@@ -868,6 +875,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloZip.resx">
       <DependentUpon>HelloZip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImagePng8.resx">
+      <DependentUpon>ImagePng8.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtualKeyboardNumber.resx">
       <DependentUpon>VirtualKeyboardNumber.cs</DependentUpon>

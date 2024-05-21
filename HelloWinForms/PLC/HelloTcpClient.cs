@@ -13,7 +13,7 @@ using System.Web.ModelBinding;
 using System.Windows.Forms;
 using YamlDotNet.Core.Tokens;
 
-namespace HelloWinForms
+namespace HelloWinForms.PLC
 {
     public partial class HelloTcpClient : Form
     {
@@ -134,6 +134,16 @@ namespace HelloWinForms
         private void timer1_Tick(object sender, EventArgs e)
         {
             //connectButton_Click(sender, e);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PlcFeedback feedback = new PlcFeedback();
+            feedback.BatchNumber = 1;
+
+            var numberValue = DateTime.Now.Second % 2 == 1 ? (ushort)1 : (ushort)2;
+
+            feedback.Number1 = feedback.Number1 == 2 ? (ushort)2 : numberValue;
         }
     }
 

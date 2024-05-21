@@ -29,12 +29,7 @@ namespace HelloWinForms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            PlcFeedback feedback = new PlcFeedback();
-            feedback.BatchNumber = 1;
-
-            var numberValue = DateTime.Now.Second % 2 == 1 ? (ushort)1 : (ushort)2;
-
-            feedback.Number1 = feedback.Number1 == 2 ? (ushort)2 : numberValue;
+            
         }
     }
 

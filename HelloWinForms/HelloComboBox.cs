@@ -40,6 +40,7 @@ namespace HelloWinForms
 
             comboBox2.DropDown += ComboBox2_DropDown;
             //ComboBox2_DropDown(null, null);
+
         }
 
         private void ComboBox2_DropDown(object sender, EventArgs e)
@@ -262,6 +263,14 @@ namespace HelloWinForms
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Tag is long createTimeMs)
+            {
+                Console.WriteLine($"{createTimeMs}");
+            }
         }
     }
 }
