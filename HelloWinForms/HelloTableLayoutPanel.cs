@@ -21,5 +21,13 @@ namespace HelloWinForms
         {
 
         }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                Console.WriteLine("RadioButton1 Checked");
+            }
+        }
     }
 }

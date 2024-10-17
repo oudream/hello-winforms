@@ -119,5 +119,10 @@ namespace HelloWinForms
                 outputRichTextBox.AppendText(text);
             }
         }
+
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            await AsyncButton_Click(sender, e);
+        }
     }
 }

@@ -38,6 +38,28 @@ namespace HelloWinForms.Protocols
             return $"*#module_number:{ModuleNumber}#batch_number:{BatchNumber}#cmd:{Cmd}#pos:{Pos}#sn1:{Sn1}#sn2:{Sn2}#sn3:{Sn3}#sn4:{Sn4}#dt:{Dt:yyyy-MM-dd HH:mm:ss}&";
         }
 
+        public PlcMessage Clone()
+        {
+            var plcMessage = new PlcMessage();
+            plcMessage.BatchNumber = BatchNumber;
+            plcMessage.Cmd = Cmd;
+            plcMessage.Dt = Dt;
+            plcMessage.ModuleNumber = ModuleNumber;
+            plcMessage.Pos = Pos;
+            plcMessage.Sn1 = Sn1;
+            plcMessage.Sn2 = Sn2;
+            plcMessage.Sn3 = Sn3;
+            plcMessage.Sn4 = Sn4;
+
+            plcMessage.SendImageAcquisitionTime = SendImageAcquisitionTime;
+            plcMessage.ReceivedQRCodeTime = ReceivedQRCodeTime;
+            plcMessage.ReceivedQRCodes = ReceivedQRCodes;
+            plcMessage.ReceivedImageTime = ReceivedImageTime;
+            plcMessage.SendResultTime = SendResultTime;
+            plcMessage.ReceivedResult = ReceivedResult;
+            plcMessage.ReceivedResultTime = ReceivedResultTime;
+            return plcMessage;
+        }
 
     }
 

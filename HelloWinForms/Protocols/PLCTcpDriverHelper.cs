@@ -37,10 +37,10 @@ namespace HelloWinForms.Protocols
             }
 
             DoRun();
-            tcpClientChannel = new TcpClientChannel(ip, port);
+            tcpClientChannel = new TcpClientChannel();
             tcpClientChannel.StateChanged += TcClient_StateChanged;
             tcpClientChannel.DataReceived += TcClient_DataReceived;
-            tcpClientChannel.Start();
+            tcpClientChannel.Start(ip, port);
         }
 
         public static void Stop()

@@ -217,14 +217,15 @@
             this.panel5.Size = new System.Drawing.Size(1287, 763);
             this.panel5.TabIndex = 9;
             // 
-            // HelloTcpServerPLC
+            // SolderBallPLCServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 763);
             this.Controls.Add(this.panel5);
-            this.Name = "HelloTcpServerPLC";
+            this.Name = "SolderBallPLCServer";
             this.Text = "HelloTcpServerPLC";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SolderBallPLCServer_FormClosing);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

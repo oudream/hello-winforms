@@ -21,16 +21,16 @@ namespace HelloWinForms.Channel
             Started
         }
 
-        private TcpClient tcpClient;
-        private Thread clientThread;
-        private readonly object lockObject = new object();
-        private bool running = false;
-        private bool tcpClientError = false;
-        private long tryConnectTime = 0;
+        private TcpClient _tcpClient;
+        private Thread _clientThread;
+        private readonly object _lockObject = new object();
+        private bool _running = false;
+        private bool _tcpClientError = false;
+        private long _tryConnectTime = 0;
 
         // 服务器的IP地址和端口
-        private readonly string serverIp;
-        private readonly ushort serverPort;
+        private string _serverIp;
+        private ushort _serverPort;
 
         // 状态属性
         private TcpClientModuleState state = TcpClientModuleState.Stopped;
@@ -51,20 +51,17 @@ namespace HelloWinForms.Channel
         // 数据接收事件
         public event Action<byte[], int> DataReceived;
 
-        public TcpClientChannel(string ip, ushort port)
-        {
-            serverIp = ip;
-            serverPort = port;
-        }
-
         // 启动读取模块，启动TCPClient通道
-        public void Start()
+        public void Start(string ip, ushort port)
         {
             // 检查是否已停止
             if (ModuleState != TcpClientModuleState.Stopped)
             {
                 return;
             }
+
+            _serverIp = ip;
+            _serverPort = port;
 
             StartClientThread();
 
@@ -73,82 +70,88 @@ namespace HelloWinForms.Channel
 
         private void StartClientThread()
         {
-            if (running)
+            if (_running)
             {
                 return;
             }
 
-            LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} TCPClient读取模板已启动");
-            running = true;
+            LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient读取模板已启动");
+            _running = true;
 
             NetworkStream networkStream = null;
 
-            clientThread = new Thread(() =>
+            _clientThread = new Thread(() =>
             {
-                while (running)
+                while (_running)
                 {
                     try
                     {
-                        lock (lockObject)
+                        lock (_lockObject)
                         {
                             // 关闭已存在问题的TCPClient
-                            if (tcpClientError)
+                            if (_tcpClientError)
                             {
-                                if (tcpClient != null)
+                                if (_tcpClient != null)
                                 {
-                                    tcpClient.Close();
-                                    tcpClient = null;
+                                    _tcpClient.Close();
+                                    _tcpClient = null;
                                 }
-                                tcpClientError = false;
+                                _tcpClientError = false;
                             }
                             // 创建TCPClient
-                            if (tcpClient == null)
+                            if (_tcpClient == null)
                             {
-                                tcpClient = new TcpClient();
+                                _tcpClient = new TcpClient();
                             }
                         }
 
                         // 检查TCPClient是否连接，如果没有连接，则尝试重新连接
-                        if (!tcpClient.Connected)
+                        if (_tcpClient.Connected == false)
                         {
                             try
                             {
                                 // 如果连接时间超过1秒，则尝试重新连接。防止连接过快
-                                if (TimeHelper.GetNow() - tryConnectTime < 1000)
+                                if (TimeHelper.GetNow() - _tryConnectTime < 1000)
                                 {
                                     var waitCount = 300;
-                                    while (running && waitCount > 0)
+                                    while (_running && waitCount > 0)
                                     {
                                         waitCount -= 1;
                                         Thread.Sleep(10); // 等待时间可以根据实际需要调整
                                     }
                                 }
-                                LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} 连接中...");
-                                tryConnectTime = TimeHelper.GetNow();
-                                tcpClient.Connect(serverIp, serverPort);
-                                if (tcpClient.Connected)
+                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接中...");
+                                _tryConnectTime = TimeHelper.GetNow();
+                                _tcpClient.Connect(_serverIp, _serverPort);
+                                if (_tcpClient.Connected)
                                 {
-                                    LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} 连接成功");
+                                    LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接成功");
                                 }
                             }
                             catch (Exception e)
                             {
-                                LogHelper.Error($"TCP客户端{serverIp}:{serverPort} 连接异常：{e.Message}");
-                            }
-                            if (!tcpClient.Connected)
-                            {
-                                lock (lockObject)
+                                lock (_lockObject)
                                 {
-                                    tcpClient.Close();
-                                    tcpClient = null;
+                                    _tcpClient.Close();
+                                    _tcpClient = null;
                                 }
-                                LogHelper.Error($"TCP客户端{serverIp}:{serverPort} 无法连接到服务端：{serverIp}");
+                                LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 连接异常：{e.Message}");
+                                continue;
+                            }
+                            if (!_tcpClient.Connected)
+                            {
+                                lock (_lockObject)
+                                {
+                                    _tcpClient.Close();
+                                    _tcpClient = null;
+                                }
+                                LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 无法连接到服务端：{_serverIp}");
                             }
                         }
 
-                        if (tcpClient?.Connected == true)
+                        if (_tcpClient != null && _tcpClient.Connected == true)
                         {
-                            NetworkStream stream = tcpClient.GetStream();
+                            NetworkStream stream = _tcpClient.GetStream();
                             if (stream != networkStream)
                             {
                                 networkStream = stream;
@@ -162,12 +165,12 @@ namespace HelloWinForms.Channel
                             }
                             else if (bytesRead == 0)
                             {
-                                lock (lockObject)
+                                lock (_lockObject)
                                 {
-                                    tcpClient.Close();
-                                    tcpClient = null;
+                                    _tcpClient.Close();
+                                    _tcpClient = null;
                                 }
-                                LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} TCPClient通道已断开");
+                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道已断开");
                             }
                         }
                     }
@@ -178,39 +181,41 @@ namespace HelloWinForms.Channel
                     catch (Exception ex)
                     {
                         // 除了超时异常，其他都认为是异常，则尝试重新连接
-                        tcpClientError = true;
-                        LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} TCPClient通道异常，尝试重新连接：{ex.Message}");
+                        _tcpClientError = true;
+                        LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道异常，尝试重新连接：{ex.Message}");
                     }
                 }
 
-                running = false;
+                _running = false;
                 ModuleState = TcpClientModuleState.Stopped;
-                tcpClient = null;
-                LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} TCPClient通道维护模块已停止");
+                _tcpClient = null;
+                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道维护模块已停止");
             })
             { IsBackground = true };
 
-            clientThread.Start();
+            _clientThread.Start();
         }
 
-        public void Send(byte[] data)
+        public bool Send(byte[] data)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                if (tcpClient != null && tcpClient.Connected)
+                if (_tcpClient != null && _tcpClient.Connected)
                 {
                     try
                     {
-                        NetworkStream stream = tcpClient.GetStream();
+                        NetworkStream stream = _tcpClient.GetStream();
                         stream.Write(data, 0, data.Length);
+                        return true;
                     }
                     catch (Exception ex)
                     {
-                        tcpClientError = true;
-                        LogHelper.Debug($"TCP客户端{serverIp}:{serverPort} 发送异常，尝试重新连接：{ex.Message}");
+                        _tcpClientError = true;
+                        LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 发送异常，尝试重新连接：{ex.Message}");
                     }
                 }
             }
+            return false;
         }
 
         protected virtual void OnDataReceived(byte[] data, int bytesRead)
@@ -234,21 +239,21 @@ namespace HelloWinForms.Channel
             ModuleState = TcpClientModuleState.Stopping;
 
             // 停止读取，等待线程结束
-            running = false;
-            lock (lockObject)
+            _running = false;
+            lock (_lockObject)
             {
-                if (tcpClient?.Connected == true)
+                if (_tcpClient?.Connected == true)
                 {
-                    tcpClient.Close();
+                    _tcpClient.Close();
                 }
             }
         }
 
         public bool IsConnected()
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                if (tcpClient?.Connected == true)
+                if (_tcpClient?.Connected == true)
                 {
                     return true;
                 }
@@ -256,5 +261,4 @@ namespace HelloWinForms.Channel
             return false;
         }
     }
-
 }

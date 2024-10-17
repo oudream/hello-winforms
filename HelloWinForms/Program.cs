@@ -1,4 +1,5 @@
-﻿using HelloWinForms.Utilities;
+﻿using HelloWinForms.SharedMemory;
+using HelloWinForms.Utilities;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace HelloWinForms
             //Application.Run(new HelloWaitHandle());
             //Application.Run(new HelloLog());
             //Application.Run(new HelloOOP());
+
             //Application.Run(new HelloAsync());
+            
             //Application.Run(new HelloCustomBar());
             //Application.Run(new HelloServiceController());
             //Application.Run(new HelloDataGridViewStatus());
@@ -39,7 +42,9 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            Application.Run(new PLC.SolderBallPLCServer());
+            Application.Run(new PLC.AACPLCServer());
+
+            //Application.Run(new PLC.SolderBallPLCServer());
 
             //Application.Run(new ImagePng8());
 
@@ -60,6 +65,23 @@ namespace HelloWinForms
             //Application.Run(new HelloModbus());
 
             //Application.Run(new HelloIniFile());
+
+            //Application.Run(new HelloNGTypes());
+
+            //Application.Run(new HelloProtocolPLCTcp());
+
+            //Application.Run(new HelloProcess());
+
+            //Application.Run(new HelloOrderHash());
+
+            //Application.Run(new HelloPython());
+
+            //Application.Run(new HelloTableLayoutPanel());
+
+            //Application.Run(new HelloDaemon());
+
+            //Application.Run(new HelloSharedMemory());
+
         }
     }
 }

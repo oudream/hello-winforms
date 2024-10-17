@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -66,6 +67,12 @@
     <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="ExCSS">
       <HintPath>Libs\Debug\ExCSS.dll</HintPath>
+    </Reference>
+    <Reference Include="halcondotnetxl">
+      <HintPath>..\DLL\halcon\halcondotnetxl.dll</HintPath>
+    </Reference>
+    <Reference Include="hdevenginedotnetxl">
+      <HintPath>..\DLL\halcon\hdevenginedotnetxl.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
@@ -114,6 +121,9 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.CodeDom, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CodeDom.8.0.0\lib\net462\System.CodeDom.dll</HintPath>
+    </Reference>
     <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
@@ -130,6 +140,7 @@
     </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -197,6 +208,7 @@
     <Compile Include="Actions\PTray.Designer.cs">
       <DependentUpon>PTray.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppHelper.cs" />
     <Compile Include="BaseForm\UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -238,6 +250,7 @@
     <Compile Include="Controls\RJControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DaemonHelper.cs" />
     <Compile Include="DataGridViewComponent\CalendarEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -247,6 +260,12 @@
     <Compile Include="DataGridViewComponent\DataGridViewNumericColumn.cs" />
     <Compile Include="DataGridViewComponent\NumericUpDownEditingControl.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -296,6 +315,12 @@
     <Compile Include="HelloCustomBar.Designer.cs">
       <DependentUpon>HelloCustomBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloDaemon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloDaemon.Designer.cs">
+      <DependentUpon>HelloDaemon.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloDataGridView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,6 +363,12 @@
     <Compile Include="HelloEncoding.Designer.cs">
       <DependentUpon>HelloEncoding.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloExeInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloExeInForm.Designer.cs">
+      <DependentUpon>HelloExeInForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloHttpClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,11 +406,23 @@
     <Compile Include="HelloModbus.Designer.cs">
       <DependentUpon>HelloModbus.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloNGTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloNGTypes.Designer.cs">
+      <DependentUpon>HelloNGTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloOOP.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloOOP.Designer.cs">
       <DependentUpon>HelloOOP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloOrderHash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloOrderHash.Designer.cs">
+      <DependentUpon>HelloOrderHash.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloOverlayImage.cs">
       <SubType>Form</SubType>
@@ -405,6 +448,12 @@
     <Compile Include="HelloPinyin.Designer.cs">
       <DependentUpon>HelloPinyin.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloProcess.Designer.cs">
+      <DependentUpon>HelloProcess.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -426,6 +475,18 @@
     </Compile>
     <Compile Include="HelloPanel.Designer.cs">
       <DependentUpon>HelloPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloProtocolPLCTcp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloProtocolPLCTcp.Designer.cs">
+      <DependentUpon>HelloProtocolPLCTcp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloPython.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloPython.Designer.cs">
+      <DependentUpon>HelloPython.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloRoslyn.cs">
       <SubType>Form</SubType>
@@ -487,6 +548,12 @@
     </Compile>
     <Compile Include="HelloTableLayoutPanel.Designer.cs">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloTcpClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTcpClient.Designer.cs">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </Compile>
     <Compile Include="PLC\HelloTcpClient.cs">
       <SubType>Form</SubType>
@@ -554,6 +621,14 @@
     <Compile Include="Protocols\ModbusPoint.cs" />
     <Compile Include="Protocols\ModbusTcpClient.cs" />
     <Compile Include="Protocols\PointItem.cs" />
+    <Compile Include="SharedMemory\HelloSharedMemory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SharedMemory\HelloSharedMemory.Designer.cs">
+      <DependentUpon>HelloSharedMemory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SharedMemory\SharedMemoryHelper.cs" />
+    <Compile Include="Utilities\HalconHelper.cs" />
     <Compile Include="VirtualKeyboardNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -735,6 +810,9 @@
     <EmbeddedResource Include="HelloCustomBar.resx">
       <DependentUpon>HelloCustomBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloDaemon.resx">
+      <DependentUpon>HelloDaemon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloDataGridView.resx">
       <DependentUpon>HelloDataGridView.cs</DependentUpon>
     </EmbeddedResource>
@@ -756,6 +834,9 @@
     <EmbeddedResource Include="HelloEncoding.resx">
       <DependentUpon>HelloEncoding.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloExeInForm.resx">
+      <DependentUpon>HelloExeInForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloHttpClient.resx">
       <DependentUpon>HelloHttpClient.cs</DependentUpon>
     </EmbeddedResource>
@@ -774,8 +855,14 @@
     <EmbeddedResource Include="HelloModbus.resx">
       <DependentUpon>HelloModbus.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloNGTypes.resx">
+      <DependentUpon>HelloNGTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloOOP.resx">
       <DependentUpon>HelloOOP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloOrderHash.resx">
+      <DependentUpon>HelloOrderHash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloOverlayImage.resx">
       <DependentUpon>HelloOverlayImage.cs</DependentUpon>
@@ -788,6 +875,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloPinyin.resx">
       <DependentUpon>HelloPinyin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloProcess.resx">
+      <DependentUpon>HelloProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloProgressDialog.resx">
       <DependentUpon>HelloProgressDialog.cs</DependentUpon>
@@ -812,6 +902,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloPanel.resx">
       <DependentUpon>HelloPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloProtocolPLCTcp.resx">
+      <DependentUpon>HelloProtocolPLCTcp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloPython.resx">
+      <DependentUpon>HelloPython.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloRichTextBox.resx">
       <DependentUpon>HelloRichTextBox.cs</DependentUpon>
@@ -845,6 +941,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTableLayoutPanel.resx">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTcpClient.resx">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PLC\HelloTcpClient.resx">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
@@ -887,6 +986,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePng8.resx">
       <DependentUpon>ImagePng8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SharedMemory\HelloSharedMemory.resx">
+      <DependentUpon>HelloSharedMemory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtualKeyboardNumber.resx">
       <DependentUpon>VirtualKeyboardNumber.cs</DependentUpon>
@@ -951,6 +1053,15 @@
     <Folder Include="Utilities\Sample\Log\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\hello.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\hello1.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\tmp.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\image1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils.Drawing;
+﻿using CxWorkStation.Utilities;
+using DevExpress.Utils.Drawing;
 using HelloWinForms.Components;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,10 @@ namespace HelloWinForms
     {
         private IpV4Component ipConponent;
 
+
+        private string currentSelection;
+        private DateTime lastSwitchTime;
+        private bool isRestoringPreviousSelection = false;
 
         public HelloComboBox()
         {
@@ -41,6 +46,92 @@ namespace HelloWinForms
             comboBox2.DropDown += ComboBox2_DropDown;
             //ComboBox2_DropDown(null, null);
 
+            currentSelection = defaultManualRadioButton.Tag.ToString(); // 初始选择
+            lastSwitchTime = DateTime.Now;
+            defaultOKRadioButton.Tag = "OK";
+            defaultManualRadioButton.Tag = "Manual";
+            defaultNGRadioButton.Tag = "NG";
+
+            defaultOKRadioButton.CheckedChanged += new EventHandler(RadioButton_CheckedChanged);
+            defaultManualRadioButton.CheckedChanged += new EventHandler(RadioButton_CheckedChanged);
+            defaultNGRadioButton.CheckedChanged += new EventHandler(RadioButton_CheckedChanged);
+
+            // 添加选项到下拉菜单
+            toolStripDropDownButton1.DropDownItems.Add("导出记录", null, ExportRecord_Click);
+            toolStripDropDownButton1.DropDownItems.Add("上传MES", null, UploadMES_Click);
+            toolStripDropDownButton1.DropDownItems.Add("导出MES", null, ExportMES_Click);
+
+        }
+
+        private void ExportMES_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UploadMES_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExportRecord_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isRestoringPreviousSelection)
+                return;
+
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton != null && radioButton.Checked)
+            {
+                string newSelection = radioButton.Tag.ToString(); // 从 Tag 属性获取新选择的值
+
+                // 检查上次切换时间
+                TimeSpan timeSinceLastSwitch = DateTime.Now - lastSwitchTime;
+                if (timeSinceLastSwitch.TotalSeconds < 5)
+                {
+                    MessageBox.Show("切换间隔不能低于5秒", "提示", MessageBoxButtons.OK);
+                    RestorePreviousSelection();
+                    return;
+                }
+
+                if (newSelection != currentSelection)
+                {
+                    DialogResult result = MessageBox.Show("确定要切换吗？", "确认", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        currentSelection = newSelection;
+                        lastSwitchTime = DateTime.Now; // 更新上次切换时间
+                    }
+                    else
+                    {
+                        RestorePreviousSelection();
+                    }
+                }
+            }
+        }
+
+        private void RestorePreviousSelection()
+        {
+            isRestoringPreviousSelection = true;
+            // 恢复之前的选择状态
+            this.SuspendLayout();
+            if (currentSelection == "OK")
+            {
+                defaultOKRadioButton.Checked = true;
+            }
+            else if (currentSelection == "Manual")
+            {
+                defaultManualRadioButton.Checked = true;
+            }
+            else if (currentSelection == "NG")
+            {
+                defaultNGRadioButton.Checked = true;
+            }
+            this.ResumeLayout();
+            isRestoringPreviousSelection = false;
         }
 
         private void ComboBox2_DropDown(object sender, EventArgs e)
@@ -258,6 +349,7 @@ namespace HelloWinForms
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            checkBox1.Checked = !checkBox1.Checked;
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -267,10 +359,105 @@ namespace HelloWinForms
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Tag is long createTimeMs)
+            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            var dtNow = TimeHelper.GetNow();
+            if (dtNow % 2 == 0 && checkBox1.Checked)
             {
-                Console.WriteLine($"{createTimeMs}");
+                checkBox1.Checked = false;
+            }
+            Console.WriteLine($"checkBox1 CheckedChanged");
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"checkBox1 Click");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            checkBox1.Checked = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    Console.WriteLine("---", DateTime.Now);
+                }));
+            }
+            else
+            {
+                Console.WriteLine(DateTime.Now);
             }
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            SetCodeArea();
+            Point pt = new Point(0, 0);
+            pt.X = 1720;
+            pt.Y = 732;
+            int index = FitArea(pt);
+            if (index != -1)
+                Console.WriteLine($"在第{index}个区域");
+        }
+
+        private List<CodeArea> CodeAreas = new List<CodeArea>();
+        private void SetCodeArea()
+        {
+            //条码1范围
+            CodeAreas.Add(new CodeArea()
+            {
+                LeftTop = new Point(0, 0),
+                RightBottom = new Point(0, 0),
+            });
+            //条码2范围
+            CodeAreas.Add(new CodeArea()
+            {
+                LeftTop = new Point(1400, 1020),
+                RightBottom = new Point(1970, 1470),
+            });
+            //条码3范围
+            CodeAreas.Add(new CodeArea()
+            {
+                LeftTop = new Point(1450, 630),
+                RightBottom = new Point(1930, 960),
+            });
+        }
+
+
+        /// <summary>
+        /// 判定点在三个条码范围的哪个范围，0、1、2，返回-1表示三个范围都不属于
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private int FitArea(Point point)
+        {
+            for (int i = 0; i < CodeAreas.Count; i++)
+            {
+                CodeArea area = CodeAreas[i];
+                if (point.X >= area.LeftTop.X && point.X <= area.RightBottom.X)
+                {
+                    if (point.Y >= area.LeftTop.Y && point.Y <= area.RightBottom.Y)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
+    public class CodeArea
+    {
+        public Point LeftTop { get; set; }      //左上角位置
+        public Point RightBottom { get; set; }  //右下角位置
     }
 }

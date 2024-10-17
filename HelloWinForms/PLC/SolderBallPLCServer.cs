@@ -17,6 +17,7 @@ using CxWorkStation.Utilities;
 using OpenCvSharp.Flann;
 using HelloWinForms.Utilities;
 using HelloWinForms.Protocols;
+using CommonInterfaces;
 
 namespace HelloWinForms.PLC
 {
@@ -52,9 +53,17 @@ namespace HelloWinForms.PLC
         private ConcurrentDictionary<string, TcpClient> _connectedClients = new ConcurrentDictionary<string, TcpClient>();
         private Random _random = new Random();
 
+        private string _batchNumberFilePath;
+        static uint _batchNumber = 1;
+
         public SolderBallPLCServer()
         {
             InitializeComponent();
+
+            _batchNumberFilePath = AppHelper.JoinFullPath("BatchNumber.ini");
+            _batchNumber = ReadIntegerFromFile(_batchNumberFilePath)+1;
+
+            this.Text = $"SolderBallPLCServer - {_batchNumber}";
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -180,6 +189,8 @@ namespace HelloWinForms.PLC
             }
         }
 
+
+
         private void HandleClient(TcpClient client)
         {
             var clientEndpoint = client.Client.RemoteEndPoint.ToString();
@@ -196,7 +207,6 @@ namespace HelloWinForms.PLC
                 long lastSendTime = 0;
                 int sendIndex = 0;
                 int snIndex = 0;
-                uint batchNumber = 1;
 
                 while (_isRunning)
                 {
@@ -232,10 +242,10 @@ namespace HelloWinForms.PLC
 
                     // 检查是否需要发送新的消息
                     var dtNow = TimeHelper.GetNow();
-                    if (dtNow - lastSendTime >= 1000) // 每秒发送一次状态更新
+                    if (dtNow - lastSendTime >= 1500) // 每秒发送一次状态更新
                     {
                         lastSendTime = dtNow;
-                        SendPlcMessage(stream, ref sendIndex, ref snIndex, ref batchNumber);
+                        SendPlcMessage(stream, ref sendIndex, ref snIndex, ref _batchNumber);
                     }
                 }
             }
@@ -415,20 +425,41 @@ namespace HelloWinForms.PLC
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var plcMessage = new PlcMessage
-            {
-                ModuleNumber = 1,
-                BatchNumber = 1,
-                Cmd = 11,
-                Pos = 11,
-                Dt = DateTime.Now,
-            };
+        }
 
+        // 写入整数到文件的方法
+        static void WriteIntegerToFile(string filePath, uint number)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine(number);
+            }
+        }
+
+        // 从文件加载整数的方法
+        static uint ReadIntegerFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                return 1; // 文件不存在时返回默认值 1
+            }
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line = reader.ReadLine();
+                if (uint.TryParse(line, out uint number))
+                {
+                    return number;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
         }
 
         private static PlcFeedback ProcessUpdatePlcData(List<byte> _plcMessageBuffer, byte[] bytes)
@@ -579,6 +610,11 @@ namespace HelloWinForms.PLC
                 }
             }
             return plcFeedback;
+        }
+
+        private void SolderBallPLCServer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            WriteIntegerToFile(_batchNumberFilePath, _batchNumber);
         }
     }
 
