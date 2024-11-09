@@ -42,7 +42,7 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            Application.Run(new PLC.AACPLCServer());
+            //Application.Run(new PLC.AACPLCServer());
 
             //Application.Run(new PLC.SolderBallPLCServer());
 
@@ -81,6 +81,8 @@ namespace HelloWinForms
             //Application.Run(new HelloDaemon());
 
             //Application.Run(new HelloSharedMemory());
+
+            Application.Run(new HelloEquals());
 
         }
     }

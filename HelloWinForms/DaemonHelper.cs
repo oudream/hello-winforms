@@ -23,6 +23,7 @@ namespace HelloWinForms
         private static volatile bool _isRunning = false;
         private static AutoResetEvent _updateSignal = new AutoResetEvent(false);
         private static readonly object _lockUpdateList = new object();
+        private static Dictionary<string, Process> _processes = new Dictionary<string, Process>();
 
         private static List<DaemonAppConfig> _apps = new List<DaemonAppConfig>();
 
@@ -137,20 +138,25 @@ namespace HelloWinForms
                     {
                         var process = Process.Start(startInfo);
                         app.StartTime = TimeHelper.GetNow();
-                        if (string.IsNullOrEmpty(app.AppLogFileName))
+                        if (!string.IsNullOrEmpty(app.AppLogFileName))
                         {
                             // 检测 infer.log 最后一行要出现（2024-10-15 08:25:53 [INF] Server listening on port 12345...），而且时间要大于启动时间，才算运行成功
-                            // 每 200 毫秒检查一次，最多检查 10 秒，确保启动成功
+                            // 每 200 毫秒检查一次，最多检查 10 秒，确保启动成功  
                             bool isStarted = CheckAppStatusWithTimeout(app, process.StartTime, 10000, 200);
                             if (isStarted)
                             {
                                 app.StartCompleteTime = TimeHelper.GetNow();
+                                _processes[fn] = process;
                             }
                             else
                             {
                                 LogHelper.Debug($"看守服务 启动进程 {fn} 失败");
                                 process.Kill();
                             }
+                        }
+                        else
+                        {
+                            _processes[fn] = process;
                         }
                         LogHelper.Debug($"看守服务 已启动进程 {fn}");
                     }
@@ -165,15 +171,15 @@ namespace HelloWinForms
         // 每200毫秒检查一次是否启动成功，最多检查10秒
         private static bool CheckAppStatusWithTimeout(DaemonAppConfig app, DateTime startTime, int timeoutMs, int intervalMs)
         {
-            int elapsed = 0;
-            while (elapsed < timeoutMs)
+            DateTime startCheckTime = DateTime.Now;  // 记录检查开始的时间
+
+            while ((DateTime.Now - startCheckTime).TotalMilliseconds < timeoutMs)
             {
                 if (IsAppRunningSuccessfully(startTime, app))
                 {
                     return true;
                 }
                 Thread.Sleep(intervalMs);
-                elapsed += intervalMs;
             }
             return false;
         }
@@ -186,7 +192,7 @@ namespace HelloWinForms
                 string logFilePath = Path.Combine(app.WorkingDirectory, app.AppLogFileName);
                 if (File.Exists(logFilePath))
                 {
-                    var lastLogLine = File.ReadLines(logFilePath).LastOrDefault();
+                    string lastLogLine = ReadLastLineWithContent(logFilePath) ;
 
                     if (!string.IsNullOrEmpty(lastLogLine))
                     {
@@ -213,6 +219,57 @@ namespace HelloWinForms
             }
 
             return false;
+        }
+
+        public static string ReadLastLineWithContent(string filePath)
+        {
+            const int bufferSize = 1024; // 每次读取1KB的内容
+            byte[] buffer = new byte[bufferSize];
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                if (fs.Length == 0)
+                {
+                    return string.Empty; // 文件为空
+                }
+
+                long position = fs.Length;
+                StringBuilder sb = new StringBuilder();
+                bool foundLine = false;
+
+                while (position > 0)
+                {
+                    int bytesToRead = (int)Math.Min(bufferSize, position); // 如果文件尾部不够1KB，则读取剩余部分
+                    position -= bytesToRead;
+                    fs.Seek(position, SeekOrigin.Begin);
+                    fs.Read(buffer, 0, bytesToRead);
+
+                    string chunk = Encoding.Default.GetString(buffer, 0, bytesToRead);
+                    sb.Insert(0, chunk);
+
+                    // 分割成行
+                    string[] lines = sb.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+                    // 从最后一行开始查找有内容的行
+                    for (int i = lines.Length - 1; i >= 0; i--)
+                    {
+                        if (!string.IsNullOrWhiteSpace(lines[i]))
+                        {
+                            foundLine = true;
+                            return lines[i];
+                        }
+                    }
+
+                    if (foundLine)
+                    {
+                        break;
+                    }
+
+                    sb.Clear(); // 清空 StringBuilder，以便继续从文件中读取更多数据
+                }
+            }
+
+            return string.Empty; // 如果没有找到任何内容行，返回空字符串
         }
 
         // 判断是否所有的应用都启动成功
@@ -342,17 +399,18 @@ namespace HelloWinForms
             // Sample configurations
             var daemon1 = new DaemonAppConfig
             {
-                FileName = @"C:\\Program Files (x86)\\Siemens\\Automation\\WinCC RT Advanced\\HmiRTm.exe",
-                Arguments = "--mode test -d \"C:\\应用程序1\\data\" --config config.yaml",
-                WorkingDirectory = @"C:\\App1",
-                CreateNoWindow = true
+                FileName = "D:\\cyg\\FastDeployV31\\infer_demo.exe",
+                Arguments = "D:\\cyg\\FastDeployV31\\model",
+                WorkingDirectory = "D:\\cyg\\FastDeployV31",
+                CreateNoWindow = true,
+                AppLogFileName = "D:\\cyg\\FastDeployV31\\infer.log"
             };
 
             var daemon2 = new DaemonAppConfig
             {
-                FileName = "app2.exe",
-                Arguments = "--config config.yaml",
-                WorkingDirectory = @"D:\\App2",
+                FileName = "D:\\cyg\\VCDataAnalysis\\VCDataAnalysis.exe",
+                Arguments = "",
+                WorkingDirectory = "D:\\cyg\\VCDataAnalysis",
                 CreateNoWindow = false
             };
 

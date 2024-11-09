@@ -27,11 +27,13 @@ namespace HelloWinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DaemonHelper.Init();
+            DaemonHelper.Run();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Stop();
+            DaemonHelper.Stop(true);
         }
 
         private void Stop()
