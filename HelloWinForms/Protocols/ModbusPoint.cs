@@ -1,6 +1,4 @@
 ﻿using CxWorkStation.Utilities;
-using DevExpress.Services.Internal;
-using DevExpress.Utils;
 using HelloWinForms.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace HelloWinForms.Protocols
 {

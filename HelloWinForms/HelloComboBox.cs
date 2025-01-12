@@ -1,5 +1,4 @@
 ﻿using CxWorkStation.Utilities;
-using DevExpress.Utils.Drawing;
 using HelloWinForms.Components;
 using System;
 using System.Collections.Generic;
@@ -452,6 +451,11 @@ namespace HelloWinForms
             }
 
             return -1;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            comboBox3.Text = "";
         }
     }
 

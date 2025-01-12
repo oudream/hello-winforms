@@ -1,18 +1,18 @@
-﻿using System;
-using System.Net.Sockets;
-using System.Threading;
-using NModbus.Device;
-using NModbus;
-using CxWorkStation.Utilities;
-using HelloWinForms.Utilities;
-using System.IO;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 
-namespace HelloWinForms.Protocols
+namespace CommonInterfaces
 {
-    public class ModbusTcpClient
+    public class TcpClientChannel
     {
-        public enum ClientState
+        public enum TcpClientModuleState
         {
             Stopping,
             Stopped,
@@ -31,8 +31,8 @@ namespace HelloWinForms.Protocols
         private ushort _serverPort;
 
         // 状态属性
-        private ClientState state = ClientState.Stopped;
-        public ClientState ModuleState
+        private TcpClientModuleState state = TcpClientModuleState.Stopped;
+        public TcpClientModuleState ModuleState
         {
             get { return state; }
             private set
@@ -42,26 +42,32 @@ namespace HelloWinForms.Protocols
             }
         }
         // 状态改变事件
-        public event Action<ClientState> StateChanged;
+        public event Action<TcpClientModuleState> StateChanged;
 
-        // 线圈接收事件 slaveAddress, startAddress, coils
-        public event Action<byte, ushort, bool[]> CoilsReceived;
-        public event Action<byte, ushort, ushort[]> RegistersReceived;
+        private byte[] buffer = new byte[8192];
 
-        // modbus
-        private IModbusMaster _modbusMaster;
-        private ModbusFactory _modbusFactory;
+        // 数据接收事件
+        public event Action<byte[], int> DataReceived;
 
-        public ModbusTcpClient()
+        // 日志记录
+        ILogger _logger = null;
+
+        public TcpClientChannel(bool enableLog)
         {
-            _modbusFactory = new ModbusFactory();
+            if (enableLog)
+            {
+                _logger = new LoggerConfiguration()
+                  .WriteTo.File("log-tcpclient.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+                  .MinimumLevel.Verbose()
+                  .CreateLogger();
+            }
         }
 
         // 启动读取模块，启动TCPClient通道
-        public void Start(string ip, ushort port, List<S7ReadIntervalGroup> s7ReadIntervalGroups)
+        public void Start(string ip, ushort port)
         {
             // 检查是否已停止
-            if (ModuleState != ClientState.Stopped)
+            if (ModuleState != TcpClientModuleState.Stopped)
             {
                 return;
             }
@@ -69,20 +75,22 @@ namespace HelloWinForms.Protocols
             _serverIp = ip;
             _serverPort = port;
 
-            StartClientThread(s7ReadIntervalGroups);
+            StartClientThread();
 
-            ModuleState = ClientState.Started;
+            ModuleState = TcpClientModuleState.Started;
         }
 
-        private void StartClientThread(List<S7ReadIntervalGroup> readIntervalGroups)
+        private void StartClientThread()
         {
             if (_running)
             {
                 return;
             }
 
-            LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} TCPClient读取模板已启动");
+            LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient读取模板已启动");
             _running = true;
+
+            NetworkStream networkStream = null;
 
             _clientThread = new Thread(() =>
             {
@@ -106,14 +114,11 @@ namespace HelloWinForms.Protocols
                             if (_tcpClient == null)
                             {
                                 _tcpClient = new TcpClient();
-                                _modbusMaster = _modbusFactory.CreateMaster(_tcpClient);
-                                _modbusMaster.Transport.ReadTimeout = 100;
-                                _modbusMaster.Transport.WriteTimeout = 100;
                             }
                         }
 
                         // 检查TCPClient是否连接，如果没有连接，则尝试重新连接
-                        if (!_tcpClient.Connected)
+                        if (_tcpClient.Connected == false)
                         {
                             try
                             {
@@ -127,12 +132,12 @@ namespace HelloWinForms.Protocols
                                         Thread.Sleep(10); // 等待时间可以根据实际需要调整
                                     }
                                 }
-                                LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} 连接中...");
+                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接中...");
                                 _tryConnectTime = TimeHelper.GetNow();
                                 _tcpClient.Connect(_serverIp, _serverPort);
                                 if (_tcpClient.Connected)
                                 {
-                                    LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} 连接成功");
+                                    LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接成功");
                                 }
                             }
                             catch (Exception e)
@@ -142,7 +147,7 @@ namespace HelloWinForms.Protocols
                                     _tcpClient.Close();
                                     _tcpClient = null;
                                 }
-                                LogHelper.Error($"ModbusTcp{_serverIp}:{_serverPort} 连接异常：{e.Message}");
+                                LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 连接异常：{e.Message}");
                                 continue;
                             }
                             if (!_tcpClient.Connected)
@@ -152,38 +157,54 @@ namespace HelloWinForms.Protocols
                                     _tcpClient.Close();
                                     _tcpClient = null;
                                 }
-                                LogHelper.Error($"ModbusTcp{_serverIp}:{_serverPort} 无法连接到服务端：{_serverIp}");
+                                LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 无法连接到服务端：{_serverIp}");
                             }
                         }
 
-                        if (_tcpClient?.Connected == true)
+                        if (_tcpClient != null && _tcpClient.Connected == true)
                         {
-                            var dtNow = TimeHelper.GetNow();
-
-                            foreach (var intervalGroup in readIntervalGroups)
+                            NetworkStream stream = _tcpClient.GetStream();
+                            if (stream != networkStream)
                             {
-                                if (intervalGroup.ReadInterval > 0 && dtNow - intervalGroup.LastReadTime > intervalGroup.ReadInterval)
+                                networkStream = stream;
+                                networkStream.ReadTimeout = 1000; // 1秒
+                            }
+
+                            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                            if (bytesRead > 0)
+                            {
+                                OnDataReceived(buffer, bytesRead);
+
+                                // 记录日志
+                                if (_logger != null)
                                 {
-                                    intervalGroup.LastReadTime = dtNow;
-                                    foreach (var dbGroup in intervalGroup.DbGroups)
+                                    try
                                     {
-                                        switch (dbGroup.FunctionCode)
+                                        // 先记录 十六进制
                                         {
-                                            case ModbusFunctionCodes.ReadCoils:
-                                                {
-                                                    bool[] coils = _modbusMaster.ReadCoils(dbGroup.SlaveAddress, dbGroup.StartAddress, dbGroup.Count);
-                                                    CoilsReceived?.Invoke(dbGroup.SlaveAddress, dbGroup.StartAddress, coils);
-                                                }
-                                                break;
-                                            case ModbusFunctionCodes.ReadHoldingRegisters:
-                                                {
-                                                    ushort[] registers = _modbusMaster.ReadHoldingRegisters(dbGroup.SlaveAddress, dbGroup.StartAddress, dbGroup.Count);
-                                                    RegistersReceived?.Invoke(dbGroup.SlaveAddress, dbGroup.StartAddress, registers);
-                                                }
-                                                break;
+                                            var recvBufString = StringHelper.BytesToHexString(buffer, 0, bytesRead);
+                                            _logger.Debug($"接收数据0X--[{bytesRead}]：{recvBufString}");
+                                        }
+
+                                        // 再记录字符串
+                                        {
+                                            var recvBufString = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                                            _logger.Debug($"接收数据STR-[{bytesRead}]：{recvBufString}");
                                         }
                                     }
+                                    catch (Exception)
+                                    {
+                                    }
                                 }
+                            }
+                            else if (bytesRead == 0)
+                            {
+                                lock (_lockObject)
+                                {
+                                    _tcpClient.Close();
+                                    _tcpClient = null;
+                                }
+                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道已断开");
                             }
                         }
                     }
@@ -191,27 +212,25 @@ namespace HelloWinForms.Protocols
                     {
                         Console.WriteLine("Read timed out.");
                     }
-                    // 读取为0时，抛出异常，表示服务器断开连接。
-                    // 读取的其它异常
                     catch (Exception ex)
                     {
                         // 除了超时异常，其他都认为是异常，则尝试重新连接
                         _tcpClientError = true;
-                        LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} TCPClient通道异常，尝试重新连接：{ex.Message}");
+                        LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道异常，尝试重新连接：{ex.Message}");
                     }
                 }
 
                 _running = false;
-                ModuleState = ClientState.Stopped;
+                ModuleState = TcpClientModuleState.Stopped;
                 _tcpClient = null;
-                LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} TCPClient通道维护模块已停止");
+                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道维护模块已停止");
             })
             { IsBackground = true };
 
             _clientThread.Start();
         }
 
-        public void Send(byte[] data)
+        public bool Send(byte[] data)
         {
             lock (_lockObject)
             {
@@ -221,17 +240,24 @@ namespace HelloWinForms.Protocols
                     {
                         NetworkStream stream = _tcpClient.GetStream();
                         stream.Write(data, 0, data.Length);
+                        return true;
                     }
                     catch (Exception ex)
                     {
                         _tcpClientError = true;
-                        LogHelper.Debug($"ModbusTcp{_serverIp}:{_serverPort} 发送异常，尝试重新连接：{ex.Message}");
+                        LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 发送异常，尝试重新连接：{ex.Message}");
                     }
                 }
             }
+            return false;
         }
 
-        protected virtual void OnStateChanged(ClientState newState)
+        protected virtual void OnDataReceived(byte[] data, int bytesRead)
+        {
+            DataReceived?.Invoke(data, bytesRead);
+        }
+
+        protected virtual void OnStateChanged(TcpClientModuleState newState)
         {
             StateChanged?.Invoke(newState);
         }
@@ -239,12 +265,12 @@ namespace HelloWinForms.Protocols
         public void Stop()
         {
             // 检查是否已启动
-            if (ModuleState != ClientState.Started)
+            if (ModuleState != TcpClientModuleState.Started)
             {
                 return;
             }
 
-            ModuleState = ClientState.Stopping;
+            ModuleState = TcpClientModuleState.Stopping;
 
             // 停止读取，等待线程结束
             _running = false;

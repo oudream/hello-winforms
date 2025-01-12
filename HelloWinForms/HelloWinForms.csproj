@@ -58,21 +58,23 @@
     <Reference Include="DeveloperSharp">
       <HintPath>..\Dll64\DeveloperSharp.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.Desktop.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Drawing.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="ExCSS">
-      <HintPath>Libs\Debug\ExCSS.dll</HintPath>
+    <Reference Include="EPPlus, Version=7.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.7.5.1\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=7.5.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.7.5.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=7.5.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.7.5.0\lib\net462\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="halcondotnetxl">
       <HintPath>..\DLL\halcon\halcondotnetxl.dll</HintPath>
     </Reference>
     <Reference Include="hdevenginedotnetxl">
       <HintPath>..\DLL\halcon\hdevenginedotnetxl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
@@ -85,6 +87,9 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -127,6 +132,9 @@
     <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -135,11 +143,14 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.7.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
+    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.8.0.4\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -261,6 +272,12 @@
     <Compile Include="Dialogs\ProgressDialog.Designer.cs">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorHandlerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorHandlerForm.Designer.cs">
+      <DependentUpon>ErrorHandlerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloAsync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -357,11 +374,23 @@
     <Compile Include="HelloEquals.Designer.cs">
       <DependentUpon>HelloEquals.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloExcel.Designer.cs">
+      <DependentUpon>HelloExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloExeInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloExeInForm.Designer.cs">
       <DependentUpon>HelloExeInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelloHalconOpenCV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloHalconOpenCV.Designer.cs">
+      <DependentUpon>HelloHalconOpenCV.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloHttpClient.cs">
       <SubType>Form</SubType>
@@ -549,29 +578,11 @@
     <Compile Include="HelloTcpClient.Designer.cs">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="PLC\HelloTcpClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PLC\HelloTcpClient.Designer.cs">
-      <DependentUpon>HelloTcpClient.cs</DependentUpon>
-    </Compile>
     <Compile Include="HelloTcpServer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HelloTcpServer.Designer.cs">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PLC\AACPLCServer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PLC\AACPLCServer.Designer.cs">
-      <DependentUpon>AACPLCServer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PLC\SolderBallPLCServer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PLC\SolderBallPLCServer.Designer.cs">
-      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
     </Compile>
     <Compile Include="HelloTemp.cs">
       <SubType>Form</SubType>
@@ -610,12 +621,46 @@
     <Compile Include="ImagePng8.Designer.cs">
       <DependentUpon>ImagePng8.cs</DependentUpon>
     </Compile>
+    <Compile Include="PLC\AACPLCServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\AACPLCServer.Designer.cs">
+      <DependentUpon>AACPLCServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\HelloTcpClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\HelloTcpClient.Designer.cs">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\SolderBallPLCServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\SolderBallPLCServer.Designer.cs">
+      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocolMFL\MFLClient.cs" />
+    <Compile Include="ProtocolMFL\MFLClientWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProtocolMFL\MFLClientWin.Designer.cs">
+      <DependentUpon>MFLClientWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocolMFL\MFLServer.cs" />
+    <Compile Include="ProtocolMFL\MFLServerClient.cs" />
+    <Compile Include="ProtocolMFL\MFLStruct.cs" />
+    <Compile Include="ProtocolMFL\MFLServerWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProtocolMFL\MFLServerWin.Designer.cs">
+      <DependentUpon>MFLServerWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Protocols\PLCStructs.cs" />
     <Compile Include="Protocols\ModbusReadGroup.cs" />
     <Compile Include="Protocols\ModbusPoint.cs" />
     <Compile Include="Protocols\ModbusTcpClient.cs" />
     <Compile Include="Protocols\PointItem.cs" />
-    <Compile Include="Protocols\ProtocolSimpleJson.cs" />
+    <Compile Include="ProtocolMFL\ProtocolMFL.cs" />
     <Compile Include="SharedMemory\HelloSharedMemory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,6 +814,9 @@
     <EmbeddedResource Include="Controls\PagerControl.resx">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ErrorHandlerForm.resx">
+      <DependentUpon>ErrorHandlerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloAsync.resx">
       <DependentUpon>HelloAsync.cs</DependentUpon>
     </EmbeddedResource>
@@ -817,8 +865,14 @@
     <EmbeddedResource Include="HelloEquals.resx">
       <DependentUpon>HelloEquals.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelloExcel.resx">
+      <DependentUpon>HelloExcel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelloExeInForm.resx">
       <DependentUpon>HelloExeInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloHalconOpenCV.resx">
+      <DependentUpon>HelloHalconOpenCV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloHttpClient.resx">
       <DependentUpon>HelloHttpClient.cs</DependentUpon>
@@ -928,17 +982,8 @@
     <EmbeddedResource Include="HelloTcpClient.resx">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PLC\HelloTcpClient.resx">
-      <DependentUpon>HelloTcpClient.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HelloTcpServer.resx">
       <DependentUpon>HelloTcpServer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PLC\AACPLCServer.resx">
-      <DependentUpon>AACPLCServer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PLC\SolderBallPLCServer.resx">
-      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTemp.resx">
       <DependentUpon>HelloTemp.cs</DependentUpon>
@@ -966,6 +1011,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePng8.resx">
       <DependentUpon>ImagePng8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\AACPLCServer.resx">
+      <DependentUpon>AACPLCServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\HelloTcpClient.resx">
+      <DependentUpon>HelloTcpClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\SolderBallPLCServer.resx">
+      <DependentUpon>SolderBallPLCServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SharedMemory\HelloSharedMemory.resx">
       <DependentUpon>HelloSharedMemory.cs</DependentUpon>

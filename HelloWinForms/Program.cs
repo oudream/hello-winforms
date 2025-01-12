@@ -31,7 +31,7 @@ namespace HelloWinForms
             //Application.Run(new HelloOOP());
 
             //Application.Run(new HelloAsync());
-            
+
             //Application.Run(new HelloCustomBar());
             //Application.Run(new HelloServiceController());
             //Application.Run(new HelloDataGridViewStatus());
@@ -42,7 +42,7 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            //Application.Run(new PLC.AACPLCServer());
+            Application.Run(new PLC.AACPLCServer());
 
             //Application.Run(new PLC.SolderBallPLCServer());
 
@@ -82,7 +82,11 @@ namespace HelloWinForms
 
             //Application.Run(new HelloSharedMemory());
 
-            Application.Run(new HelloEquals());
+            //Application.Run(new HelloEquals());
+
+            //Application.Run(new HelloExcel());
+
+            //Application.Run(new HelloHalconOpenCV());
 
         }
     }

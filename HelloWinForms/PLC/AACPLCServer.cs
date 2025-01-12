@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Web.UI.WebControls.WebParts;
 using CxWorkStation.Utilities;
 using OpenCvSharp.Flann;
 using HelloWinForms.Utilities;
@@ -20,7 +19,8 @@ using HelloWinForms.Protocols;
 using System.Runtime.InteropServices.ComTypes;
 using System.Globalization;
 using HelloWinForms.Channel;
-using DevExpress.Internal.WinApi.Windows.UI.Notifications;
+using HalconDotNet;
+using Newtonsoft.Json;
 
 namespace HelloWinForms.PLC
 {
@@ -412,6 +412,37 @@ namespace HelloWinForms.PLC
             Stop();
         }
 
+        static uint ExtractNumberFromPath(string path)
+        {
+            // 定义可能的关键字
+            string[] keys = { "original.", "detector.", "prediction." };
+
+            foreach (string key in keys)
+            {
+                int keyIndex = path.IndexOf(key); // 找到关键字的位置
+                if (keyIndex != -1)
+                {
+                    keyIndex += key.Length; // 定位到数字的开始位置
+                    int endIndex = keyIndex;
+
+                    // 找到数字的结束位置
+                    while (endIndex < path.Length && char.IsDigit(path[endIndex]))
+                    {
+                        endIndex++;
+                    }
+
+                    // 提取数字字符串并尝试转换为 uint
+                    string numberStr = path.Substring(keyIndex, endIndex - keyIndex);
+                    if (uint.TryParse(numberStr, out uint number))
+                    {
+                        return number; // 返回解析出的 uint 值
+                    }
+                }
+            }
+
+            return 0; // 如果没有找到任何关键字或数字，返回 0
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             Stop();
@@ -419,83 +450,254 @@ namespace HelloWinForms.PLC
             Start();
         }
 
-        public static string Product_v54 = "models_v54";
+        public class UserDrawState
+        {
+            // 使用 JsonIgnore 来忽略此属性的序列化
+            [JsonIgnore]
+            public List<DrawObjectInfo> DrawObjectList { get; private set; }
+
+            public List<DrawMeasureLineInfo> MeasureLines { get; private set; }
+            public List<DrawRectangleInfo> UserRectangles { get; private set; }
+            public List<DrawCircleInfo> UserCircles { get; private set; }
+
+            // 同样使用 JsonIgnore 来忽略此属性的序列化
+            [JsonIgnore]
+            public List<DrawActionType> ActionTypes { get; private set; }
+
+            public UserDrawState(
+                List<DrawObjectInfo> drawObjectList,
+                List<DrawMeasureLineInfo> measureLines,
+                List<DrawRectangleInfo> userRectangles,
+                List<DrawCircleInfo> userCircles,
+                List<DrawActionType> actionTypes)
+            {
+                DrawObjectList = new List<DrawObjectInfo>(drawObjectList);
+                MeasureLines = new List<DrawMeasureLineInfo>(measureLines);
+                UserRectangles = new List<DrawRectangleInfo>(userRectangles);
+                UserCircles = new List<DrawCircleInfo>(userCircles);
+                ActionTypes = new List<DrawActionType>(actionTypes);
+            }
+
+            public UserDrawState()
+            {
+                DrawObjectList = new List<DrawObjectInfo>();
+                MeasureLines = new List<DrawMeasureLineInfo>();
+                UserRectangles = new List<DrawRectangleInfo>();
+                UserCircles = new List<DrawCircleInfo>();
+                ActionTypes = new List<DrawActionType>();
+            }
+        }
+        public class DrawObjectInfo
+        {
+            public HObject HObject;
+            public int LineWidth;
+            public string Color;
+            public string DrawMode;
+            public int Font;
+            public Action<HTuple> DrawAction;
+            public DrawTextInfo TextInfo;
+
+        }
+
+        public class DrawTextInfo
+        {
+            public string Text { get; set; }
+            public double Row { get; set; }
+            public double Col { get; set; }
+            public string Color { get; set; }
+        }
+
+        public enum DrawActionType
+        {
+            AddRectangle,
+            AddCircle,
+            AddMeasureLine
+        }
+
+        /// <summary>
+        /// 测量线信息
+        /// </summary>
+        public class DrawMeasureLineInfo
+        {
+            /// <summary>
+            /// 线段起始点
+            /// </summary>
+            public Point Start { get; set; }
+
+            /// <summary>
+            /// 线段结束点
+            /// </summary>
+            public Point End { get; set; }
+
+            /// <summary>
+            /// 线段长度
+            /// </summary>
+            public double Length { get; set; }
+        }
+
+        /// <summary>
+        /// 矩形信息
+        /// </summary>
+        public class DrawRectangleInfo
+        {
+            /// <summary>
+            /// 矩形区域
+            /// </summary>
+            public Rectangle Rectangle { get; set; }
+
+            /// <summary>
+            /// 平均灰度值
+            /// </summary>
+            public double GrayValue { get; set; }
+        }
+
+        /// <summary>
+        /// 圆信息
+        /// </summary>
+        public class DrawCircleInfo
+        {
+            /// <summary>
+            /// 圆心坐标
+            /// </summary>
+            public Point Center { get; set; }
+
+            /// <summary>
+            /// 半径
+            /// </summary>
+            public int Radius { get; set; }
+
+            /// <summary>
+            /// 平均灰度值
+            /// </summary>
+            public double GrayValue { get; set; }
+        }
+
+        /// <summary>
+        /// 将 UserDrawState 对象序列化成字节数组（内部为 JSON）
+        /// </summary>
+        /// <param name="state">UserDrawState 对象</param>
+        /// <returns>序列化后得到的字节数组</returns>
+        public static byte[] SerializeToBytes(UserDrawState state)
+        {
+            // 序列化配置
+            var settings = new JsonSerializerSettings
+            {
+                // Formatting.Indented 让 JSON 更容易阅读（带缩进）
+                Formatting = Formatting.Indented,
+                // ReferenceLoopHandling.Ignore 用于在出现循环引用时避免错误
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            // 先序列化为 JSON 字符串
+            string jsonString = JsonConvert.SerializeObject(state, settings);
+
+            // 再转换为 UTF8 字节数组
+            return Encoding.UTF8.GetBytes(jsonString);
+        }
+
+        /// <summary>
+        /// 从字节数组反序列化回 UserDrawState 对象
+        /// </summary>
+        /// <param name="data">字节数组（内容是 JSON）</param>
+        /// <returns>反序列化得到的对象</returns>
+        public static UserDrawState DeserializeFromBytes(byte[] data)
+        {
+            if (data == null || data.Length == 0)
+                return null; // 或者返回一个新的 UserDrawState()
+
+            // 先从字节数组还原 UTF8 字符串
+            string jsonString = Encoding.UTF8.GetString(data);
+
+            // 反序列化配置
+            var settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            // 反序列化回 UserDrawState 对象
+            return JsonConvert.DeserializeObject<UserDrawState>(jsonString, settings);
+        }
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-            string s = "v54";
-            if (Product_v54.Contains(s))
+            // 1. 准备一些测试数据
+            var drawObjectList = new List<DrawObjectInfo>
             {
-                Console.WriteLine(s);
-            }
-            string input = "BO,XXX";
-            if (ContainsOtherNGStrings(input))
-            {
-                Console.WriteLine("The string contains invalid substrings.");
-            }
-            else
-            {
-                Console.WriteLine("The string only contains 'BB' and 'BO'.");
-            }
-            input = "BO,BB";
-            if (ContainsOtherNGStrings(input))
-            {
-                Console.WriteLine("The string contains invalid substrings.");
-            }
-            else
-            {
-                Console.WriteLine("The string only contains 'BB' and 'BO'.");
-            }
-            input = "BO";
-            if (ContainsOtherNGStrings(input))
-            {
-                Console.WriteLine("The string contains invalid substrings.");
-            }
-            else
-            {
-                Console.WriteLine("The string only contains 'BB' and 'BO'.");
-            }
-            input = "Fail";
-            if (ContainsOtherNGStrings(input))
-            {
-                Console.WriteLine("The string contains invalid substrings.");
-            }
-            else
-            {
-                Console.WriteLine("The string only contains 'BB' and 'BO'.");
-            }
-            input = "";
-            if (ContainsOtherNGStrings(input))
-            {
-                Console.WriteLine("The string contains invalid substrings.");
-            }
-            else
-            {
-                Console.WriteLine("The string only contains 'BB' and 'BO'.");
-            }
-            //if (_stream == null) return;
-            //var dtNow = DateTime.Now;
-            //var nowMs = TimeHelper.GetMs(dtNow);
+                new DrawObjectInfo { LineWidth = 1, Color = "LineObject" },
+                new DrawObjectInfo { LineWidth = 2, Color = "CircleObject" }
+            };
 
-            //var plcMessage = new PlcMessage
-            //{
-            //    BatchNumber = _batchNumber++,
-            //    Cmd = CMD_PC,
-            //    Dt = dtNow,
-            //    Sn1 = _position1HasProduct ? "1" : "0",
-            //    Sn2 = _position2HasProduct ? "1" : "0",
-            //    Sn3 = _position3HasProduct ? "1" : "0",
-            //};
+            var measureLines = new List<DrawMeasureLineInfo>
+            {
+                new DrawMeasureLineInfo
+                {
+                    Start = new Point(0, 0),
+                    End = new Point(10, 0),
+                    Length = 10
+                },
+                new DrawMeasureLineInfo
+                {
+                    Start = new Point(10, 10),
+                    End = new Point(10, 20),
+                    Length = 10
+                }
+            };
 
-            //plcMessage.SendImageAcquisitionTime = 0;
-            //plcMessage.ReceivedQRCodeTime = 0;
-            //plcMessage.ReceivedImageTime = 0;
-            //plcMessage.SendResultTime = 0;
-            //plcMessage.ReceivedResultTime = 0;
+            var rectangles = new List<DrawRectangleInfo>
+            {
+                new DrawRectangleInfo
+                {
+                    Rectangle = new Rectangle(0, 0, 50, 50),
+                    GrayValue = 80.5
+                }
+            };
 
-            //// 请求读码
-            //plcMessage.Pos = POS_QRCodeAcquisition;
-            //SendPlcMessage(_stream, plcMessage);
+            var circles = new List<DrawCircleInfo>
+            {
+                new DrawCircleInfo
+                {
+                    Center = new Point(100, 100),
+                    Radius = 30,
+                    GrayValue = 120.7
+                }
+            };
+
+            var actionTypes = new List<DrawActionType>
+            {
+                DrawActionType.AddCircle,
+                DrawActionType.AddRectangle,
+                DrawActionType.AddMeasureLine
+            };
+
+            // 2. 创建 UserDrawState 对象
+            var userDrawState = new UserDrawState(
+                drawObjectList,
+                measureLines,
+                rectangles,
+                circles,
+                actionTypes
+            );
+
+            // 3. 序列化到字节数组
+            byte[] serializedData = SerializeToBytes(userDrawState);
+
+            Console.WriteLine("===== 序列化得到的 JSON（字符串查看）=====");
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(serializedData));
+            Console.WriteLine();
+
+            // 4. 反序列化回对象
+            UserDrawState deserializedState = DeserializeFromBytes(serializedData);
+
+            // 5. 验证结果
+            // 因为我们给 DrawObjectList 和 ActionTypes 加了 [JsonIgnore]
+            // 它们不会被写入 JSON，也就不会被反序列化回来
+            Console.WriteLine("===== 反序列化后的结果 =====");
+            Console.WriteLine($"MeasureLines.Count = {deserializedState.MeasureLines.Count}");
+            Console.WriteLine($"UserRectangles.Count = {deserializedState.UserRectangles.Count}");
+            Console.WriteLine($"UserCircles.Count = {deserializedState.UserCircles.Count}");
+            Console.WriteLine($"DrawObjectList.Count = {deserializedState.DrawObjectList.Count} (被忽略，反序列化为 0)");
+            Console.WriteLine($"ActionTypes.Count = {deserializedState.ActionTypes.Count} (被忽略，反序列化为 0)");
+
 
             if (checkBox4.Checked)
             {

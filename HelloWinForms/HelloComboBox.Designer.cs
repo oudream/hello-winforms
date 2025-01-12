@@ -44,7 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cueTextBox1 = new HelloWinForms.Components.CueTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -67,8 +66,11 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.dateTimePickerBigOne1 = new HelloWinForms.Controls.DateTimePickerBigOne();
             this.datePickerWithWeekNumbers1 = new DatePickerWithWeekNumbers();
+            this.cueTextBox1 = new HelloWinForms.Components.CueTextBox();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -243,17 +245,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(290, 47);
             this.panel2.TabIndex = 15;
-            // 
-            // cueTextBox1
-            // 
-            this.cueTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cueTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cueTextBox1.Cue = "请输入IP地址";
-            this.cueTextBox1.Location = new System.Drawing.Point(3, 0);
-            this.cueTextBox1.Name = "cueTextBox1";
-            this.cueTextBox1.Size = new System.Drawing.Size(218, 42);
-            this.cueTextBox1.TabIndex = 13;
             // 
             // button6
             // 
@@ -457,7 +448,7 @@
             this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(384, 36);
+            this.toolStrip1.Size = new System.Drawing.Size(384, 38);
             this.toolStrip1.TabIndex = 66;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -468,7 +459,7 @@
             this.toolStripDropDownButton1.ForeColor = System.Drawing.Color.Black;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(110, 31);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(110, 33);
             this.toolStripDropDownButton1.Text = "导出功能";
             // 
             // panel3
@@ -488,6 +479,18 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(384, 42);
             this.panel4.TabIndex = 67;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c"});
+            this.comboBox3.Location = new System.Drawing.Point(922, 644);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(149, 26);
+            this.comboBox3.TabIndex = 68;
             // 
             // dateTimePickerBigOne1
             // 
@@ -511,12 +514,35 @@
             this.datePickerWithWeekNumbers1.Size = new System.Drawing.Size(319, 47);
             this.datePickerWithWeekNumbers1.TabIndex = 58;
             // 
+            // cueTextBox1
+            // 
+            this.cueTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cueTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cueTextBox1.Cue = "请输入IP地址";
+            this.cueTextBox1.Location = new System.Drawing.Point(3, 0);
+            this.cueTextBox1.Name = "cueTextBox1";
+            this.cueTextBox1.Size = new System.Drawing.Size(218, 42);
+            this.cueTextBox1.TabIndex = 13;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(1077, 645);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 69;
+            this.button10.Text = "button10";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // HelloComboBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(1356, 862);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.defaultConfirmGroupBox);
@@ -603,5 +629,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button button10;
     }
 }

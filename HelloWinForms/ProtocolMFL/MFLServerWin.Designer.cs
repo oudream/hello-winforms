@@ -1,6 +1,6 @@
-﻿namespace TransparentForm
+﻿namespace HelloWinForms.ProtocolMFL
 {
-    partial class GraphicsPathForm
+    partial class MFLServerWin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicsPathForm));
-            this.SuspendLayout();
-            // 
-            // GraphicsPathForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(963, 641);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "GraphicsPathForm";
-            this.Text = "GraphicsPathForm";
-            this.Load += new System.EventHandler(this.GraphicsPathForm_Load);
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "MFLServerWin";
         }
 
         #endregion
