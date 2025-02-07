@@ -20,10 +20,10 @@
             <summary>Name of the originating HDevelop procedure</summary>
         </member>
         <member name="P:HalconDotNet.HDevEngineException.LineText">
-            <summary>Script line in which the error occured</summary>
+            <summary>Script line in which the error occurred</summary>
         </member>
         <member name="P:HalconDotNet.HDevEngineException.LineNumber">
-            <summary>Script line number at which the error occured</summary>
+            <summary>Script line number at which the error occurred</summary>
         </member>
         <member name="P:HalconDotNet.HDevEngineException.UserData">
             <summary>User data which was added to the exception</summary>

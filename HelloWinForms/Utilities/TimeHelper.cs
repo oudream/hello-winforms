@@ -63,6 +63,7 @@ namespace CxWorkStation.Utilities
             "yyyy/MM/dd HH:mm:ss:fff", // 使用斜杠分隔符，包括毫秒
             "yyyy/MM/dd HH:mm:ss.fff", // 使用斜杠分隔符，包括毫秒
             "yyyy/MM/dd HH:mm:ss",     // 使用斜杠分隔符，不包括毫秒
+            "yyyyMMddHHmmss",
                                        // 在这里可以根据需要添加更多格式
             };
 

@@ -21,6 +21,9 @@ using System.Globalization;
 using HelloWinForms.Channel;
 using HalconDotNet;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using CxAAC.Utilities;
+using System.Reflection;
 
 namespace HelloWinForms.PLC
 {
@@ -618,7 +621,7 @@ namespace HelloWinForms.PLC
             return JsonConvert.DeserializeObject<UserDrawState>(jsonString, settings);
         }
 
-        private void sendButton_Click(object sender, EventArgs e)
+        public static void testSerialize()
         {
             // 1. 准备一些测试数据
             var drawObjectList = new List<DrawObjectInfo>
@@ -697,8 +700,72 @@ namespace HelloWinForms.PLC
             Console.WriteLine($"UserCircles.Count = {deserializedState.UserCircles.Count}");
             Console.WriteLine($"DrawObjectList.Count = {deserializedState.DrawObjectList.Count} (被忽略，反序列化为 0)");
             Console.WriteLine($"ActionTypes.Count = {deserializedState.ActionTypes.Count} (被忽略，反序列化为 0)");
+        }
+
+        public static void testProcessFullPath()
+        {
+            string[] processNames = { "infer_demo1", "infer_demo2" };
+
+            foreach (string procName in processNames)
+            {
+                // 通过名称获取进程列表
+                Process[] processes = Process.GetProcessesByName(procName);
+
+                if (processes.Length == 0)
+                {
+                    Console.WriteLine($"进程 {procName} 不存在，请先运行程序。");
+                }
+                else
+                {
+                    // 这里仅取第一个同名进程
+                    Process proc = processes[0];
+
+                    try
+                    {
+                        // 获取进程可执行文件完整路径
+                        string fullPath = proc.MainModule?.FileName;
+
+                        if (!string.IsNullOrEmpty(fullPath))
+                        {
+                            // 获取所在目录
+                            string directory = Path.GetDirectoryName(fullPath);
+
+                            Console.WriteLine($"{procName} 全路径: {fullPath}");
+                            Console.WriteLine($"{procName} 所在目录: {directory}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"无法获取进程 {procName} 的可执行文件全路径。");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"获取进程 {procName} 信息时出错: {ex.Message}");
+                    }
+                }
+
+                Console.WriteLine(new string('-', 50));
+            }
+
+            Console.WriteLine("按任意键退出...");
+            Console.ReadKey();
+        }
 
 
+
+        private void sendButton_Click(object sender, EventArgs e)
+        {
+            // 获取当前执行的程序集所在的目录
+            string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+
+            // 获取目录部分
+            string appDirectory = Path.GetDirectoryName(assemblyLocation);
+
+            string testRootDir = Path.Combine(appDirectory, "BrazingParamTest");
+
+            // 生成测试数据
+            GenerateTestDirectoriesAndFiles(testRootDir);
+            return;
             if (checkBox4.Checked)
             {
                 byte[] buffer = HexStringToByteArray(sendTextBox.Text);
@@ -709,6 +776,86 @@ namespace HelloWinForms.PLC
                 byte[] buffer = Encoding.UTF8.GetBytes(sendTextBox.Text);
                 _stream.Write(buffer, 0, buffer.Length);
             }
+        }
+
+        public static void GenerateTestDirectoriesAndFiles(string rootDir)
+        {
+            try
+            {
+                // 清理测试根目录
+                if (Directory.Exists(rootDir))
+                {
+                    Directory.Delete(rootDir, true);
+                }
+
+                // 创建日期目录
+                string today = DateTime.Now.ToString("yyyyMMdd");
+                string dateDir = Path.Combine(rootDir, today);
+                Directory.CreateDirectory(dateDir);
+
+                // 创建白班和夜班目录
+                string dayShiftDir = Path.Combine(dateDir, "白班");
+                string nightShiftDir = Path.Combine(dateDir, "夜班");
+                Directory.CreateDirectory(dayShiftDir);
+                Directory.CreateDirectory(nightShiftDir);
+
+                // 生成测试文件
+                GenerateTestFiles(dayShiftDir, lineNumber: 0, fileCount: 12);
+                GenerateTestFiles(nightShiftDir, lineNumber: 0, fileCount: 15);
+                GenerateTestFiles(dayShiftDir, lineNumber: 1, fileCount: 15);
+                GenerateTestFiles(nightShiftDir, lineNumber: 1, fileCount: 15);
+
+                Console.WriteLine("测试目录和文件生成完成！");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"生成测试目录和文件时发生错误：{ex.Message}");
+            }
+        }
+
+        private static void GenerateTestFiles(string dir, int lineNumber, int fileCount)
+        {
+            for (int i = 0; i < fileCount; i++)
+            {
+                string trayPos = (i + 1).ToString();
+                string timestamp = DateTime.Now.AddSeconds(i).ToString("yyyyMMddHHmmss");
+                string fileName = $"src_image_{trayPos}_{lineNumber}_{timestamp}.tif";
+                string filePath = Path.Combine(dir, fileName);
+
+                // 创建空文件
+                File.Create(filePath).Dispose();
+            }
+        }
+
+        public static void SplitFileName(string fileName, out uint lineNumber, out uint batchNumber, out DateTime time, out string sn1, out string sn2)
+        {
+            lineNumber = 0;
+            batchNumber = 0;
+            time = DateTime.MinValue;
+            sn1 = string.Empty;
+            sn2 = string.Empty;
+
+            fileName = Path.GetFileNameWithoutExtension(fileName);   //去掉后缀
+            string[] sp = fileName.Split('_');
+            try
+            {
+                if (sp.Length == 5)
+                {
+                    sn1 = sp[0];
+                    lineNumber = uint.Parse(sp[2]);
+                    batchNumber = uint.Parse(sp[3]);
+                    TimeHelper.TryParseDateTime(sp[4], out time);
+                }
+                else if (sp.Length == 6)
+                {
+                    sn1 = sp[0];
+                    sn2 = sp[1];
+                    lineNumber = uint.Parse(sp[3]);
+                    batchNumber = uint.Parse(sp[4]);
+                    TimeHelper.TryParseDateTime(sp[5], out time);
+                }
+            }
+            catch { }
         }
 
         public static bool ContainsOtherNGStrings(string input)
