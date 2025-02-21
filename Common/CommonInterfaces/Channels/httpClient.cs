@@ -6,10 +6,8 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Threading;
-using YamlDotNet.Core.Tokens;
 
 namespace CommonInterfaces
 {
@@ -63,7 +61,7 @@ namespace CommonInterfaces
         private async Task<string> CreateInfomationAsync<T>(T request)
         {
             string str_res = "";
-            MesResponseData res;  //成功收到回复的结果
+            //MesResponseData res;  //成功收到回复的结果
                                   //T message;  //未收到回复的信息
             HttpResponseMessage response = await client.PostAsJsonAsync("", request).ConfigureAwait(false);
             //HttpResponseMessage response = await client.PostAsync("", request, new , mediaType, CancellationToken.None);
@@ -75,7 +73,7 @@ namespace CommonInterfaces
             else
             {
                 string message = await response.Content.ReadAsStringAsync();
-                throw new Exception(message.ToString());
+                throw new Exception("error:" + message.ToString());
             }
             return str_res;
         }

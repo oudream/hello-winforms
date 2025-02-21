@@ -1,6 +1,4 @@
-﻿using CxWorkStation.Utilities;
-using HelloWinForms.Channel;
-using HelloWinForms.Utilities;
+﻿using CommonInterfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +22,14 @@ namespace HelloWinForms
             InitializeComponent();
         }
 
-        TcpClientChannel _tcpClientChannel = new TcpClientChannel();
+        TcpClientChannel _tcpClientChannel = new TcpClientChannel(false);
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (!_tcpClientChannel.IsConnected())
             {
                 _tcpClientChannel.Start(ipTextBox.Text, (ushort)portNumericUpDown.Value);
-                _tcpClientChannel.DataReceived += TcpClientChannel_DataReceived;
+                _tcpClientChannel.DataReceivedEvent += TcpClientChannel_DataReceived;
             }
         }
 

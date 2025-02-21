@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace CommonInterfaces
 {
@@ -21,11 +22,38 @@ namespace CommonInterfaces
         private static int _logId = 0;
 
         private static bool isRunning;
-
-        public static void Run()
+        /// <summary>
+        /// 检查当前程序运行目录下是否有Logs文件夹,没有则创建
+        /// </summary>
+        /// <returns>返回Log文件夹路径</returns>
+        private static string LogDirectoryCheck() 
         {
+            string logDirPath = AppHelper.JoinFullPath("Logs");
+            DirectoryInfo DirInfo=new DirectoryInfo(logDirPath);
+            if (!DirInfo.Exists) 
+            {
+                try
+                {
+                    Directory.CreateDirectory(logDirPath);
+                }
+                catch (Exception ex)
+                {
+                    // 记录异常
+                    Console.WriteLine($"Exception : {ex.Message}");
+                    logDirPath = null;
+                    throw;
+                }
+            }
+            return logDirPath;
+        }
+        public static void Run(string LogFileName)
+        {
+            // 启动时检测Logs文件夹是否存在，创建失败会退出程序
+            string logDir = LogDirectoryCheck();
+            //防止Logs文件夹创建失败,不存在时则生成到当前程序运行目录
+            string logPath = AppHelper.JoinFullPath(logDir, $"{LogFileName}-log-.txt");
             Serilog.Log.Logger = new LoggerConfiguration()
-              .WriteTo.File("log-main-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+              .WriteTo.File(logPath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
               .MinimumLevel.Verbose()
               .CreateLogger();
 
@@ -187,7 +215,7 @@ namespace CommonInterfaces
             Log(LogLevel.Debug, message, tag);
         }
 
-        private static void Log(LogLevel logLevel, string message, string tag = "")
+        public static void Log(LogLevel logLevel, string message, string tag = "")
         {
             Interlocked.Increment(ref _logId);
             var logEntry = new LogEntry { Id = _logId, Level = logLevel, Timestamp = TimeHelper.GetNow(), Message = string.Copy(message), Tag = string.Copy(tag) };

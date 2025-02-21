@@ -13,18 +13,39 @@ namespace CommonInterfaces
         public const string CONFIG_DIR_NAME = "Configs";
 
         // 常量，驱动目录名
-        public const string DRIVER_DIR_NAME = "Drivers";
+        public const string DRIVER_DIR_NAME = "Drivers";  
+        
+        // 常量，日志目录名
+        public const string LOG_DIR_NAME = "Logs";
 
-        public static void Load()
+        // 常量，临时文件目录名
+        public const string TEMP_DIR_NAME = "Temp";
+
+        // 常量，数据文件目录名
+        public const string DATA_DIR_NAME = "Data";
+
+        // 常量，点检文件目录名
+        public const string SELFCHECK_DIR_NAME = "SelfCheck";
+
+        // 常量，APP异常日志文件名
+        public const string EXCEPTION_LOG_FILE_NAME = "异常日志.txt";
+
+        // 常量，各模块版本记录文件
+        public const string VERSION_LOG_FILE_NAME = "版本记录.csv";
+
+        // 配置目录下的文件路径
+        public static string ConfigFilePath(string fileName)
         {
-            // TODO
+            return AppHelper.JoinFullPath(CONFIG_DIR_NAME, fileName);
         }
 
-        public static string ConfigFilePathDriver(string driverName)
+        // 日志目录下的文件路径
+        public static string LogFilePath(string fileName)
         {
-            return AppHelper.JoinFullPath(CONFIG_DIR_NAME, DRIVER_DIR_NAME, $"{driverName}.yaml");
+            return AppHelper.JoinFullPath(LOG_DIR_NAME, fileName);
         }
 
+        // 驱动点表文件
         public static string ConfigFilePathDriverPoints(string driverName)
         {
             return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"{driverName}.points.conl");
@@ -35,6 +56,7 @@ namespace CommonInterfaces
             return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"{driverName}.csv");
         }
 
+        // 系统配置文件
         public static string ConfigFilePathSystem(int mode = 0)
         {
             //胶路模式
@@ -54,25 +76,34 @@ namespace CommonInterfaces
             }
         }
 
-
-        public static string ConfigFilePathModel(string pathName)
+        // 客户端配置文件
+        public static string ConfigFilePathClient()
         {
-            return AppHelper.JoinFullPath(CONFIG_DIR_NAME, pathName);
+            return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"ClientConfigs.yaml");
         }
 
-
+        // 权限文件路径
         public static string PermissionsFilePathSystem()
         {
             return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"Permissions.yaml");
         }
+
+        // 守护进程配置文件路径
         public static string DaemonFilFilePathSystem()
         {
             return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"Daemon.yaml");
         }
 
+        // Halcon主文件路径
         public static string HalconMainHDevFilePath()
         {
             return AppHelper.JoinFullPath($"Main.hdev");
+        }
+
+        // 配方文件路径
+        public static string ConfigFilePathProductRecipe()
+        {
+            return AppHelper.JoinFullPath(CONFIG_DIR_NAME, $"Recipe.dat");
         }
 
     }

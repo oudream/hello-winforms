@@ -141,6 +141,18 @@ namespace CommonInterfaces
             return result;
         }
 
+        public static string Reverse(string source)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return string.Empty;
+            }
+            char[] charArray = source.ToCharArray();
+            Array.Reverse(charArray);
+            string reversed = new string(charArray);
+            return reversed;
+        }
+
     }
 
 }

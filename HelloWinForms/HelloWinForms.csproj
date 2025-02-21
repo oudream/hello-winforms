@@ -214,9 +214,6 @@
     <Compile Include="BaseForm\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Channel\ChannelClient.cs" />
-    <Compile Include="Channel\TcpChannelClient.cs" />
-    <Compile Include="Channel\TcpClientChannel.cs" />
     <Compile Include="CircularIndicator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -308,6 +305,12 @@
     <Compile Include="HelloComboBox.Designer.cs">
       <DependentUpon>HelloComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloConfigUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloConfigUI.Designer.cs">
+      <DependentUpon>HelloConfigUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloCustomBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,7 +395,6 @@
     <Compile Include="HelloIniFile.Designer.cs">
       <DependentUpon>HelloIniFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelloIniFileManager.cs" />
     <Compile Include="HelloJson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -560,6 +562,12 @@
     <Compile Include="HelloTableLayoutPanel.Designer.cs">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelloTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelloTask.Designer.cs">
+      <DependentUpon>HelloTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelloTcpClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -621,6 +629,9 @@
     <Compile Include="PLC\HelloTcpClient.Designer.cs">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="PLC\IniParser.cs" />
+    <Compile Include="PLC\P.cs" />
+    <Compile Include="PLC\PM.cs" />
     <Compile Include="PLC\SolderBallPLCServer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -763,7 +774,6 @@
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Protocols\PLCTcpDriverHelper.cs" />
-    <Compile Include="Utilities\LogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControl1.cs">
@@ -774,15 +784,12 @@
     </Compile>
     <Compile Include="Utilities\LogViewer.cs" />
     <Compile Include="Utilities\MultiThreadedTcpClient.cs" />
-    <Compile Include="Utilities\NetHelper.cs" />
     <Compile Include="Utilities\Sample\Yaml\Deserializer.cs" />
     <Compile Include="Utilities\Sample\Yaml\Hello.cs" />
     <Compile Include="Utilities\Sample\Yaml\Model.cs" />
     <Compile Include="Utilities\Snowflake.cs" />
-    <Compile Include="Utilities\StringHelper.cs" />
     <Compile Include="Utilities\TcpClientModule.cs" />
     <Compile Include="Utilities\TcpClientSelect.cs" />
-    <Compile Include="Utilities\TimeHelper.cs" />
     <Compile Include="Utilities\YamlHelper.cs" />
     <EmbeddedResource Include="Actions\PRight.resx">
       <DependentUpon>PRight.cs</DependentUpon>
@@ -822,6 +829,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloComboBox.resx">
       <DependentUpon>HelloComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloConfigUI.resx">
+      <DependentUpon>HelloConfigUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloCustomBar.resx">
       <DependentUpon>HelloCustomBar.cs</DependentUpon>
@@ -963,6 +973,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTableLayoutPanel.resx">
       <DependentUpon>HelloTableLayoutPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelloTask.resx">
+      <DependentUpon>HelloTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelloTcpClient.resx">
       <DependentUpon>HelloTcpClient.cs</DependentUpon>
@@ -1118,6 +1131,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\CommonInterfaces\CommonInterfaces.csproj">
+      <Project>{A6796B05-97A0-42B0-BFBC-29A5062EEC1F}</Project>
+      <Name>CommonInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -105,7 +105,7 @@ namespace HelloWinForms
             try
             {
                 Exception ex = (Exception)e.ExceptionObject;
-                string errorMsg = "应用程序发生错误。请联系管理员，提供以下信息：\n\n";
+                //string errorMsg = "应用程序发生错误。请联系管理员，提供以下信息：\n\n";
 
                 // 将异常信息输出到文件
                 LogExceptionToFile("非UI线程异常", ex);

@@ -1,4 +1,5 @@
-﻿using CxWorkStation.Utilities;
+﻿using CommonInterfaces;
+using CxWorkStation.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

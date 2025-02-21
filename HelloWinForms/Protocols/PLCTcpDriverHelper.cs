@@ -1,13 +1,9 @@
-﻿using CxWorkStation.Utilities;
-using HelloWinForms.Channel;
-using HelloWinForms.Utilities;
+﻿using CommonInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using static HelloWinForms.Channel.TcpClientChannel;
 
 namespace HelloWinForms.Protocols
 {
@@ -19,7 +15,7 @@ namespace HelloWinForms.Protocols
         private static TcpClientChannel tcpClientChannel = null;
 
         // 本模块状态变化事件，给其他模块订阅调用
-        public static event EventHandler<TcpClientModuleState> ModuleStateChanged;
+        public static event EventHandler<TcpClientChannel.TcpClientModuleState> ModuleStateChanged;
         public static event EventHandler<PlcMessage> ReceivedMessage;
         private static long receivedTime = 0;
 
@@ -37,9 +33,9 @@ namespace HelloWinForms.Protocols
             }
 
             DoRun();
-            tcpClientChannel = new TcpClientChannel();
+            tcpClientChannel = new TcpClientChannel(false);
             tcpClientChannel.StateChanged += TcClient_StateChanged;
-            tcpClientChannel.DataReceived += TcClient_DataReceived;
+            tcpClientChannel.DataReceivedEvent += TcClient_DataReceived;
             tcpClientChannel.Start(ip, port);
         }
 
@@ -53,7 +49,7 @@ namespace HelloWinForms.Protocols
             isRunning = false;
             // 通知线程
             updateSignal.Set();
-            TcClient_StateChanged(TcpClientModuleState.Stopped);
+            TcClient_StateChanged(TcpClientChannel.TcpClientModuleState.Stopped);
         }
 
         private static void DoRun()
@@ -215,7 +211,7 @@ namespace HelloWinForms.Protocols
             return tcpClientChannel != null && tcpClientChannel.IsConnected();
         }
 
-        public static TcpClientModuleState ModuleState
+        public static TcpClientChannel.TcpClientModuleState ModuleState
         {
             get
             {
@@ -225,7 +221,7 @@ namespace HelloWinForms.Protocols
                 }
                 else
                 {
-                    return TcpClientModuleState.Stopped;
+                    return TcpClientChannel.TcpClientModuleState.Stopped;
                 }
             }
         }

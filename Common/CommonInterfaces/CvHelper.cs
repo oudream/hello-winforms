@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,6 +98,22 @@ namespace CommonInterfaces
             // 将字节数组解码为Mat对象。假设图像以标准格式（如PNG或TIF）编码。
             Mat image = Cv2.ImDecode(imageBytes, ImreadModes.Unchanged);
 
+            return image;
+        }
+        public static Mat ConvertBase64ToMat(byte[] imageBytes)
+        {
+            // 将字节数组解码为Mat对象。假设图像以标准格式（如PNG或TIF）编码。
+            Mat image = Cv2.ImDecode(imageBytes, ImreadModes.Unchanged);
+
+            return image;
+        }
+
+        public static Mat ConvertBase64ToMat(byte[] imageBytes, int rows, int cols, int channels)
+        {
+            // 将字节数组解码为Mat对象。假设图像以标准格式（如PNG或TIF）编码。
+            MatType matType = MatType.CV_8UC1;
+            if (channels == 3) matType = MatType.CV_8UC3;
+            Mat image = new Mat(rows, cols, matType, imageBytes);
             return image;
         }
 

@@ -18,12 +18,12 @@ using HelloWinForms.Utilities;
 using HelloWinForms.Protocols;
 using System.Runtime.InteropServices.ComTypes;
 using System.Globalization;
-using HelloWinForms.Channel;
 using HalconDotNet;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using CxAAC.Utilities;
 using System.Reflection;
+using CommonInterfaces;
 
 namespace HelloWinForms.PLC
 {

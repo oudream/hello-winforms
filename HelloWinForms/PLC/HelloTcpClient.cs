@@ -1,4 +1,4 @@
-﻿using HelloWinForms.Channel;
+﻿using CommonInterfaces;
 using HelloWinForms.Protocols;
 using HelloWinForms.Utilities;
 using System;

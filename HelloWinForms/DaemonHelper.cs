@@ -14,6 +14,7 @@ using CxWorkStation.Utilities;
 using System.Diagnostics;
 using YamlDotNet.Core;
 using System.Globalization;
+using CommonInterfaces;
 
 namespace HelloWinForms
 {

@@ -1,4 +1,5 @@
-﻿using HelloWinForms.Utilities;
+﻿using CommonInterfaces;
+using HelloWinForms.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace HelloWinForms
         {
             InitializeComponent();
 
-            LogHelper.Run();
+            LogHelper.Run("HelloLogViewer");
 
 
             logViewer = new LogViewer(logDataGridView, clearButton, levelWithinCheckBox, filterComboBox,

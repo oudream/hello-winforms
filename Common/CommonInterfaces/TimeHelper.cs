@@ -57,6 +57,14 @@ namespace CommonInterfaces
             return (long)difference.TotalMilliseconds;
         }
 
+        // 今天最后一刻的毫秒时间戳
+        public static long GetTodayEndMs()
+        {
+            DateTime now = DateTime.Now;
+            DateTime end = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, 999);
+            return GetMs(end);
+        }
+
         public static bool TryParseDateTime(string dateTimeString, out DateTime dateTime)
         {
             // 定义可能的日期时间格式
@@ -68,7 +76,8 @@ namespace CommonInterfaces
             "yyyy/MM/dd HH:mm:ss:fff", // 使用斜杠分隔符，包括毫秒
             "yyyy/MM/dd HH:mm:ss.fff", // 使用斜杠分隔符，包括毫秒
             "yyyy/MM/dd HH:mm:ss",     // 使用斜杠分隔符，不包括毫秒
-                                       // 在这里可以根据需要添加更多格式
+            "yyyyMMddHHmmss",
+            // 在这里可以根据需要添加更多格式
             };
 
             // 尝试解析字符串

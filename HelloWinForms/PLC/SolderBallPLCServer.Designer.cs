@@ -44,27 +44,32 @@
             this.connectButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.portNumericUpDown)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1287, 491);
+            this.richTextBox1.Size = new System.Drawing.Size(1144, 410);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 663);
+            this.panel1.Location = new System.Drawing.Point(0, 553);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1287, 100);
+            this.panel1.Size = new System.Drawing.Size(1144, 83);
             this.panel1.TabIndex = 16;
             // 
             // timer1
@@ -75,13 +80,16 @@
             // 
             this.panel3.Controls.Add(this.richTextBox1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 172);
+            this.panel3.Location = new System.Drawing.Point(0, 143);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1287, 491);
+            this.panel3.Size = new System.Drawing.Size(1144, 410);
             this.panel3.TabIndex = 18;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.numericUpDown1);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.portNumericUpDown);
             this.panel2.Controls.Add(this.sendTextBox);
@@ -93,16 +101,18 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1287, 172);
+            this.panel2.Size = new System.Drawing.Size(1144, 143);
             this.panel2.TabIndex = 17;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(1061, 12);
+            this.checkBox1.Location = new System.Drawing.Point(943, 10);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(133, 22);
+            this.checkBox1.Size = new System.Drawing.Size(112, 19);
             this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "3秒启停一次";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -110,14 +120,15 @@
             // 
             // portNumericUpDown
             // 
-            this.portNumericUpDown.Location = new System.Drawing.Point(790, 42);
+            this.portNumericUpDown.Location = new System.Drawing.Point(702, 35);
+            this.portNumericUpDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.portNumericUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.portNumericUpDown.Name = "portNumericUpDown";
-            this.portNumericUpDown.Size = new System.Drawing.Size(213, 28);
+            this.portNumericUpDown.Size = new System.Drawing.Size(189, 25);
             this.portNumericUpDown.TabIndex = 6;
             this.portNumericUpDown.Value = new decimal(new int[] {
             1000,
@@ -130,18 +141,20 @@
             this.sendTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendTextBox.Location = new System.Drawing.Point(790, 97);
+            this.sendTextBox.Location = new System.Drawing.Point(702, 81);
+            this.sendTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(485, 69);
+            this.sendTextBox.Size = new System.Drawing.Size(432, 58);
             this.sendTextBox.TabIndex = 5;
             this.sendTextBox.Text = "127.0.0.1";
             // 
             // ipTextBox
             // 
-            this.ipTextBox.Location = new System.Drawing.Point(790, 7);
+            this.ipTextBox.Location = new System.Drawing.Point(702, 6);
+            this.ipTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ipTextBox.Name = "ipTextBox";
-            this.ipTextBox.Size = new System.Drawing.Size(213, 28);
+            this.ipTextBox.Size = new System.Drawing.Size(190, 25);
             this.ipTextBox.TabIndex = 5;
             this.ipTextBox.Text = "127.0.0.1";
             // 
@@ -149,9 +162,10 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(619, 3);
+            this.button2.Location = new System.Drawing.Point(550, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(148, 166);
+            this.button2.Size = new System.Drawing.Size(132, 138);
             this.button2.TabIndex = 2;
             this.button2.Text = "发上位机位置到";
             this.button2.UseVisualStyleBackColor = true;
@@ -161,9 +175,10 @@
             // 
             this.sendButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.sendButton.Location = new System.Drawing.Point(465, 3);
+            this.sendButton.Location = new System.Drawing.Point(413, 2);
+            this.sendButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(148, 166);
+            this.sendButton.Size = new System.Drawing.Size(132, 138);
             this.sendButton.TabIndex = 2;
             this.sendButton.Text = "发送";
             this.sendButton.UseVisualStyleBackColor = true;
@@ -173,9 +188,10 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Location = new System.Drawing.Point(311, 3);
+            this.button3.Location = new System.Drawing.Point(276, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(148, 166);
+            this.button3.Size = new System.Drawing.Size(132, 138);
             this.button3.TabIndex = 2;
             this.button3.Text = "停止";
             this.button3.UseVisualStyleBackColor = true;
@@ -185,9 +201,10 @@
             // 
             this.connectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.connectButton.Location = new System.Drawing.Point(157, 3);
+            this.connectButton.Location = new System.Drawing.Point(140, 2);
+            this.connectButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(148, 166);
+            this.connectButton.Size = new System.Drawing.Size(132, 138);
             this.connectButton.TabIndex = 2;
             this.connectButton.Text = "启动";
             this.connectButton.UseVisualStyleBackColor = true;
@@ -197,9 +214,10 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Location = new System.Drawing.Point(3, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 166);
+            this.button1.Size = new System.Drawing.Size(132, 138);
             this.button1.TabIndex = 2;
             this.button1.Text = "十六进制";
             this.button1.UseVisualStyleBackColor = true;
@@ -214,15 +232,43 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1287, 763);
+            this.panel5.Size = new System.Drawing.Size(1144, 636);
             this.panel5.TabIndex = 9;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown1.Location = new System.Drawing.Point(943, 34);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 25);
+            this.numericUpDown1.TabIndex = 8;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            123,
+            0,
+            0,
+            131072});
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(956, 53);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 9;
             // 
             // SolderBallPLCServer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1287, 763);
+            this.ClientSize = new System.Drawing.Size(1144, 636);
             this.Controls.Add(this.panel5);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SolderBallPLCServer";
             this.Text = "HelloTcpServerPLC";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SolderBallPLCServer_FormClosing);
@@ -231,6 +277,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.portNumericUpDown)).EndInit();
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +299,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

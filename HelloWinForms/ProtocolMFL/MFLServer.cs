@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Serilog.Core;
 using HelloWinForms.Utilities;
+using CommonInterfaces;
 
 namespace HelloWinForms.ProtocolMFL
 {

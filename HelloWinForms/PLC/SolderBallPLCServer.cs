@@ -18,6 +18,10 @@ using OpenCvSharp.Flann;
 using HelloWinForms.Utilities;
 using HelloWinForms.Protocols;
 using CommonInterfaces;
+using System.Diagnostics;
+using HalconDotNet;
+using System.Security.Cryptography;
+using YamlDotNet.Core;
 
 namespace HelloWinForms.PLC
 {
@@ -425,10 +429,123 @@ namespace HelloWinForms.PLC
 
         private void button1_Click(object sender, EventArgs e)
         {
+            bool result = CheckImageQuality();
+            Console.WriteLine(result);
         }
 
+        /// <summary>
+        /// 计算指定目录下所有文件内容的 MD5 值。
+        /// 
+        /// <para>
+        /// 此方法会递归扫描指定目录的所有文件，按文件路径的字典序排序后，
+        /// 依次以流方式读取文件内容，累加计算 MD5，从而避免一次性加载所有数据到内存中。
+        /// </para>
+        /// 
+        /// <para>注意：如果目录中包含非常大的文件，计算过程可能会比较耗时。</para>
+        /// </summary>
+        /// <param name="directoryPath">要扫描的目录路径。</param>
+        /// <returns>计算出的 MD5 字符串（32位小写十六进制）。</returns>
+        /// <exception cref="DirectoryNotFoundException">当指定目录不存在时抛出。</exception>
+        public static string ComputeDirectoryMd5(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                return string.Empty;
+            }
+
+            using (var md5 = MD5.Create())
+            {
+                // 获取所有文件，按路径排序以确保顺序稳定
+                var files = Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories)
+                                     .OrderBy(f => f, StringComparer.OrdinalIgnoreCase)
+                                     .ToArray();
+
+                foreach (var file in files)
+                {
+                    using (FileStream fs = File.OpenRead(file))
+                    {
+                        byte[] buffer = new byte[8192];
+                        int bytesRead;
+                        while ((bytesRead = fs.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            md5.TransformBlock(buffer, 0, bytesRead, null, 0);
+                        }
+                    }
+                }
+                // 完成最后的块处理
+                md5.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
+                // 返回 MD5 字符串（32位小写十六进制）
+                return BitConverter.ToString(md5.Hash).Replace("-", "").ToLowerInvariant();
+            }
+        }
+        public static string GetFolderMD5(string folderPath)
+        {
+            // 检查文件夹是否存在
+            if (!Directory.Exists(folderPath))
+            {
+                return string.Empty;
+            }
+
+            // 获取文件夹中的所有文件路径
+            string[] filePaths = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
+            Array.Sort(filePaths); // 对文件路径进行排序，确保每次顺序一致
+
+            StringBuilder allFileHashes = new StringBuilder();
+
+            // 为每个文件计算MD5哈希值
+            using (MD5 md5 = MD5.Create())
+            {
+                foreach (string filePath in filePaths)
+                {
+                    try
+                    {
+                        // 打开文件流
+                        using (FileStream fileStream = File.OpenRead(filePath))
+                        {
+                            // 计算文件的MD5哈希值
+                            byte[] hashBytes = md5.ComputeHash(fileStream);
+                            string fileHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                            allFileHashes.Append(fileHash);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"处理文件 {filePath} 时出错: {ex.Message}");
+                    }
+                }
+            }
+
+            // 为所有文件的哈希值连接后的字符串计算MD5哈希值
+            byte[] combinedHashBytes = null;
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(allFileHashes.ToString());
+                combinedHashBytes = md5.ComputeHash(inputBytes);
+            }
+
+            // 将字节数组转换为十六进制字符串
+            string combinedHash = BitConverter.ToString(combinedHashBytes).Replace("-", "").ToLowerInvariant();
+            return combinedHash;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
+            // 打开文件对话框
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "INI 文件 (*.ini)|*.ini|所有文件 (*.*)|*.*",
+                Title = "选择 INI 配置文件"
+            };
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                IniParser.Test(openFileDialog.FileName);
+            }
+        }
+
+        public static bool CheckImageQuality()
+        {
+            HTuple IsOk = 1;
+            
+            return IsOk;
         }
 
         // 写入整数到文件的方法

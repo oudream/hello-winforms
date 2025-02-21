@@ -395,6 +395,28 @@ namespace CommonInterfaces
             return success;
         }
 
+        public static bool IsSubdirectory(string parentDir, string subDir)
+        {
+            var parentDirectoryInfo = new DirectoryInfo(parentDir).FullName; 
+            var subDirectoryInfo = new DirectoryInfo(subDir).FullName; 
+            return subDirectoryInfo.StartsWith(parentDirectoryInfo, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static string ReadAllText(string filePath)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    return File.ReadAllText(filePath);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return string.Empty;
+        }
     }
 
     public class FileInfoNode

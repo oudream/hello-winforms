@@ -7,6 +7,7 @@ using CxWorkStation.Utilities;
 using HelloWinForms.Utilities;
 using System.IO;
 using System.Collections.Generic;
+using CommonInterfaces;
 
 namespace HelloWinForms.Protocols
 {

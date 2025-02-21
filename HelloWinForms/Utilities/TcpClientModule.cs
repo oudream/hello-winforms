@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.Windows.Media.Animation;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
+using CommonInterfaces;
 
 namespace HelloWinForms.Utilities
 {

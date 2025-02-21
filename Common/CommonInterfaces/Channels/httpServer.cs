@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -84,15 +83,15 @@ namespace CommonInterfaces
             if (request.RawUrl == "/mesTest/")
             {
                 //收到的信息转换为json字符串，转换为类的实例
-                TestMesInformation data = JsonConvert.DeserializeObject<TestMesInformation>(s);
-
-                MesResponseData res = new MesResponseData()
-                {
-                    Result = true,
-                    Message = "已收到" + data.Name + "的信息",
-                };
-
-                responseString = JsonConvert.SerializeObject(res);
+//                TestMesInformation data = JsonConvert.DeserializeObject<TestMesInformation>(s);
+//
+//                MesResponseData res = new MesResponseData()
+//                {
+//                    Result = true,
+//                    Message = "已收到" + data.Name + "的信息",
+//                };
+//
+//                responseString = JsonConvert.SerializeObject(res);
             }
 
 

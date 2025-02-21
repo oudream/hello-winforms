@@ -1,4 +1,5 @@
-﻿using HelloWinForms.Utilities;
+﻿using CommonInterfaces;
+using HelloWinForms.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace HelloWinForms
             InitializeComponent();
 
             // 如有必要，在此初始化LogHelper
-            LogHelper.Run();
+            LogHelper.Run("HelloLog");
         }
 
         private void button1_Click(object sender, EventArgs e)

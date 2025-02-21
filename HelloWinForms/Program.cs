@@ -1,4 +1,5 @@
-﻿using HelloWinForms.SharedMemory;
+﻿using CommonInterfaces;
+using HelloWinForms.SharedMemory;
 using HelloWinForms.Utilities;
 using Serilog;
 using System;
@@ -21,7 +22,7 @@ namespace HelloWinForms
 
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LogHelper.Run();
+            LogHelper.Run("HelloWinForms");
 
             //Application.Run(new HelloDataGridView());
             //Application.Run(new HelloRoslyn());
@@ -42,9 +43,13 @@ namespace HelloWinForms
             //Application.Run(new HelloTcpClient());
             //Application.Run(new HelloTcpServer());
 
-            Application.Run(new PLC.AACPLCServer());
+            //Application.Run(new PLC.AACPLCServer());
 
             //Application.Run(new PLC.SolderBallPLCServer());
+
+            Application.Run(new HelloConfigUI());
+
+            //Application.Run(new HelloTask());
 
             //Application.Run(new ImagePng8());
 

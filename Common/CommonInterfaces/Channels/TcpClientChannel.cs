@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -16,7 +17,8 @@ namespace CommonInterfaces
         {
             Stopping,
             Stopped,
-            Started
+            Started,    //启动但是还未连接
+            Connected,  //已连接
         }
 
         private TcpClient _tcpClient;
@@ -31,26 +33,34 @@ namespace CommonInterfaces
         private ushort _serverPort;
 
         // 状态属性
-        private TcpClientModuleState state = TcpClientModuleState.Stopped;
+        private TcpClientModuleState _state = TcpClientModuleState.Stopped;
         public TcpClientModuleState ModuleState
         {
-            get { return state; }
+            get { return _state; }
             private set
             {
-                state = value;
-                OnStateChanged(state);
+                if (_state != value)
+                {
+                    //LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 状态改变:{_state} -> {value}");
+                    _state = value;
+                    StateChanged?.Invoke(value);
+                }
             }
         }
+
         // 状态改变事件
         public event Action<TcpClientModuleState> StateChanged;
 
-        private byte[] buffer = new byte[8192];
+        private byte[] buffer = new byte[256 * 1024];
 
         // 数据接收事件
-        public event Action<byte[], int> DataReceived;
+        public event Action<byte[], int> DataReceivedEvent;
 
         // 日志记录
-        ILogger _logger = null;
+        private ILogger _logger = null;
+
+        // 需要关闭的通道
+        private volatile bool _needClose = false;
 
         public TcpClientChannel(bool enableLog)
         {
@@ -77,7 +87,6 @@ namespace CommonInterfaces
 
             StartClientThread();
 
-            ModuleState = TcpClientModuleState.Started;
         }
 
         private void StartClientThread()
@@ -87,9 +96,11 @@ namespace CommonInterfaces
                 return;
             }
 
+            ModuleState = TcpClientModuleState.Started;
             LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient读取模板已启动");
             _running = true;
-
+            bool errLog = false,connectLog = false;
+            Stopwatch sw_err = new Stopwatch(), sw_connect = new Stopwatch();
             NetworkStream networkStream = null;
 
             _clientThread = new Thread(() =>
@@ -109,6 +120,7 @@ namespace CommonInterfaces
                                     _tcpClient = null;
                                 }
                                 _tcpClientError = false;
+                                Thread.Sleep(100);
                             }
                             // 创建TCPClient
                             if (_tcpClient == null)
@@ -132,12 +144,30 @@ namespace CommonInterfaces
                                         Thread.Sleep(10); // 等待时间可以根据实际需要调整
                                     }
                                 }
-                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接中...");
+                                if (!connectLog)
+                                {
+                                    LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接中...");
+                                    connectLog = true;
+                                    sw_connect.Restart();
+                                }
+                                else
+                                {
+                                    if (sw_connect.ElapsedMilliseconds > 300000)
+                                    {
+                                        connectLog = false; //不要重复记录日志，5分钟记录一次
+                                    }
+                                }
                                 _tryConnectTime = TimeHelper.GetNow();
                                 _tcpClient.Connect(_serverIp, _serverPort);
                                 if (_tcpClient.Connected)
                                 {
                                     LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} 连接成功");
+                                    Thread.Sleep(2);
+                                    ModuleState = TcpClientModuleState.Connected;
+                                }
+                                else
+                                {
+                                    ModuleState = TcpClientModuleState.Started;
                                 }
                             }
                             catch (Exception e)
@@ -147,7 +177,19 @@ namespace CommonInterfaces
                                     _tcpClient.Close();
                                     _tcpClient = null;
                                 }
-                                LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 连接异常：{e.Message}");
+                                if(!errLog)
+                                {
+                                    LogHelper.Error($"TCP客户端{_serverIp}:{_serverPort} 连接异常：{e.Message}");
+                                    errLog = true;
+                                    sw_err.Restart();
+                                }
+                                else
+                                {
+                                    if(sw_err.ElapsedMilliseconds > 300000)
+                                    {
+                                        errLog = false; // 不要重复记录日志，5分钟记录一次
+                                    }
+                                }
                                 continue;
                             }
                             if (!_tcpClient.Connected)
@@ -199,13 +241,14 @@ namespace CommonInterfaces
                             }
                             else if (bytesRead == 0)
                             {
-                                lock (_lockObject)
-                                {
-                                    _tcpClient.Close();
-                                    _tcpClient = null;
-                                }
-                                LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道已断开");
+                                Close();
                             }
+                        }
+
+                        if (_needClose)
+                        {
+                            _needClose = false;
+                            Close();
                         }
                     }
                     catch (IOException ex) when (ex.InnerException is SocketException socketEx && (socketEx.SocketErrorCode == SocketError.TimedOut))
@@ -216,6 +259,7 @@ namespace CommonInterfaces
                     {
                         // 除了超时异常，其他都认为是异常，则尝试重新连接
                         _tcpClientError = true;
+                        ModuleState = TcpClientModuleState.Started; //断开连接后将状态改为started
                         LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道异常，尝试重新连接：{ex.Message}");
                     }
                 }
@@ -252,20 +296,33 @@ namespace CommonInterfaces
             return false;
         }
 
-        protected virtual void OnDataReceived(byte[] data, int bytesRead)
+        public void PushClose()
         {
-            DataReceived?.Invoke(data, bytesRead);
+            _needClose = true;
         }
 
-        protected virtual void OnStateChanged(TcpClientModuleState newState)
+        private void Close()
         {
-            StateChanged?.Invoke(newState);
+            lock (_lockObject)
+            {
+                if (_tcpClient == null) return;
+                _tcpClient.Close();
+                _tcpClient = null;
+            }
+            ModuleState = TcpClientModuleState.Started; //断开连接后将状态改为started
+            LogHelper.Debug($"TCP客户端{_serverIp}:{_serverPort} TCPClient通道已断开");
+            Thread.Sleep(100);
+        }
+
+        protected virtual void OnDataReceived(byte[] data, int bytesRead)
+        {
+            DataReceivedEvent?.Invoke(data, bytesRead);
         }
 
         public void Stop()
         {
             // 检查是否已启动
-            if (ModuleState != TcpClientModuleState.Started)
+            if (ModuleState != TcpClientModuleState.Started && ModuleState != TcpClientModuleState.Connected)
             {
                 return;
             }
